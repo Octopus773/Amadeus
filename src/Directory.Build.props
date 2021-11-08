@@ -1,0 +1,53 @@
+<Project>
+	<PropertyGroup>
+		<Company>Amadeus</Company>
+		<Authors>Clément LE BIHAN, Zoe Roux</Authors>
+		<Copyright>Copyright (c) Amadeus</Copyright>
+		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+		<PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
+		<RequireLicenseAcceptance>true</RequireLicenseAcceptance>
+
+		<RepositoryUrl>https://github.com/Octopus773/Amadeus</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<PackageProjectUrl>https://github.com/Octopus773/Amadeus</PackageProjectUrl>
+
+		<PackageVersion>1.0.0</PackageVersion>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+
+		<ApplicationIcon>$(MSBuildThisFileDirectory)../icons/icon-256x256.ico</ApplicationIcon>
+
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<IsWindows Condition="$([MSBuild]::IsOSPlatform('Windows'))">true</IsWindows>
+		<IsOSX Condition="$([MSBuild]::IsOSPlatform('OSX'))">true</IsOSX>
+		<IsLinux Condition="$([MSBuild]::IsOSPlatform('Linux'))">true</IsLinux>
+
+
+		<!-- TODO the next thing does not work on rider, enabling coding style check by default. -->
+		<!--<CheckCodingStyle Condition="$(BuildingInsideVisualStudio) == true">true</CheckCodingStyle>-->
+		<!--<CheckCodingStyle Condition="$(BuildingInsideReSharper) == true">true</CheckCodingStyle>-->
+		<CheckCodingStyle Condition="$(CheckCodingStyle) == ''">true</CheckCodingStyle>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.0-beta-20204-02" PrivateAssets="All" />
+	</ItemGroup>
+
+	<ItemGroup Condition="$(CheckCodingStyle) == true">
+		<PackageReference Include="SerilogAnalyzer" Version="0.15.0" PrivateAssets="All" />
+		<PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.354" PrivateAssets="All" />
+
+		<AdditionalFiles Include="$(MSBuildThisFileDirectory)../stylecop.json" Link="stylecop.json" Visible="false" />
+		<None Include="$(MSBuildThisFileDirectory)../.editorconfig" Link=".editorconfig" Visible="false" />
+	</ItemGroup>
+
+	<PropertyGroup Condition="$(CheckCodingStyle) == true">
+		<EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+		<CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)../Amadeus.ruleset</CodeAnalysisRuleSet>
+<!--		<AnalysisMode>AllEnabledByDefault</AnalysisMode>-->
+	</PropertyGroup>
+</Project>
