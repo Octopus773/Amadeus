@@ -1,0 +1,60 @@
+{
+	"metadata": [
+		{
+			"src": [
+				{
+					"files": [ "**.csproj" ],
+					"exclude": [ "**/bin/**", "**/obj/**" ],
+					"src": "../src"
+				}
+			],
+			"dest": "obj/api",
+			"disableGitFeatures": false,
+			"disableDefaultFilter": false
+		}
+	],
+	"build": {
+		"content": [
+			{
+				"files": [
+					"**/*.md",
+					"**/toc.yml"
+				]
+			},
+			{
+				"files": [ "**/*.yml" ],
+				"src": "obj/api",
+				"dest": "api"
+			}
+		],
+		"resource": [
+			{
+				"files": ["icons/**"],
+				"src": "../"
+			}
+		],
+		"dest": "_site",
+		"globalMetadata": {
+			"_appTitle": "Documentation - Amadeus",
+			"_appLogoPath": "icons/icon.svg",
+			"_appFaviconPath": "icons/icon-256x256.ico",
+			"_gitContribute": {
+				"repo": "https://github.com/Octopus773/Amadeus",
+				"branch": "main",
+				"apiSpecFolder": "docs"
+			},
+			"_enableSearch": true
+		},
+		"globalMetadataFiles": [],
+		"fileMetadataFiles": [],
+		"template": [
+			"default"
+		],
+		"postProcessors": [],
+		"markdownEngineName": "markdig",
+		"noLangKeyword": false,
+		"keepFileLink": false,
+		"cleanupCacheHistory": false,
+		"disableGitFeatures": false
+	}
+}

@@ -20,7 +20,7 @@ jobs:
         #          cd docs/_site
         #  sudo chown $(whoami):$(whoami) . -R
         run: |
-
+          cd docs/_site
           git config --global user.email "${GITHUB_ACTOR}@github.com"
           git config --global user.name "${GITHUB_ACTOR}"
           git init
