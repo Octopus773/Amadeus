@@ -48,7 +48,7 @@ namespace MvcMovie
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapController()
+	            endpoints.MapControllers();
             });
         }
     }

@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Amadeus.Host", "src\Amadeus
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Amadeus.WebApp", "src\Amadeus.WebApp\Amadeus.WebApp.csproj", "{4EA109F3-B6C4-46E1-A767-9BE614A1CA7B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcMovie", "restapi\MvcMovie\MvcMovie.csproj", "{E6C27CD2-1433-441D-8FF3-F33F67F9E4FC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{4EA109F3-B6C4-46E1-A767-9BE614A1CA7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4EA109F3-B6C4-46E1-A767-9BE614A1CA7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4EA109F3-B6C4-46E1-A767-9BE614A1CA7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6C27CD2-1433-441D-8FF3-F33F67F9E4FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6C27CD2-1433-441D-8FF3-F33F67F9E4FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6C27CD2-1433-441D-8FF3-F33F67F9E4FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6C27CD2-1433-441D-8FF3-F33F67F9E4FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
