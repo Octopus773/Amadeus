@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Amadeus.Host", "src\Amadeus.Host\Amadeus.Host.csproj", "{B8568F25-B72B-44BF-8078-4BE99E5A1794}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B8568F25-B72B-44BF-8078-4BE99E5A1794}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8568F25-B72B-44BF-8078-4BE99E5A1794}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8568F25-B72B-44BF-8078-4BE99E5A1794}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8568F25-B72B-44BF-8078-4BE99E5A1794}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
