@@ -1,7 +1,7 @@
 <Project>
 	<PropertyGroup>
 		<Company>Amadeus</Company>
-		<Authors>Clément LE BIHAN, Zoe Roux</Authors>
+		<Authors>Clément LE BIHAN, Zoe ROUX</Authors>
 		<Copyright>Copyright (c) Amadeus</Copyright>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
@@ -16,17 +16,12 @@
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 
-		<ApplicationIcon>$(MSBuildThisFileDirectory)../icons/icon-256x256.ico</ApplicationIcon>
+<!--		<ApplicationIcon>$(MSBuildThisFileDirectory)../icons/icon-256x256.ico</ApplicationIcon>-->
 
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 	</PropertyGroup>
 
 	<PropertyGroup>
-		<IsWindows Condition="$([MSBuild]::IsOSPlatform('Windows'))">true</IsWindows>
-		<IsOSX Condition="$([MSBuild]::IsOSPlatform('OSX'))">true</IsOSX>
-		<IsLinux Condition="$([MSBuild]::IsOSPlatform('Linux'))">true</IsLinux>
-
-
 		<!-- TODO the next thing does not work on rider, enabling coding style check by default. -->
 		<!--<CheckCodingStyle Condition="$(BuildingInsideVisualStudio) == true">true</CheckCodingStyle>-->
 		<!--<CheckCodingStyle Condition="$(BuildingInsideReSharper) == true">true</CheckCodingStyle>-->
@@ -48,6 +43,6 @@
 	<PropertyGroup Condition="$(CheckCodingStyle) == true">
 		<EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
 		<CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)../Amadeus.ruleset</CodeAnalysisRuleSet>
-<!--		<AnalysisMode>AllEnabledByDefault</AnalysisMode>-->
+		<AnalysisMode>AllEnabledByDefault</AnalysisMode>
 	</PropertyGroup>
 </Project>

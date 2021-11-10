@@ -1,0 +1,12 @@
+# Editor configuration, see https://editorconfig.org
+root = false
+
+[*]
+charset = utf-8
+indent_style = tab
+indent_size = tab
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.ts]
+quote_type = double
