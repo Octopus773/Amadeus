@@ -12,5 +12,5 @@ RUN dotnet publish -c Release -o /usr/lib/amadeus '-p:SkipWebApp=true;CheckCodin
 FROM mcr.microsoft.com/dotnet/aspnet:5.0
 EXPOSE 8080
 COPY --from=builder /usr/lib/amadeus /usr/lib/amadeus
-COPY --from=webapp /webapp/dist/* /usr/lib/amadeus/wwwroot/
+#COPY --from=webapp /webapp/dist/* /usr/lib/amadeus/wwwroot/
 CMD ["/usr/lib/kyoo/amadeus"]
