@@ -18,7 +18,7 @@ namespace Amadeus.Server.Controllers
 
         public HomeController(ILogger<HomeController> logger)
         {
-            _logger = logger;https://docs.microsoft.com/en-us/aspnet/core/web-api/?view=aspnetcore-6.0#attribute-routing-requirement
+            _logger = logger;
         }
 
         [HttpGet("index")]
