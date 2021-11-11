@@ -27,6 +27,13 @@ namespace Amadeus.Server.Controllers
             return "slt";
         }
 
+        [HttpGet("/user/{uid:int}")]
+        public IActionResult getAUser(UInt64 uid)
+        {
+	        return NotFound();
+	        // return new User();
+        }
+
         public string Privacy()
         {
             return "privacy";
