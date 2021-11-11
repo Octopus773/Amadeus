@@ -1,10 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Amadeus.Host", "src\Amadeus.Host\Amadeus.Host.csproj", "{B8568F25-B72B-44BF-8078-4BE99E5A1794}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Amadeus.WebApp", "src\Amadeus.WebApp\Amadeus.WebApp.csproj", "{4EA109F3-B6C4-46E1-A767-9BE614A1CA7B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcMovie", "restapi\MvcMovie\MvcMovie.csproj", "{E6C27CD2-1433-441D-8FF3-F33F67F9E4FC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Amadeus.Server", "src\Amadeus.Server\Amadeus.Server.csproj", "{771A98D5-A988-4EBE-88C1-210477025652}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,17 +10,13 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B8568F25-B72B-44BF-8078-4BE99E5A1794}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B8568F25-B72B-44BF-8078-4BE99E5A1794}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B8568F25-B72B-44BF-8078-4BE99E5A1794}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B8568F25-B72B-44BF-8078-4BE99E5A1794}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4EA109F3-B6C4-46E1-A767-9BE614A1CA7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4EA109F3-B6C4-46E1-A767-9BE614A1CA7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4EA109F3-B6C4-46E1-A767-9BE614A1CA7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4EA109F3-B6C4-46E1-A767-9BE614A1CA7B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E6C27CD2-1433-441D-8FF3-F33F67F9E4FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E6C27CD2-1433-441D-8FF3-F33F67F9E4FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E6C27CD2-1433-441D-8FF3-F33F67F9E4FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E6C27CD2-1433-441D-8FF3-F33F67F9E4FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{771A98D5-A988-4EBE-88C1-210477025652}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{771A98D5-A988-4EBE-88C1-210477025652}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{771A98D5-A988-4EBE-88C1-210477025652}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{771A98D5-A988-4EBE-88C1-210477025652}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
