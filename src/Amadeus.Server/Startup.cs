@@ -32,8 +32,8 @@ namespace Amadeus.Server
 
 			var builder = new SqlConnectionStringBuilder(Configuration.GetConnectionString("AmadeusDB"));
 			// IConfigurationSection contosoPetsCredentials = Configuration.GetSection("ContosoPetsCredentials");
-			builder.UserID = "user";
-			builder.Password = "password";
+			builder.UserID = "ninja";
+			builder.Password = "oui";
 			// builder.UserID = Environment.GetEnvironmentVariable("AMADEUS_DB_USER");
 			// builder.Password = Environment.GetEnvironmentVariable("AMADEUS_DB_PASSWORD");
 

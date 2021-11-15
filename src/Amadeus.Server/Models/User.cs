@@ -25,7 +25,7 @@ namespace Amadeus.Server.Models
 		public string DisplayName { get; set; }
 
 		/// <summary>
-		/// The user's email
+		/// The user's email.
 		/// </summary>
 		[Required]
 		public string Email { get; set; }

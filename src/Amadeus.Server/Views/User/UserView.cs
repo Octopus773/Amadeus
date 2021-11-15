@@ -1,38 +1,40 @@
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Amadeus.Server.Models;
+using Amadeus.Server.Controllers;
 using Amadeus.Server.Services;
-using Amadeus.Server.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
-namespace Amadeus.Server.Controllers
+namespace Amadeus.Server.Views.User
 {
-	/// <summary>
-	/// The controller for user related interactions.
-	/// </summary>
-	public class UserController
+	[ApiController]
+	[Route("/user")]
+	public class UserView : ControllerBase
 	{
-
-		private readonly UserService _userService;
+		private readonly UserController _userController;
 
 		/// <summary>
-		/// Constructor.
+		/// Create a new <see cref="UserView"/>.
 		/// </summary>
-		/// <param name="userService">The user orm to use.</param>
-		public UserController(UserService userService)
+		/// <param name="userController">Controller for the business logic.</param>
+		public UserView(UserController userController)
 		{
-			_userService = userService;
+			_userController = userController;
 		}
 
 		/// <summary>
-		/// Get all the registered users.
+		/// Get all users.
 		/// </summary>
-		/// <returns>The list of all registered users.</returns>
+		/// <remarks>
+		/// It gets all the users.
+		/// </remarks>
+		/// <returns>All the users.</returns>
 		[HttpGet]
-		public async Task<<List<User>>> GetUsers()
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		public async Task<ActionResult<List<Models.User>>> GetAll()
 		{
-			return await _userService.GetAll();
+			return await _userController.GetUsers();
 		}
 
 		/// <summary>
@@ -43,8 +45,7 @@ namespace Amadeus.Server.Controllers
 		[HttpGet("/{uid:long}")]
 		public IActionResult GetUser(ulong uid)
 		{
-			// return _userService.GetUserById(uid);
-			return NotFound();
+			return _userController.GetUser(uid);
 		}
 
 		/// <summary>
