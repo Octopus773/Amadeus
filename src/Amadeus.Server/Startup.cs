@@ -27,21 +27,20 @@ namespace Amadeus.Server
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			services.AddScoped<UserService>();
+			//services.AddScoped<UserService>();
 
 
-			var builder = new SqlConnectionStringBuilder(Configuration.GetConnectionString("AmadeusDB"));
+			// var builder = new SqlConnectionStringBuilder(Configuration.GetConnectionString("AmadeusDB"));
 			// IConfigurationSection contosoPetsCredentials = Configuration.GetSection("ContosoPetsCredentials");
-			builder.UserID = "ninja";
-			builder.Password = "oui";
-			// builder.UserID = Environment.GetEnvironmentVariable("AMADEUS_DB_USER");
-			// builder.Password = Environment.GetEnvironmentVariable("AMADEUS_DB_PASSWORD");
+			// builder.UserID = Environment.GetEnvironmentVariable("AMADEUS_DB_USER") ?? "ninja";
+			// builder.Password = Environment.GetEnvironmentVariable("AMADEUS_DB_PASSWORD") ?? "oui";
 
-			services.AddDbContext<ServerDB>(options => options.UseSqlServer(builder.ConnectionString));
+			string dbName = Configuration.GetSelectedDatabase();
+
+			services.AddDbContext<ServerDB>(options => options.UseSqlServer(Configuration.GetDatabaseConnection(dbName)));
 			// .EnableSensitiveDataLogging(Configuration.GetValue<bool>("Logging:EnableSqlParameterLogging")));
 
-			// TODO check if it's not services.AddControllers();
-			services.AddControllersWithViews();
+			services.AddControllers();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

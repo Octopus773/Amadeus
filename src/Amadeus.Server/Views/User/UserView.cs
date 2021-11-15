@@ -4,9 +4,10 @@ using Amadeus.Server.Controllers;
 using Amadeus.Server.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Amadeus.Server.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Amadeus.Server.Views.User
+namespace Amadeus.Server.Views
 {
 	[ApiController]
 	[Route("/user")]
@@ -42,10 +43,10 @@ namespace Amadeus.Server.Views.User
 		/// </summary>
 		/// <param name="uid">Uid of the specific user.</param>
 		/// <returns>All infos of the specific user.</returns>
-		[HttpGet("/{uid:long}")]
-		public IActionResult GetUser(ulong uid)
+		[HttpGet("{uid:long}")]
+		public async Task<ActionResult<User>> GetUser(ulong uid)
 		{
-			return _userController.GetUser(uid);
+			return await _userController.GetUser(uid);
 		}
 
 		/// <summary>
@@ -54,9 +55,9 @@ namespace Amadeus.Server.Views.User
 		/// <param name="user">The user to create.</param>
 		/// <returns>The infos of the newly created user.</returns>
 		[HttpPost]
-		public IActionResult CreateUser(User user)
+		public async Task<IActionResult> CreateUser(User user)
 		{
-			_userService.Create(user).Wait();
+			await _userController.CreateUser(user);
 			return CreatedAtAction(nameof(CreateUser), new { uid = 42 }, user);
 		}
 
@@ -66,7 +67,7 @@ namespace Amadeus.Server.Views.User
 		/// <param name="uid">The id of the user to modify.</param>
 		/// <param name="user">The new infos to update.</param>
 		/// <returns>The specific user with updated infos.</returns>
-		[HttpPut("/{uid:long}")]
+		[HttpPut("{uid:long}")]
 		public IActionResult ModifyUser(ulong uid, User user)
 		{
 			return NotFound();
@@ -77,12 +78,17 @@ namespace Amadeus.Server.Views.User
 		/// </summary>
 		/// <param name="uid">The id of the specific user.</param>
 		/// <returns>The infos of the deleted user.</returns>
-		[HttpDelete("/{uid:long}")]
-		public IActionResult DeleteUser(ulong uid)
+		[HttpDelete("{uid:long}")]
+		public async Task<ActionResult<User>> DeleteUser(ulong uid)
 		{
-			_userService.Delete(uid).Wait();
-			return NoContent();
-		}
+			User user = await _userController.DeleteUser(uid);
 
+			if (user == null)
+			{
+				return NotFound();
+			}
+
+			return user;
+		}
 	}
 }
