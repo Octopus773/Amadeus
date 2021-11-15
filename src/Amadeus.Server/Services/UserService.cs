@@ -11,12 +11,24 @@ using Microsoft.Extensions.FileSystemGlobbing.Internal.PathSegments;
 
 namespace Amadeus.Server.Services
 {
-	public class UserService
+	/// <summary>
+	/// The orm class for the user object.
+	/// </summary>
+	public abstract class UserService
 	{
 		/// <summary>
 		/// The User ORM.
 		/// </summary>
 		private readonly UserDB _context;
+
+		/// <summary>
+		/// Constructor.
+		/// </summary>
+		/// <param name="context">The DB to use when storing and retrieving data.</param>
+		protected UserService(UserDB context)
+		{
+			_context = context;
+		}
 
 
 		/// <summary>

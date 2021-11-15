@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using Amadeus.Server.Models;
+using Amadeus.Server.Services;
+using Amadeus.Server.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Amadeus.Server.Controllers
@@ -12,6 +14,18 @@ namespace Amadeus.Server.Controllers
 	[Route("user")]
 	public class UserController : ControllerBase
 	{
+
+		private readonly UserService _userService;
+
+		/// <summary>
+		/// Constructor.
+		/// </summary>
+		/// <param name="userService">The user orm to use.</param>
+		public UserController(UserService userService)
+		{
+			_userService = userService;
+		}
+
 		/// <summary>
 		/// Get all the registered users.
 		/// </summary>
@@ -20,6 +34,7 @@ namespace Amadeus.Server.Controllers
 		public ActionResult<List<User>> GetUsers()
 		{
 			return new List<User>();
+			// return _userService.GetAll();
 		}
 
 		/// <summary>
@@ -30,6 +45,7 @@ namespace Amadeus.Server.Controllers
 		[HttpGet("/{uid:long}")]
 		public IActionResult GetUser(ulong uid)
 		{
+			// return _userService.GetUserById(uid);
 			return NotFound();
 		}
 
@@ -41,6 +57,7 @@ namespace Amadeus.Server.Controllers
 		[HttpPost]
 		public IActionResult CreateUser(User user)
 		{
+			_userService.Create(user).Wait();
 			return CreatedAtAction(nameof(CreateUser), new { uid = 42 }, user);
 		}
 
@@ -64,6 +81,7 @@ namespace Amadeus.Server.Controllers
 		[HttpDelete("/{uid:long}")]
 		public IActionResult DeleteUser(ulong uid)
 		{
+			_userService.Delete(uid).Wait();
 			return NoContent();
 		}
 
