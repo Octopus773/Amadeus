@@ -29,8 +29,7 @@ namespace Amadeus.Server.Controllers
 		/// Get all the registered users.
 		/// </summary>
 		/// <returns>The list of all registered users.</returns>
-		[HttpGet]
-		public async Task<<List<User>>> GetUsers()
+		public async Task<List<User>> GetUsers()
 		{
 			return await _userService.GetAll();
 		}
@@ -40,11 +39,9 @@ namespace Amadeus.Server.Controllers
 		/// </summary>
 		/// <param name="uid">Uid of the specific user.</param>
 		/// <returns>All infos of the specific user.</returns>
-		[HttpGet("/{uid:long}")]
-		public IActionResult GetUser(ulong uid)
+		public async Task<User> GetUser(ulong uid)
 		{
-			// return _userService.GetUserById(uid);
-			return NotFound();
+			return await _userService.GetUserById(uid);
 		}
 
 		/// <summary>
@@ -52,11 +49,9 @@ namespace Amadeus.Server.Controllers
 		/// </summary>
 		/// <param name="user">The user to create.</param>
 		/// <returns>The infos of the newly created user.</returns>
-		[HttpPost]
-		public IActionResult CreateUser(User user)
+		public async Task<User> CreateUser(User user)
 		{
-			_userService.Create(user).Wait();
-			return CreatedAtAction(nameof(CreateUser), new { uid = 42 }, user);
+			return await _userService.Create(user);
 		}
 
 		/// <summary>
@@ -65,10 +60,9 @@ namespace Amadeus.Server.Controllers
 		/// <param name="uid">The id of the user to modify.</param>
 		/// <param name="user">The new infos to update.</param>
 		/// <returns>The specific user with updated infos.</returns>
-		[HttpPut("/{uid:long}")]
-		public IActionResult ModifyUser(ulong uid, User user)
+		public Task<User> ModifyUser(ulong uid, User user)
 		{
-			return NotFound();
+			return null;
 		}
 
 		/// <summary>
@@ -76,11 +70,9 @@ namespace Amadeus.Server.Controllers
 		/// </summary>
 		/// <param name="uid">The id of the specific user.</param>
 		/// <returns>The infos of the deleted user.</returns>
-		[HttpDelete("/{uid:long}")]
-		public IActionResult DeleteUser(ulong uid)
+		public async Task<User> DeleteUser(ulong uid)
 		{
-			_userService.Delete(uid).Wait();
-			return NoContent();
+			return await _userService.Delete(uid);
 		}
 
 	}

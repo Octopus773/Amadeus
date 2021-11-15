@@ -76,19 +76,17 @@ namespace Amadeus.Server.Services
 		/// </summary>
 		/// <param name="id">id of the user to delete.</param>
 		/// <returns>True if the user was deleted false otherwise</returns>
-		public async Task<bool> Delete(ulong id)
+		public async Task<User> Delete(ulong id)
 		{
-			bool isDeleted = false;
 			User user = await GetUserById(id);
 
 			if (user != null)
 			{
 				_context.Remove(user);
 				await _context.SaveChangesAsync();
-				isDeleted = true;
 			}
 
-			return isDeleted;
+			return user;
 		}
 	}
 }
