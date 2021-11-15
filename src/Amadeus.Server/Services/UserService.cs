@@ -19,13 +19,13 @@ namespace Amadeus.Server.Services
 		/// <summary>
 		/// The User ORM.
 		/// </summary>
-		private readonly UserDB _context;
+		private readonly ServerDB _context;
 
 		/// <summary>
 		/// Constructor.
 		/// </summary>
 		/// <param name="context">The DB to use when storing and retrieving data.</param>
-		protected UserService(UserDB context)
+		protected UserService(ServerDB context)
 		{
 			_context = context;
 		}

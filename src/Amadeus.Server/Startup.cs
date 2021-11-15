@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Amadeus.Server.Data;
+using Amadeus.Server.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -23,6 +25,21 @@ namespace Amadeus.Server
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
+			services.AddScoped<UserService>();
+
+			var builder = new SqlConnectionStringBuilder(
+				Configuration.GetConnectionString("ContosoPets"));
+			IConfigurationSection contosoPetsCredentials =
+				Configuration.GetSection("ContosoPetsCredentials");
+
+			builder.UserID = contosoPetsCredentials["UserId"];
+			builder.Password = contosoPetsCredentials["Password"];
+
+			services.AddDbContext<ServerDB>(options =>
+				options.UseSqlServer(builder.ConnectionString));
+			// .EnableSensitiveDataLogging(Configuration.GetValue<bool>("Logging:EnableSqlParameterLogging")));
+
+			// TODO check if it's not services.AddControllers();
 			services.AddControllersWithViews();
 		}
 
@@ -32,12 +49,6 @@ namespace Amadeus.Server
 			if (env.IsDevelopment())
 			{
 				app.UseDeveloperExceptionPage();
-			}
-			else
-			{
-				app.UseExceptionHandler("/Home/Error");
-				// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-				app.UseHsts();
 			}
 
 			app.UseHttpsRedirection();
