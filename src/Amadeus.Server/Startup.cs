@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using Amadeus.Server.Data;
@@ -7,6 +8,7 @@ using Amadeus.Server.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -27,16 +29,13 @@ namespace Amadeus.Server
 		{
 			services.AddScoped<UserService>();
 
-			var builder = new SqlConnectionStringBuilder(
-				Configuration.GetConnectionString("ContosoPets"));
-			IConfigurationSection contosoPetsCredentials =
-				Configuration.GetSection("ContosoPetsCredentials");
 
-			builder.UserID = contosoPetsCredentials["UserId"];
-			builder.Password = contosoPetsCredentials["Password"];
+			var builder = new SqlConnectionStringBuilder(Configuration.GetConnectionString("AmadeusDB"));
+			// IConfigurationSection contosoPetsCredentials = Configuration.GetSection("ContosoPetsCredentials");
+			builder.UserID = Environment.GetEnvironmentVariable("AMADEUS_DB_USER");
+			builder.Password = Environment.GetEnvironmentVariable("AMADEUS_DB_PASSWORD");
 
-			services.AddDbContext<ServerDB>(options =>
-				options.UseSqlServer(builder.ConnectionString));
+			services.AddDbContext<ServerDB>(options => options.UseSqlServer(builder.ConnectionString));
 			// .EnableSensitiveDataLogging(Configuration.GetValue<bool>("Logging:EnableSqlParameterLogging")));
 
 			// TODO check if it's not services.AddControllers();
