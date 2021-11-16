@@ -1,14 +1,17 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Amadeus.Server.Controllers;
+using Amadeus.Server.Models;
 using Amadeus.Server.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Amadeus.Server.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Amadeus.Server.Views
 {
+	/// <summary>
+	/// User view that receives http requests.
+	/// </summary>
 	[ApiController]
 	[Route("/user")]
 	public class UserView : ControllerBase

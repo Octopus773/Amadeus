@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
+using Amadeus.Server.Controllers;
 using Amadeus.Server.Data;
 using Amadeus.Server.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -27,8 +29,9 @@ namespace Amadeus.Server
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			//services.AddScoped<UserService>();
+			services.AddScoped<UserService>();
 
+			services.AddTransient<UserController>();
 
 			// var builder = new SqlConnectionStringBuilder(Configuration.GetConnectionString("AmadeusDB"));
 			// IConfigurationSection contosoPetsCredentials = Configuration.GetSection("ContosoPetsCredentials");
@@ -37,7 +40,7 @@ namespace Amadeus.Server
 
 			string dbName = Configuration.GetSelectedDatabase();
 
-			services.AddDbContext<ServerDB>(options => options.UseSqlServer(Configuration.GetDatabaseConnection(dbName)));
+			services.AddDbContext<ServerDB>(options => options.UseNpgsql(Configuration.GetDatabaseConnection(dbName)));
 			// .EnableSensitiveDataLogging(Configuration.GetValue<bool>("Logging:EnableSqlParameterLogging")));
 
 			services.AddControllers();

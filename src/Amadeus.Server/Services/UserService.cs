@@ -14,7 +14,7 @@ namespace Amadeus.Server.Services
 	/// <summary>
 	/// The orm class for the user object.
 	/// </summary>
-	public abstract class UserService
+	public class UserService
 	{
 		/// <summary>
 		/// The User ORM.
@@ -25,7 +25,7 @@ namespace Amadeus.Server.Services
 		/// Constructor.
 		/// </summary>
 		/// <param name="context">The DB to use when storing and retrieving data.</param>
-		protected UserService(ServerDB context)
+		public UserService(ServerDB context)
 		{
 			_context = context;
 		}

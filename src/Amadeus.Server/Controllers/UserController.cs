@@ -13,7 +13,6 @@ namespace Amadeus.Server.Controllers
 	/// </summary>
 	public class UserController
 	{
-
 		private readonly UserService _userService;
 
 		/// <summary>
