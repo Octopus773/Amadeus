@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Amadeus.Server.Controllers;
 using Amadeus.Server.Data;
-using Amadeus.Server.Services;
+using Amadeus.Server.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -29,9 +29,7 @@ namespace Amadeus.Server
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			services.AddScoped<UserService>();
-
-			services.AddTransient<UserController>();
+			services.AddScoped<IRepository<User>, UserRepository>();
 
 			// var builder = new SqlConnectionStringBuilder(Configuration.GetConnectionString("AmadeusDB"));
 			// IConfigurationSection contosoPetsCredentials = Configuration.GetSection("ContosoPetsCredentials");

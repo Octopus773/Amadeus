@@ -12,14 +12,4 @@
     </PackageReference>
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.10" />
   </ItemGroup>
-
-  <ItemGroup>
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="Views\Shared\Error.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Shared\_Layout.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Shared\_ValidationScriptsPartial.cshtml" />
-  </ItemGroup>
-
 </Project>

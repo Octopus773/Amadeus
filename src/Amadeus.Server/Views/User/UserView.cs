@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Amadeus.Server.Controllers;
 using Amadeus.Server.Models;
-using Amadeus.Server.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,15 +16,15 @@ namespace Amadeus.Server.Views
 	[Route("/user")]
 	public class UserView : ControllerBase
 	{
-		private readonly UserController _userController;
+		private readonly IRepository<User> _userRepository;
 
 		/// <summary>
 		/// Create a new <see cref="UserView"/>.
 		/// </summary>
-		/// <param name="userController">Controller for the business logic.</param>
-		public UserView(UserController userController)
+		/// <param name="userRepository">Controller for the business logic.</param>
+		public UserView(IRepository<User> userRepository)
 		{
-			_userController = userController;
+			_userRepository = userRepository;
 		}
 
 		/// <summary>
@@ -37,9 +36,9 @@ namespace Amadeus.Server.Views
 		/// <returns>All the users.</returns>
 		[HttpGet]
 		[ProducesResponseType(StatusCodes.Status200OK)]
-		public async Task<ActionResult<List<Models.User>>> GetAll()
+		public async Task<ActionResult<IList<User>>> GetAll()
 		{
-			return await _userController.GetUsers();
+			return Ok(await _userRepository.GetAll());
 		}
 
 		/// <summary>
@@ -50,7 +49,7 @@ namespace Amadeus.Server.Views
 		[HttpGet("{uid:int}")]
 		public async Task<ActionResult<User>> GetUser(int uid)
 		{
-			return await _userController.GetUser(uid);
+			return await _userRepository.GetUserById(uid);
 		}
 
 		/// <summary>
@@ -63,11 +62,11 @@ namespace Amadeus.Server.Views
 		{
 			try
 			{
-				await _userController.CreateUser(user);
+				await _userRepository.Create(user);
 			}
 			catch (ArgumentException exception)
 			{
-				return BadRequest();
+				return BadRequest(exception.Message);
 			}
 			return CreatedAtAction(nameof(CreateUser), new { uid = 42 }, user);
 		}
@@ -92,7 +91,7 @@ namespace Amadeus.Server.Views
 		[HttpDelete("{uid:long}")]
 		public async Task<ActionResult<User>> DeleteUser(int uid)
 		{
-			User user = await _userController.DeleteUser(uid);
+			User user = await _userRepository.Delete(uid);
 
 			if (user == null)
 			{

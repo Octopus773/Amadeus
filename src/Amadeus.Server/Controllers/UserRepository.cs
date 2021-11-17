@@ -1,23 +1,22 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Net.Sockets;
+using System.Diagnostics.CodeAnalysis;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Amadeus.Server.Data;
 using Amadeus.Server.Models;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.FileSystemGlobbing.Internal.PathSegments;
-using System.Security.Cryptography;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using Microsoft.EntityFrameworkCore;
 
-namespace Amadeus.Server.Services
+namespace Amadeus.Server.Controllers
 {
 	/// <summary>
 	/// The orm class for the user object.
 	/// </summary>
-	public class UserService
+	public class UserRepository : IRepository<User>
 	{
+
 		/// <summary>
 		/// The User ORM.
 		/// </summary>
@@ -27,7 +26,7 @@ namespace Amadeus.Server.Services
 		/// Constructor.
 		/// </summary>
 		/// <param name="context">The DB to use when storing and retrieving data.</param>
-		public UserService(ServerDB context)
+		public UserRepository(ServerDB context)
 		{
 			_context = context;
 		}
@@ -37,9 +36,9 @@ namespace Amadeus.Server.Services
 		/// Get all the users in db.
 		/// </summary>
 		/// <returns>All the users in the db.</returns>
-		public Task<List<User>> GetAll()
+		public async Task<IList<User>> GetAll()
 		{
-			return _context.Users
+			return await _context.Users
 				.AsNoTracking()
 				.ToListAsync();
 		}
@@ -59,7 +58,7 @@ namespace Amadeus.Server.Services
 		/// </summary>
 		/// <param name="user">The user to save in the db.</param>
 		/// <returns>The user saved in db.</returns>
-		public async Task<User> Create(User user)
+		public async Task<User> Create([NotNull] User user)
 		{
 			Debug.Assert(user != null, nameof(user) + " != null");
 			user.CreatedAt = DateTime.UtcNow;
@@ -84,11 +83,20 @@ namespace Amadeus.Server.Services
 			{
 				await _context.SaveChangesAsync();
 			}
-			catch (Microsoft.EntityFrameworkCore.DbUpdateException exception)
+			catch (DbUpdateException)
 			{
 				throw new ArgumentException("User with fields like this already exists");
 			}
 
+			return user;
+		}
+
+		/// <inheritdoc/>
+		public async Task<User> Modify(int uid, User user)
+		{
+			user.Id = uid;
+			_context.Entry(user).State = EntityState.Modified;
+			await _context.SaveChangesAsync();
 			return user;
 		}
 

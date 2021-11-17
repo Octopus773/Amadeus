@@ -19,7 +19,7 @@ namespace Amadeus.Server.Models
 		public int Id { get; set; }
 
 		/// <summary>
-		/// User's username.[Index(IsUnique=true)]
+		/// User's username.
 		/// </summary>
 		[MaxLength(20)]
 		[MinLength(2)]
@@ -37,6 +37,7 @@ namespace Amadeus.Server.Models
 		/// The user's email.
 		/// </summary>
 		[Required]
+		[EmailAddress]
 		public string Email { get; set; }
 
 		/// <summary>
