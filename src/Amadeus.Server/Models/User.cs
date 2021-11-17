@@ -44,7 +44,7 @@ namespace Amadeus.Server.Models
 		/// The user's password.
 		/// </summary>
 		/// <note type="caution">
-		/// It should encoded.
+		/// It should be encoded.
 		/// </note>
 		[Required]
 		public string Password { get; set; }
@@ -57,7 +57,7 @@ namespace Amadeus.Server.Models
 		public DateTime CreatedAt { get; set; }
 
 		/// <summary>
-		/// True if the user is verified
+		/// True if the user is verified.
 		/// </summary>
 		[Required]
 		public bool Verified { get; set; }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Amadeus.Server.Controllers;
+using Amadeus.Server.Exceptions;
 using Amadeus.Server.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -64,7 +65,7 @@ namespace Amadeus.Server.Views
 			{
 				await _userRepository.Create(user);
 			}
-			catch (ArgumentException exception)
+			catch (DuplicateField exception)
 			{
 				return BadRequest(exception.Message);
 			}
