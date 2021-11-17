@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Amadeus.Server.Controllers;
@@ -60,7 +61,14 @@ namespace Amadeus.Server.Views
 		[HttpPost]
 		public async Task<IActionResult> CreateUser(User user)
 		{
-			await _userController.CreateUser(user);
+			try
+			{
+				await _userController.CreateUser(user);
+			}
+			catch (ArgumentException exception)
+			{
+				return BadRequest();
+			}
 			return CreatedAtAction(nameof(CreateUser), new { uid = 42 }, user);
 		}
 

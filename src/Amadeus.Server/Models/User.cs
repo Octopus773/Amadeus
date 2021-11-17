@@ -1,12 +1,16 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.InteropServices;
+using Microsoft.EntityFrameworkCore;
 
 namespace Amadeus.Server.Models
 {
 	/// <summary>
 	/// The user of all the dashboard.
 	/// </summary>
+	[Index(nameof(Username), IsUnique = true)]
+	[Index(nameof(Email), IsUnique = true)]
 	public class User
 	{
 		/// <summary>
@@ -15,11 +19,10 @@ namespace Amadeus.Server.Models
 		public int Id { get; set; }
 
 		/// <summary>
-		/// User's username.
+		/// User's username.[Index(IsUnique=true)]
 		/// </summary>
 		[MaxLength(20)]
 		[MinLength(2)]
-		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public string Username { get; set; }
 
 		/// <summary>
@@ -34,7 +37,6 @@ namespace Amadeus.Server.Models
 		/// The user's email.
 		/// </summary>
 		[Required]
-		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public string Email { get; set; }
 
 		/// <summary>
@@ -44,8 +46,6 @@ namespace Amadeus.Server.Models
 		/// It should encoded.
 		/// </note>
 		[Required]
-		[MaxLength(30)]
-		[MinLength(5)]
 		public string Password { get; set; }
 
 

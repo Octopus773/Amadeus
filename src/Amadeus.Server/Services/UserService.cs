@@ -8,6 +8,8 @@ using Amadeus.Server.Data;
 using Amadeus.Server.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileSystemGlobbing.Internal.PathSegments;
+using System.Security.Cryptography;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 
 namespace Amadeus.Server.Services
 {
@@ -61,8 +63,32 @@ namespace Amadeus.Server.Services
 		{
 			Debug.Assert(user != null, nameof(user) + " != null");
 			user.CreatedAt = DateTime.UtcNow;
+
+			// generate a 128-bit salt using a cryptographically strong random sequence of nonzero values
+			byte[] salt = new byte[128 / 8];
+			using (var rngCsp = new RNGCryptoServiceProvider())
+			{
+				rngCsp.GetNonZeroBytes(salt);
+			}
+
+			// derive a 256-bit subkey (use HMACSHA256 with 100,000 iterations)
+			user.Password = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+				password: user.Password,
+				salt: salt,
+				prf: KeyDerivationPrf.HMACSHA256,
+				iterationCount: 100000,
+				numBytesRequested: 256 / 8));
+
 			_context.Add(user);
-			await _context.SaveChangesAsync();
+			try
+			{
+				await _context.SaveChangesAsync();
+			}
+			catch (Microsoft.EntityFrameworkCore.DbUpdateException exception)
+			{
+				throw new ArgumentException("User with fields like this already exists");
+			}
+
 			return user;
 		}
 
