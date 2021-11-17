@@ -38,7 +38,7 @@ namespace Amadeus.Server.Controllers
 		/// </summary>
 		/// <param name="uid">Uid of the specific user.</param>
 		/// <returns>All infos of the specific user.</returns>
-		public async Task<User> GetUser(ulong uid)
+		public async Task<User> GetUser(int uid)
 		{
 			return await _userService.GetUserById(uid);
 		}
@@ -59,7 +59,7 @@ namespace Amadeus.Server.Controllers
 		/// <param name="uid">The id of the user to modify.</param>
 		/// <param name="user">The new infos to update.</param>
 		/// <returns>The specific user with updated infos.</returns>
-		public Task<User> ModifyUser(ulong uid, User user)
+		public Task<User> ModifyUser(int uid, User user)
 		{
 			return null;
 		}
@@ -69,7 +69,7 @@ namespace Amadeus.Server.Controllers
 		/// </summary>
 		/// <param name="uid">The id of the specific user.</param>
 		/// <returns>The infos of the deleted user.</returns>
-		public async Task<User> DeleteUser(ulong uid)
+		public async Task<User> DeleteUser(int uid)
 		{
 			return await _userService.Delete(uid);
 		}

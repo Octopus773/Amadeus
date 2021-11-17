@@ -39,11 +39,6 @@ namespace Amadeus.Server.Services
 		{
 			return _context.Users
 				.AsNoTracking()
-				.Select(o => new User
-				{
-					Username = o.Username,
-					Email = o.Email
-				})
 				.ToListAsync();
 		}
 
@@ -52,7 +47,7 @@ namespace Amadeus.Server.Services
 		/// </summary>
 		/// <param name="id">The id of the user to get.</param>
 		/// <returns>The user corresponding at the id.</returns>
-		public Task<User> GetUserById(ulong id)
+		public Task<User> GetUserById(int id)
 		{
 			return _context.Users.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
 		}
@@ -76,7 +71,7 @@ namespace Amadeus.Server.Services
 		/// </summary>
 		/// <param name="id">id of the user to delete.</param>
 		/// <returns>True if the user was deleted false otherwise</returns>
-		public async Task<User> Delete(ulong id)
+		public async Task<User> Delete(int id)
 		{
 			User user = await GetUserById(id);
 

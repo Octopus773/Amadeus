@@ -46,8 +46,8 @@ namespace Amadeus.Server.Views
 		/// </summary>
 		/// <param name="uid">Uid of the specific user.</param>
 		/// <returns>All infos of the specific user.</returns>
-		[HttpGet("{uid:long}")]
-		public async Task<ActionResult<User>> GetUser(ulong uid)
+		[HttpGet("{uid:int}")]
+		public async Task<ActionResult<User>> GetUser(int uid)
 		{
 			return await _userController.GetUser(uid);
 		}
@@ -71,7 +71,7 @@ namespace Amadeus.Server.Views
 		/// <param name="user">The new infos to update.</param>
 		/// <returns>The specific user with updated infos.</returns>
 		[HttpPut("{uid:long}")]
-		public IActionResult ModifyUser(ulong uid, User user)
+		public IActionResult ModifyUser(int uid, User user)
 		{
 			return NotFound();
 		}
@@ -82,7 +82,7 @@ namespace Amadeus.Server.Views
 		/// <param name="uid">The id of the specific user.</param>
 		/// <returns>The infos of the deleted user.</returns>
 		[HttpDelete("{uid:long}")]
-		public async Task<ActionResult<User>> DeleteUser(ulong uid)
+		public async Task<ActionResult<User>> DeleteUser(int uid)
 		{
 			User user = await _userController.DeleteUser(uid);
 
