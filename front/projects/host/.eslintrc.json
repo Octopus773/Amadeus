@@ -20,7 +20,7 @@
           "error",
           {
             "type": "attribute",
-            "prefix": "app",
+            "prefix": "host",
             "style": "camelCase"
           }
         ],
@@ -28,7 +28,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "app",
+            "prefix": "host",
             "style": "kebab-case"
           }
         ]
