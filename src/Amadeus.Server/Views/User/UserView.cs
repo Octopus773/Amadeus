@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Amadeus.Server.Controllers;
 using Amadeus.Server.Exceptions;
@@ -48,6 +49,8 @@ namespace Amadeus.Server.Views
 		/// <param name="uid">Uid of the specific user.</param>
 		/// <returns>All infos of the specific user.</returns>
 		[HttpGet("{uid:int}")]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		public async Task<ActionResult<User>> GetUser(int uid)
 		{
 			return await _userRepository.GetUserById(uid);
@@ -59,8 +62,17 @@ namespace Amadeus.Server.Views
 		/// <param name="user">The user to create.</param>
 		/// <returns>The infos of the newly created user.</returns>
 		[HttpPost]
-		public async Task<IActionResult> CreateUser(User user)
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		[ProducesResponseType(StatusCodes.Status400BadRequest)]
+		public async Task<IActionResult> CreateUser([NotNull] UserCreationDTO userDto)
 		{
+			User user = null;
+
+			// will be in a controller.
+			user.Email = userDto.Email;
+			user.Password = userDto.Password;
+			user.DisplayName = userDto.DisplayName.Trim();
+			user.Username = user.DisplayName.Replace(" ", string.Empty);
 			try
 			{
 				await _userRepository.Create(user);
@@ -69,7 +81,7 @@ namespace Amadeus.Server.Views
 			{
 				return BadRequest(exception.Message);
 			}
-			return CreatedAtAction(nameof(CreateUser), new { uid = 42 }, user);
+			return Created(nameof(CreateUser), user);
 		}
 
 		/// <summary>
@@ -78,10 +90,19 @@ namespace Amadeus.Server.Views
 		/// <param name="uid">The id of the user to modify.</param>
 		/// <param name="user">The new infos to update.</param>
 		/// <returns>The specific user with updated infos.</returns>
-		[HttpPut("{uid:long}")]
-		public IActionResult ModifyUser(int uid, User user)
+		[HttpPut("{uid:int}")]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		[ProducesResponseType(StatusCodes.Status404NotFound)]
+		public async Task<ActionResult<User>> ModifyUser(int uid, User user)
 		{
-			return NotFound();
+			try
+			{
+				return await _userRepository.Modify(uid, user);
+			}
+			catch (ElementNotFound e)
+			{
+				return NotFound(e.Message);
+			}
 		}
 
 		/// <summary>
@@ -89,17 +110,19 @@ namespace Amadeus.Server.Views
 		/// </summary>
 		/// <param name="uid">The id of the specific user.</param>
 		/// <returns>The infos of the deleted user.</returns>
-		[HttpDelete("{uid:long}")]
+		[HttpDelete("{uid:int}")]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		public async Task<ActionResult<User>> DeleteUser(int uid)
 		{
-			User user = await _userRepository.Delete(uid);
-
-			if (user == null)
+			try
 			{
-				return NotFound();
+				return await _userRepository.Delete(uid);
 			}
-
-			return user;
+			catch (ElementNotFound e)
+			{
+				return NotFound(e.Message);
+			}
 		}
 	}
 }

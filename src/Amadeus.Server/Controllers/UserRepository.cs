@@ -77,8 +77,14 @@ namespace Amadeus.Server.Controllers
 		}
 
 		/// <inheritdoc/>
-		public async Task<User> Modify(int uid, User user)
+		public async Task<User> Modify(int uid, [NotNull] User user)
 		{
+			User u = await GetUserById(uid);
+
+			if (u == null)
+			{
+				throw new ElementNotFound($"The user with the id: {uid} wasn't found");
+			}
 			user.Id = uid;
 			_context.Entry(user).State = EntityState.Modified;
 			await _context.SaveChangesAsync();
@@ -94,11 +100,12 @@ namespace Amadeus.Server.Controllers
 		{
 			User user = await GetUserById(id);
 
-			if (user != null)
+			if (user == null)
 			{
-				_context.Remove(user);
-				await _context.SaveChangesAsync();
+				throw new ElementNotFound($"The user with the id: {id} wasn't found");
 			}
+			_context.Remove(user);
+			await _context.SaveChangesAsync();
 
 			return user;
 		}
