@@ -73,20 +73,20 @@ namespace Amadeus.Server.Views
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		public async Task<IActionResult> CreateUser([NotNull] UserCreationDTO userDto)
 		{
-			User user = new User();
+			User user = new();
 
 			// will be in a controller.
 			user.Email = userDto.Email;
 			user.Password = userDto.Password;
 			user.DisplayName = userDto.DisplayName.Trim();
-			user.Username = user.DisplayName.Replace(" ", string.Empty).ToLower();
+			user.Username = UtilsController.ToSlug(user.DisplayName);
 			try
 			{
 				await _userRepository.Create(user);
 			}
 			catch (DuplicateField exception)
 			{
-				return BadRequest(exception.Message);
+				return BadRequest(new { Message = exception.Message });
 			}
 			return Created(nameof(CreateUser), user);
 		}

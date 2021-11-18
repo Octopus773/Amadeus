@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.VisualBasic.CompilerServices;
 
 namespace Amadeus.Server
 {
@@ -31,15 +32,7 @@ namespace Amadeus.Server
 		{
 			services.AddScoped<IRepository<User>, UserRepository>();
 
-			// var builder = new SqlConnectionStringBuilder(Configuration.GetConnectionString("AmadeusDB"));
-			// IConfigurationSection contosoPetsCredentials = Configuration.GetSection("ContosoPetsCredentials");
-			// builder.UserID = Environment.GetEnvironmentVariable("AMADEUS_DB_USER") ?? "ninja";
-			// builder.Password = Environment.GetEnvironmentVariable("AMADEUS_DB_PASSWORD") ?? "oui";
-
-			string dbName = Configuration.GetSelectedDatabase();
-
-			services.AddDbContext<ServerDB>(options => options.UseNpgsql(Configuration.GetDatabaseConnection(dbName)));
-			// .EnableSensitiveDataLogging(Configuration.GetValue<bool>("Logging:EnableSqlParameterLogging")));
+			services.AddDbContext<ServerDB>(options => options.UseNpgsql(Configuration.GetDatabaseConnection()));
 
 			services.AddControllers();
 		}
