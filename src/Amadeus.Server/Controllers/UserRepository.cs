@@ -49,9 +49,14 @@ namespace Amadeus.Server.Controllers
 		/// </summary>
 		/// <param name="id">The id of the user to get.</param>
 		/// <returns>The user corresponding at the id.</returns>
-		public Task<User> GetUserById(int id)
+		public async Task<User> GetUserById(int id)
 		{
-			return _context.Users.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+			User u = await _context.Users.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+			if (u == null)
+			{
+				throw new ElementNotFound($"The user with the id: {id} wasn't found");
+			}
+			return u;
 		}
 
 		/// <summary>
@@ -81,10 +86,6 @@ namespace Amadeus.Server.Controllers
 		{
 			User u = await GetUserById(uid);
 
-			if (u == null)
-			{
-				throw new ElementNotFound($"The user with the id: {uid} wasn't found");
-			}
 			user.Id = uid;
 			_context.Entry(user).State = EntityState.Modified;
 			await _context.SaveChangesAsync();
@@ -100,10 +101,6 @@ namespace Amadeus.Server.Controllers
 		{
 			User user = await GetUserById(id);
 
-			if (user == null)
-			{
-				throw new ElementNotFound($"The user with the id: {id} wasn't found");
-			}
 			_context.Remove(user);
 			await _context.SaveChangesAsync();
 

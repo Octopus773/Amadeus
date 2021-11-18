@@ -53,7 +53,14 @@ namespace Amadeus.Server.Views
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		public async Task<ActionResult<User>> GetUser(int uid)
 		{
-			return await _userRepository.GetUserById(uid);
+			try
+			{
+				return await _userRepository.GetUserById(uid);
+			}
+			catch (ElementNotFound e)
+			{
+				return NotFound(e.Message);
+			}
 		}
 
 		/// <summary>
@@ -66,13 +73,13 @@ namespace Amadeus.Server.Views
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		public async Task<IActionResult> CreateUser([NotNull] UserCreationDTO userDto)
 		{
-			User user = null;
+			User user = new User();
 
 			// will be in a controller.
 			user.Email = userDto.Email;
 			user.Password = userDto.Password;
 			user.DisplayName = userDto.DisplayName.Trim();
-			user.Username = user.DisplayName.Replace(" ", string.Empty);
+			user.Username = user.DisplayName.Replace(" ", string.Empty).ToLower();
 			try
 			{
 				await _userRepository.Create(user);
