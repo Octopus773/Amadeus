@@ -1,6 +1,6 @@
 import { TestBed } from "@angular/core/testing";
 import { RouterTestingModule } from "@angular/router/testing";
-import { AppComponent } from "./app.component";
+import { WeatherComponent } from "./weather.component";
 
 describe("AppComponent", () => {
 	beforeEach(async () => {
@@ -9,25 +9,25 @@ describe("AppComponent", () => {
 				RouterTestingModule
 			],
 			declarations: [
-				AppComponent
+				WeatherComponent
 			],
 		}).compileComponents();
 	});
 
 	it("should create the app", () => {
-		const fixture = TestBed.createComponent(AppComponent);
+		const fixture = TestBed.createComponent(WeatherComponent);
 		const app = fixture.componentInstance;
 		expect(app).toBeTruthy();
 	});
 
 	it("should have as title 'weather'", () => {
-		const fixture = TestBed.createComponent(AppComponent);
+		const fixture = TestBed.createComponent(WeatherComponent);
 		const app = fixture.componentInstance;
 		expect(app.title).toEqual("weather");
 	});
 
 	it("should render title", () => {
-		const fixture = TestBed.createComponent(AppComponent);
+		const fixture = TestBed.createComponent(WeatherComponent);
 		fixture.detectChanges();
 		const compiled = fixture.nativeElement as HTMLElement;
 		expect(compiled.querySelector(".content span")?.textContent).toContain("weather app is running!");

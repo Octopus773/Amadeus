@@ -22,6 +22,7 @@ export class AppComponent
 				...modules.map(x => toRoute(x)),
 				...routes
 			]);
+			console.log(this._router.config);
 			console.log(modules);
 		});
 	}

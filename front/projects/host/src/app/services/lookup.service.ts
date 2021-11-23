@@ -12,10 +12,11 @@ export class LookupService
 		const modules: Module[] = [
 			{
 				displayName: "weather",
+				remoteEntry: "http://localhost:4201/remoteEntry.js",
 				remoteName: "weather",
 				routePath: "weather",
-				exposedModule: "weather",
-				ngModuleName: "weather",
+				exposedModule: "./Module",
+				ngModuleName: "WeatherModule",
 			}
 		];
 		return of(modules);

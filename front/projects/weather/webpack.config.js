@@ -23,6 +23,12 @@ module.exports = {
 	},
 	plugins: [
 		new ModuleFederationPlugin({
+			name: "weather",
+			filename: "remoteEntry.js",
+			exposes: {
+				"./Module": "./projects/weather/src/app/weather.module.ts"
+			},
+			
 			shared: share({
 				"@angular/core": { singleton: true, strictVersion: true, requiredVersion: "auto" },
 				"@angular/common": { singleton: true, strictVersion: true, requiredVersion: "auto" },
