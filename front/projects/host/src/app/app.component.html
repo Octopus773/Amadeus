@@ -1,3 +1,13 @@
-<h1>this is the host</h1>
-<host-dashboard></host-dashboard>
-<router-outlet></router-outlet>
+<header>
+	<mat-toolbar color="accent">
+		<span>Amadeus</span>
+		<span class="spacer"></span>
+		<button mat-icon-button class="example-icon" aria-label="Login"
+		        matTooltipPosition="below" matTooltip="Login">
+			<mat-icon>account_circle</mat-icon>
+		</button>
+	</mat-toolbar>
+</header>
+<main>
+	<router-outlet></router-outlet>
+</main>

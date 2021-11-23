@@ -6,6 +6,11 @@ import { AppComponent } from "./app.component";
 import { NotFoundComponent } from "./components/not-found/not-found.component";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
 
+import { MatToolbarModule } from "@angular/material/toolbar";
+import { MatIconModule } from "@angular/material/icon";
+import { MatButtonModule } from "@angular/material/button";
+import { MatTooltipModule } from "@angular/material/tooltip";
+
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -14,10 +19,14 @@ import { DashboardComponent } from "./components/dashboard/dashboard.component";
 	],
 	imports: [
 		BrowserModule,
-		AppRoutingModule
+		AppRoutingModule,
+		MatToolbarModule,
+		MatIconModule,
+		MatButtonModule,
+		MatTooltipModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]
 })
-export class AppModule 
+export class AppModule
 { }
