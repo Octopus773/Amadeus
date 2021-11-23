@@ -9,7 +9,9 @@ import { DashboardComponent } from "./components/dashboard/dashboard.component";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
+import { MatCardModule } from "@angular/material/card";
 import { MatTooltipModule } from "@angular/material/tooltip";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 @NgModule({
 	declarations: [
@@ -19,11 +21,13 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 	],
 	imports: [
 		BrowserModule,
+		BrowserAnimationsModule,
 		AppRoutingModule,
 		MatToolbarModule,
 		MatIconModule,
 		MatButtonModule,
-		MatTooltipModule
+		MatTooltipModule,
+		MatCardModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]
