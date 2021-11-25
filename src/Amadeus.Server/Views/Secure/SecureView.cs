@@ -5,13 +5,13 @@ namespace Amadeus.Server.Views.Secure
 {
 	[ApiController]
 	[Route("/secure")]
-	[Authorize]
+	[Authorize (Policy = "truc")]
 	public class SecureView : ControllerBase
 	{
 		[HttpGet]
 		public string idk()
 		{
-			return "Hello world!";
+			return "{\"text\": \"Hello world!\"}";
 		}
 	}
 }

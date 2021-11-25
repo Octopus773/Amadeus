@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using IdentityServer4;
 using IdentityServer4.Models;
 
 namespace Amadeus.Server.Authentification
@@ -18,7 +19,7 @@ namespace Amadeus.Server.Authentification
 					{
 						new Secret("secret".Sha256())
 					},
-					AllowedScopes = {"testapi"}
+					AllowedScopes = { IdentityServerConstants.LocalApi.ScopeName, "testapi"}
 				}
 			};
 		}
