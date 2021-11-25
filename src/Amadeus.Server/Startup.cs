@@ -35,11 +35,17 @@ namespace Amadeus.Server
 
 			services.AddDbContext<ServerDB>(options => options.UseNpgsql(Configuration.GetDatabaseConnection()));
 
+			CertificateOption certificateOptions = new();
+			Configuration.GetSection(CertificateOption.Path).Bind(certificateOptions);
+
 			// configure identity server with in-memory stores, keys, clients and resources
 			services.AddIdentityServer()
 				.AddDeveloperSigningCredential()
+				.AddInMemoryIdentityResources(IdentityServerConfig.GetIdentityResources())
 				.AddInMemoryApiResources(IdentityServerConfig.GetApiResources())
-				.AddInMemoryClients(IdentityServerConfig.GetClients());
+				.AddInMemoryApiScopes(IdentityServerConfig.GetApiScopes())
+				.AddInMemoryClients(IdentityServerConfig.GetClients())
+				.AddSigninKeys(certificateOptions);
 			services.AddControllers();
 			services.AddAuthentication("Bearer")
 				.AddJwtBearer("Bearer", options =>
@@ -57,7 +63,6 @@ namespace Amadeus.Server
 			if (env.IsDevelopment())
 			{
 				app.UseDeveloperExceptionPage();
-				app.UseIdentityServer();
 			}
 
 			app.UseHttpsRedirection();
@@ -65,6 +70,8 @@ namespace Amadeus.Server
 
 			app.UseRouting();
 
+			app.UseIdentityServer();
+			app.UseAuthentication();
 			app.UseAuthorization();
 
 

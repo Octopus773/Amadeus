@@ -7,12 +7,45 @@ namespace Amadeus.Server.Authentification
 	{
 		public static IEnumerable<Client> GetClients()
 		{
-			return new List<Client>();
+			return new List<Client>
+			{
+				new()
+				{
+					ClientId = "ConsoleAppClient",
+					AllowedGrantTypes = GrantTypes.ClientCredentials,
+
+					ClientSecrets =
+					{
+						new Secret("secret".Sha256())
+					},
+					AllowedScopes = {"testapi"}
+				}
+			};
 		}
 
 		public static IEnumerable<ApiResource> GetApiResources()
 		{
-			return new List<ApiResource>();
+			return new List<ApiResource>
+			{
+				new("testapi", "My Test API")
+			};
+		}
+
+		public static IEnumerable<IdentityResource> GetIdentityResources()
+		{
+			return new List<IdentityResource>
+			{
+				new IdentityResources.OpenId(),
+				new IdentityResources.Profile()
+			};
+		}
+
+		public static IEnumerable<ApiScope> GetApiScopes()
+		{
+			return new List<ApiScope>
+			{
+				new("testapi", "Friendly scope name")
+			};
 		}
 	}
 }
