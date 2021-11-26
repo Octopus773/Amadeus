@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Amadeus.Server.Models;
+using Amadeus.Server.Models.Weather;
 
 namespace Amadeus.Server.Data
 {
@@ -21,5 +22,10 @@ namespace Amadeus.Server.Data
 		/// Users objects.
 		/// </summary>
 		public DbSet<User> Users { get; set; }
+
+		/// <summary>
+		/// The weather city widget.
+		/// </summary>
+		public DbSet<WeatherCityModel> WidgetWeatherCity { get; set; }
 	}
 }
