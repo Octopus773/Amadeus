@@ -4,8 +4,10 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using Amadeus.Server.Controllers;
+using Amadeus.Server.Controllers.Weather;
 using Amadeus.Server.Data;
 using Amadeus.Server.Models;
+using Amadeus.Server.Models.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -14,6 +16,7 @@ using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using Microsoft.VisualBasic.CompilerServices;
 
 namespace Amadeus.Server
@@ -31,6 +34,9 @@ namespace Amadeus.Server
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddScoped<IRepository<User>, UserRepository>();
+
+			services.Configure<WeatherConfiguration>(Configuration.GetSection(nameof(WeatherConfiguration)));
+			services.AddScoped<WeatherController>();
 
 			services.AddDbContext<ServerDB>(options => options.UseNpgsql(Configuration.GetDatabaseConnection()));
 

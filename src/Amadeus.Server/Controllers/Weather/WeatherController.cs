@@ -23,13 +23,15 @@ namespace Amadeus.Server.Controllers.Weather
 			using HttpClient client = new();
 			city = HttpUtility.UrlEncode(city);
 			Uri uri = new($"https://api.weatherapi.com/v1/current.json?key={_config.Value.ApiKey}&q={city}&aqi=no");
+			Console.WriteLine(uri);
 			HttpResponseMessage response = await client.GetAsync(uri);
 			response.EnsureSuccessStatusCode();
 			dynamic data = await response.Content.ReadAsAsync<ExpandoObject>();
 			return new WeatherData
 			{
-				Degree = data["current"]["temp_c"],
-				Weather = data["condition"]["text"] // Text vs enum. Maybe keep it as a text.
+				Degree = data.current.temp_c,
+				//Weather = Models.Weather.Weather.Sunny
+				Weather = data.current.condition.text // Text vs enum. Maybe keep it as a text.
 			};
 		}
 	}
