@@ -32,8 +32,9 @@ namespace Amadeus.Server.Controllers
 							{
 								new
 								{
-									name = "city_temperature",
-									description = "Display temperature for a city",
+									name = "city_weather",
+									description = "Display temperature & weather for a city",
+									// TODO replace paramsij by params
 									paramsij = new[]
 									{
 										new
@@ -47,23 +48,24 @@ namespace Amadeus.Server.Controllers
 						},
 						new
 						{
-							name = "rss",
+							name = "forecast",
 							widgets = new[]
 							{
 								new
 								{
-									name = "article_list",
-									description = " Displaying the list of the last articles ",
+									name = "city_forecast",
+									description = "Displaying the list of the next n days of weather for a city",
+									// TODO replace paramsij by params
 									paramsij = new[]
 									{
 										new
 										{
-											name = "link",
+											name = "city",
 											type = "string"
 										},
 										new
 										{
-											name = "number",
+											name = "days in the future",
 											type = "integer"
 										}
 									}
