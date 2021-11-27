@@ -49,14 +49,6 @@ namespace Amadeus.Server.Models
 		public string Username { get; set; }
 
 		/// <summary>
-		/// The name to use as a display.
-		/// </summary>
-		[Required]
-		[MaxLength(30)]
-		[MinLength(3)]
-		public string DisplayName { get; set; }
-
-		/// <summary>
 		/// The user's email.
 		/// </summary>
 		[Required]

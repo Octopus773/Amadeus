@@ -18,6 +18,7 @@
 
 using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -36,10 +37,12 @@ namespace Amadeus.Server.Controllers
 			_options = options;
 		}
 
-		public string BuildToken([NotNull] User user)
+		public string CreateAccessToken([NotNull] User user, out DateTime expireDate)
 		{
 			if (user == null)
 				throw new ArgumentNullException(nameof(user));
+
+			expireDate = DateTime.UtcNow.AddHours(1);
 
 			SymmetricSecurityKey key = new(Encoding.UTF8.GetBytes(_options.Value.Secret));
 			SigningCredentials credential = new(key, SecurityAlgorithms.HmacSha256Signature);
@@ -48,12 +51,37 @@ namespace Amadeus.Server.Controllers
 				issuer: _options.Value.Issuer.ToString(),
 				claims: new[]
 				{
+					new Claim(ClaimTypes.NameIdentifier, user.Id.ToString(CultureInfo.InvariantCulture)),
 					new Claim(ClaimTypes.Name, user.Username),
 					new Claim(ClaimTypes.Email, user.Email),
-					new Claim(ClaimTypes.Role, string.Join(',', user.Permissions)),
+					new Claim(ClaimTypes.Role, string.Join(',', user.Permissions))
 				},
-				expires: DateTime.UtcNow.AddHours(1)
+				expires: expireDate
 			);
+			return new JwtSecurityTokenHandler().WriteToken(token);
+		}
+
+		public string CreateRefreshToken([NotNull] User user, out DateTime expireDate)
+		{
+			if (user == null)
+				throw new ArgumentNullException(nameof(user));
+
+			expireDate = DateTime.UtcNow.AddYears(1);
+
+			SymmetricSecurityKey key = new(Encoding.UTF8.GetBytes(_options.Value.Secret));
+			SigningCredentials credential = new(key, SecurityAlgorithms.HmacSha256Signature);
+			JwtSecurityToken token = new(
+				signingCredentials: credential,
+				issuer: _options.Value.Issuer.ToString(),
+				claims: new[]
+				{
+					new Claim(ClaimTypes.NameIdentifier, user.Id.ToString(CultureInfo.InvariantCulture)),
+					new Claim("guid", Guid.NewGuid().ToString()),
+					new Claim("type", "refresh")
+				},
+				expires: expireDate
+			);
+			// TODO refresh keys are unique (thanks to the guid) but we could store them in DB to invalidate them.
 			return new JwtSecurityTokenHandler().WriteToken(token);
 		}
 	}
