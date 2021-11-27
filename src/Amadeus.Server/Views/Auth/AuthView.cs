@@ -5,6 +5,7 @@ using Amadeus.Server.Controllers;
 using Amadeus.Server.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using BCryptNet = BCrypt.Net.BCrypt;
 
 namespace Amadeus.Server.Views.Auth
@@ -57,7 +58,7 @@ namespace Amadeus.Server.Views.Auth
 				return new JwtResponse
 				{
 					AccessToken = _token.CreateAccessToken(user, out DateTime expireDate),
-					RefreshToken = _token.CreateRefreshToken(user, out _),
+					RefreshToken = await _token.CreateRefreshToken(user),
 					ExpireTime = expireDate
 				};
 			}
@@ -90,17 +91,41 @@ namespace Amadeus.Server.Views.Auth
 			return new JwtResponse
 			{
 				AccessToken = _token.CreateAccessToken(user, out DateTime expireDate),
-				RefreshToken = _token.CreateRefreshToken(user, out _),
+				RefreshToken = await _token.CreateRefreshToken(user),
 				ExpireTime = expireDate
 			};
 		}
 
+		/// <summary>
+		/// Refresh a token.
+		/// </summary>
+		/// <remarks>
+		/// Refresh an access token using the given refresh token. A new access and refresh token are generated.
+		/// The old refresh token should not be used anymore.
+		/// </remarks>
+		/// <param name="token">A valid refresh token.</param>
+		/// <returns>A new access and refresh token.</returns>
+		/// <response code="400">The given refresh token is invalid.</response>
 		[HttpGet("refresh")]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
-		public async ActionResult<JwtResponse> Refresh([FromQuery] string token)
+		public async Task<ActionResult<JwtResponse>> Refresh([FromQuery] string token)
 		{
-			if ()
+			try
+			{
+				int userId = _token.GetRefreshTokenUser(token);
+				User user = await _users.GetUserById(userId);
+				return new JwtResponse
+				{
+					AccessToken = _token.CreateAccessToken(user, out DateTime expireDate),
+					RefreshToken = await _token.CreateRefreshToken(user),
+					ExpireTime = expireDate
+				};
+			}
+			catch (SecurityTokenException ex)
+			{
+				return BadRequest(new { ex.Message });
+			}
 		}
 	}
 }
