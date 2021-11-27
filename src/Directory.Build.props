@@ -44,5 +44,6 @@
 		<EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
 		<CodeAnalysisRuleSet>$(MSBuildThisFileDirectory)../Amadeus.ruleset</CodeAnalysisRuleSet>
 		<AnalysisMode>AllEnabledByDefault</AnalysisMode>
+		<NoWarn>CS1591;SA1600</NoWarn>
 	</PropertyGroup>
 </Project>

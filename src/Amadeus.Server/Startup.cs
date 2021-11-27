@@ -1,22 +1,32 @@
-using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Threading.Tasks;
-using Amadeus.Server.Authentification;
+// Amadeus.
+// Copyright (c) Amadeus.
+//
+// See AUTHORS.md and LICENSE file in the project root for full license information.
+//
+// Amadeus is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// any later version.
+//
+// Amadeus is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Kyoo. If not, see <https://www.gnu.org/licenses/>.
+
+using System.Text;
 using Amadeus.Server.Controllers;
 using Amadeus.Server.Data;
 using Amadeus.Server.Models;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.VisualBasic.CompilerServices;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Amadeus.Server
 {
@@ -33,6 +43,7 @@ namespace Amadeus.Server
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddScoped<IRepository<User>, UserRepository>();
+			services.AddTransient<TokenController>();
 
 			services.AddDbContext<ServerDB>(options => options.UseNpgsql(Configuration.GetDatabaseConnection()));
 
@@ -40,34 +51,21 @@ namespace Amadeus.Server
 				.AddAuthorization();
 			services.AddControllers();
 
-			CertificateOption certificateOptions = new();
-			Configuration.GetSection(CertificateOption.Path).Bind(certificateOptions);
+			JwtOption jwt = new();
+			Configuration.GetSection(JwtOption.Path).Bind(jwt);
 
-			// configure identity server with in-memory stores, keys, clients and resources
-			services.AddIdentityServer()
-				.AddInMemoryIdentityResources(IdentityServerConfig.GetIdentityResources())
-				.AddInMemoryApiResources(IdentityServerConfig.GetApiResources())
-				.AddInMemoryApiScopes(IdentityServerConfig.GetApiScopes())
-				.AddInMemoryClients(IdentityServerConfig.GetClients())
-				.AddSigninKeys(certificateOptions);
-			services.AddAuthentication("Bearer")
-				.AddJwtBearer("Bearer", options =>
+			services.AddAuthentication()
+				.AddJwtBearer(options =>
 				{
-					options.Authority = "http://localhost:5000";
-					options.RequireHttpsMetadata = false;
-
-					options.Audience = "testapi";
+					options.TokenValidationParameters = new TokenValidationParameters
+					{
+						ValidateIssuer = true,
+						ValidateLifetime = true,
+						ValidateIssuerSigningKey = true,
+						ValidIssuer = jwt.Issuer.ToString(),
+						IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt.Secret))
+					};
 				});
-
-			services.AddAuthorization(x =>
-			{
-				x.AddPolicy("truc", z =>
-				{
-					//z.RequireAuthenticatedUser();
-					z.RequireClaim("scope", "testapi");
-					//z.RequireAssertion(r => true);
-				});
-			});
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -78,15 +76,13 @@ namespace Amadeus.Server
 				app.UseDeveloperExceptionPage();
 			}
 
-			//app.UseHttpsRedirection();
+			// app.UseHttpsRedirection();
 			app.UseStaticFiles();
 
 			app.UseRouting();
 
-			app.UseIdentityServer();
 			app.UseAuthentication();
 			app.UseAuthorization();
-
 
 			app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
 		}
