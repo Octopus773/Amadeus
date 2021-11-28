@@ -81,6 +81,6 @@ namespace Amadeus.Server.Models
 		/// This is one of <see cref="Amadeus.Server.Models.Permissions.Overall"/>
 		/// or <see cref="Amadeus.Server.Models.Permissions.Admin"/>.
 		/// </summary>
-		public ICollection<string> Permissions { get; set; }
+		public string[] Permissions { get; set; }
 	}
 }

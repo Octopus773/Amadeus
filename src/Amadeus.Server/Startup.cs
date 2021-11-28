@@ -16,10 +16,12 @@
 // You should have received a copy of the GNU General Public License
 // along with Kyoo. If not, see <https://www.gnu.org/licenses/>.
 
+using System;
 using System.Text;
 using Amadeus.Server.Controllers;
 using Amadeus.Server.Data;
 using Amadeus.Server.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -27,6 +29,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using Npgsql;
 
 namespace Amadeus.Server
 {
@@ -53,24 +56,33 @@ namespace Amadeus.Server
 
 			JwtOption jwt = new();
 			Configuration.GetSection(JwtOption.Path).Bind(jwt);
+			services.Configure<JwtOption>(Configuration.GetSection(JwtOption.Path));
 
-			services.AddAuthentication()
+			services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 				.AddJwtBearer(options =>
 				{
 					options.TokenValidationParameters = new TokenValidationParameters
 					{
 						ValidateIssuer = true,
+						ValidateAudience = true,
 						ValidateLifetime = true,
 						ValidateIssuerSigningKey = true,
 						ValidIssuer = jwt.Issuer.ToString(),
+						ValidAudience = jwt.Issuer.ToString(),
 						IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt.Secret))
 					};
 				});
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+		public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider provider)
 		{
+			ServerDB context = provider.GetRequiredService<ServerDB>();
+			context.Database.Migrate();
+			using NpgsqlConnection conn = (NpgsqlConnection)context.Database.GetDbConnection();
+			conn.Open();
+			conn.ReloadTypes();
+
 			if (env.IsDevelopment())
 			{
 				app.UseDeveloperExceptionPage();

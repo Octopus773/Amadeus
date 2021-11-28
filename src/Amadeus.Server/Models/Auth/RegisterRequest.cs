@@ -10,12 +10,14 @@ namespace Amadeus.Server.Models
 		/// <summary>
 		/// The user email address.
 		/// </summary>
+		[Required]
 		[EmailAddress(ErrorMessage = "The email must be a valid email address")]
 		public string Email { get; set; }
 
 		/// <summary>
 		/// The user's username.
 		/// </summary>
+		[Required]
 		[MinLength(2, ErrorMessage = "The username must have less then {1} characters")]
 		[MaxLength(20, ErrorMessage = "The username must have at least {1} characters")]
 		public string Username { get; set; }
@@ -23,6 +25,7 @@ namespace Amadeus.Server.Models
 		/// <summary>
 		/// The user's password.
 		/// </summary>
+		[Required]
 		[MinLength(8, ErrorMessage = "The password must have at least {1} characters")]
 		public string Password { get; set; }
 

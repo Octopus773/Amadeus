@@ -10,7 +10,7 @@ namespace Amadeus.Server.Models
 		/// <summary>
 		/// The path to get this option from the root configuration.
 		/// </summary>
-		public const string Path = "authentication:certificate";
+		public const string Path = "jwt";
 
 		/// <summary>
 		/// The public URL of the issuer (this server).

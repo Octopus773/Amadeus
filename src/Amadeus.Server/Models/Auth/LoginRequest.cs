@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Amadeus.Server.Models
 {
 	/// <summary>
@@ -8,11 +10,15 @@ namespace Amadeus.Server.Models
 		/// <summary>
 		/// The username of the user to log.
 		/// </summary>
+		[MinLength(2, ErrorMessage = "The username must have less then {1} characters")]
+		[MaxLength(20, ErrorMessage = "The username must have at least {1} characters")]
+		[Required]
 		public string Username { get; set; }
 
 		/// <summary>
 		/// The password of the user.
 		/// </summary>
+		[Required]
 		public string Password { get; set; }
 	}
 }

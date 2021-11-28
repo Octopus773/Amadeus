@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Amadeus.Server.Controllers;
+using Amadeus.Server.Exceptions;
 using Amadeus.Server.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -47,7 +48,7 @@ namespace Amadeus.Server.Views.Auth
 		/// <param name="request">The body of the request.</param>
 		/// <returns>A new access and a refresh token.</returns>
 		/// <response code="400">The user and password does not match.</response>
-		[HttpGet("login")]
+		[HttpPost("login")]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		public async Task<ActionResult<JwtResponse>> Login([FromBody] LoginRequest request)
@@ -75,7 +76,7 @@ namespace Amadeus.Server.Views.Auth
 		/// <returns>A new access and a refresh token.</returns>
 		/// <response code="400">The request is invalid.</response>
 		/// <response code="409">A user already exists with this username or email address.</response>
-		[HttpGet("register")]
+		[HttpPost("register")]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(StatusCodes.Status409Conflict)]
@@ -83,10 +84,15 @@ namespace Amadeus.Server.Views.Auth
 		{
 			User user = request.ToUser();
 			user.Password = BCryptNet.HashPassword(request.Password);
-
-			if ((await _users.GetAll()).Any(x => x.Username == user.Username || x.Email == user.Email))
+			try
+			{
+				await _users.Create(user);
+			}
+			catch (DuplicateField)
+			{
 				return Conflict(new { Message = "A user already exists with this username." });
-			await _users.Create(user);
+			}
+
 
 			return new JwtResponse
 			{

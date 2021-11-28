@@ -64,15 +64,19 @@ namespace Amadeus.Server.Controllers
 
 			SymmetricSecurityKey key = new(Encoding.UTF8.GetBytes(_options.Value.Secret));
 			SigningCredentials credential = new(key, SecurityAlgorithms.HmacSha256Signature);
+			string permissions = user.Permissions != null
+				? string.Join(',', user.Permissions)
+				: string.Empty;
 			JwtSecurityToken token = new(
 				signingCredentials: credential,
 				issuer: _options.Value.Issuer.ToString(),
+				audience: _options.Value.Issuer.ToString(),
 				claims: new[]
 				{
 					new Claim(ClaimTypes.NameIdentifier, user.Id.ToString(CultureInfo.InvariantCulture)),
 					new Claim(ClaimTypes.Name, user.Username),
 					new Claim(ClaimTypes.Email, user.Email),
-					new Claim(ClaimTypes.Role, string.Join(',', user.Permissions))
+					new Claim(ClaimTypes.Role, permissions)
 				},
 				expires: expireDate
 			);
@@ -94,6 +98,7 @@ namespace Amadeus.Server.Controllers
 			JwtSecurityToken token = new(
 				signingCredentials: credential,
 				issuer: _options.Value.Issuer.ToString(),
+				audience: _options.Value.Issuer.ToString(),
 				claims: new[]
 				{
 					new Claim(ClaimTypes.NameIdentifier, user.Id.ToString(CultureInfo.InvariantCulture)),
