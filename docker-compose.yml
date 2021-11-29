@@ -1,6 +1,13 @@
 version: "3.8"
 
 services:
+  webapp:
+    build: front
+    restart: on-failure
+    ports:
+      - "8080:80"
+    depends_on:
+      - amadeus
   amadeus:
     build: .
     restart: on-failure
