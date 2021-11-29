@@ -12,12 +12,14 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { LoginComponent } from './pages/login/login.component';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		NotFoundComponent,
-		DashboardComponent
+		DashboardComponent,
+  LoginComponent
 	],
 	imports: [
 		BrowserModule,

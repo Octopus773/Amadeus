@@ -11,7 +11,7 @@ $accent: #845EC2;
 	box-sizing: border-box;
 }
 
-body
+:host
 {
 	background: #d5b4b4;
 	display: flex;
@@ -19,8 +19,11 @@ body
 	align-items: center;
 	flex-direction: column;
 	font-family: 'Montserrat', sans-serif;
-	height: 100vh;
-	margin: -20px 0 50px;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
 }
 
 h1
@@ -172,7 +175,6 @@ input
 	.overlay
 	{
 		background: $secondary;
-		//background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
 		background: linear-gradient(to right, $primary, $secondary);
 		background-repeat: no-repeat;
 		background-size: cover;
@@ -199,11 +201,6 @@ input
 			width: 50%;
 			transform: translateX(0);
 			transition: transform 0.6s ease-in-out;
-		}
-
-		.overlay-left
-		{
-			transform: translateX(-20%);
 		}
 
 		.overlay-right
