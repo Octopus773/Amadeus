@@ -128,6 +128,10 @@ namespace Amadeus.Server.Views.Auth
 					ExpireTime = expireDate
 				};
 			}
+			catch (ElementNotFound)
+			{
+				return BadRequest(new { Message = "Invalid refresh token." });
+			}
 			catch (SecurityTokenException ex)
 			{
 				return BadRequest(new { ex.Message });
