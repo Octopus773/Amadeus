@@ -126,9 +126,11 @@ namespace Amadeus.Server.Controllers
 				ClaimsPrincipal a = tokenHandler.ValidateToken(refreshToken, new TokenValidationParameters
 				{
 					ValidateIssuer = true,
+					ValidateAudience = true,
 					ValidateIssuerSigningKey = true,
 					ValidateLifetime = true,
 					ValidIssuer = _options.Value.Issuer.ToString(),
+					ValidAudience = _options.Value.Issuer.ToString(),
 					IssuerSigningKey = key
 				}, out SecurityToken _);
 				Claim identifier = a.Claims.First(x => x.Type == ClaimTypes.NameIdentifier);
