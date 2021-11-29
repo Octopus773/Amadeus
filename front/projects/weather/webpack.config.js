@@ -11,7 +11,7 @@ sharedMappings.register(
 module.exports = {
 	output: {
 		uniqueName: "weather",
-		publicPath: "auto"
+		publicPath: ""
 	},
 	optimization: {
 		runtimeChunk: false
@@ -28,7 +28,7 @@ module.exports = {
 			exposes: {
 				"./Module": "./projects/weather/src/app/weather.module.ts"
 			},
-			
+
 			shared: share({
 				"@angular/core": { singleton: true, strictVersion: true, requiredVersion: "auto" },
 				"@angular/common": { singleton: true, strictVersion: true, requiredVersion: "auto" },

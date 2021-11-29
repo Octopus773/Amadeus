@@ -64,34 +64,6 @@ namespace Amadeus.Server.Views
 		}
 
 		/// <summary>
-		/// Create a user.
-		/// </summary>
-		/// <param name="user">The user to create.</param>
-		/// <returns>The infos of the newly created user.</returns>
-		[HttpPost]
-		[ProducesResponseType(StatusCodes.Status200OK)]
-		[ProducesResponseType(StatusCodes.Status400BadRequest)]
-		public async Task<IActionResult> CreateUser([NotNull] UserCreationDTO userDto)
-		{
-			User user = new();
-
-			// will be in a controller.
-			user.Email = userDto.Email;
-			user.Password = userDto.Password;
-			user.DisplayName = userDto.DisplayName.Trim();
-			user.Username = UtilsController.ToSlug(user.DisplayName);
-			try
-			{
-				await _userRepository.Create(user);
-			}
-			catch (DuplicateField exception)
-			{
-				return BadRequest(new { Message = exception.Message });
-			}
-			return Created(nameof(CreateUser), user);
-		}
-
-		/// <summary>
 		/// Modify a specific user.
 		/// </summary>
 		/// <param name="uid">The id of the user to modify.</param>
