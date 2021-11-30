@@ -9,9 +9,12 @@
 					<a href="#"><i class="fab fa-facebook-f"></i></a>
 				</div>
 				<span>or use your email for registration</span>
-				<input required type="text" placeholder="Username" name="username" [(ngModel)]="signUpForm.username"/>
-				<input required type="email" placeholder="Email" name="email" [(ngModel)]="signUpForm.email" />
-				<input required type="password" placeholder="Password" name="password" [(ngModel)]="signUpForm.password"/>
+				<input required type="text" placeholder="Username" name="username" autocomplete="username"
+				       [(ngModel)]="signUpForm.username"/>
+				<input required type="email" placeholder="Email" name="email" autocomplete="email"
+				       [(ngModel)]="signUpForm.email"/>
+				<input required type="password" placeholder="Password" name="password" autocomplete="new-password"
+				       [(ngModel)]="signUpForm.password"/>
 				<button (click)="signUp()">Sign Up</button>
 			</form>
 		</div>
@@ -24,8 +27,10 @@
 					<a href="#"><i class="fab fa-facebook-f"></i></a>
 				</div>
 				<span>or use your account</span>
-				<input required type="email" placeholder="Email" name="email" [(ngModel)]="signInForm.username" />
-				<input required type="password" placeholder="Password" name="password" [(ngModel)]="signInForm.password" />
+				<input required type="text" placeholder="Username" name="username" autocomplete="username"
+				       [(ngModel)]="signInForm.username"/>
+				<input required type="password" placeholder="Password" name="password" autocomplete="current-password"
+				       [(ngModel)]="signInForm.password"/>
 				<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Forgot your password?</a>
 				<button (click)="signIn()">Sign In</button>
 			</form>

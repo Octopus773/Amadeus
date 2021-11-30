@@ -4784,6 +4784,13 @@ ngx-build-plus@^13.0.0, ngx-build-plus@^13.0.1:
     "@schematics/angular" "^13.0.0"
     webpack-merge "^5.0.0"
 
+ngx-cookie-service@^13.0.1:
+  version "13.0.1"
+  resolved "https://registry.yarnpkg.com/ngx-cookie-service/-/ngx-cookie-service-13.0.1.tgz#a523b061374fa8ce681469fee1022be1e1223fbf"
+  integrity sha512-yDLEoiOJ8W1KFHP5c4m8RbqHvMP4k2OHIqMd5qWK67mEDuJobWVCjp83WLT8ITf4whmUEyhLII3LtnUgw5t9mg==
+  dependencies:
+    tslib "^2.0.0"
+
 nice-napi@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/nice-napi/-/nice-napi-1.0.2.tgz#dc0ab5a1eac20ce548802fc5686eaa6bc654927b"
