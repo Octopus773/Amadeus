@@ -20,4 +20,8 @@
 	    <Link>Amadeus\docker-compose.yml</Link>
 	  </Content>
 	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Tests" />
+	</ItemGroup>
 </Project>

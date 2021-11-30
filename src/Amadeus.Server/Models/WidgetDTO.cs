@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Amadeus.Server.Models
 {
-	public class WidgetCreationDTO
+	public class WidgetDTO
 	{
 		[Required]
 		public string Type { get; set; }

@@ -70,7 +70,6 @@ namespace Amadeus.Server.Controllers
 
 		public async Task<Widget> Create(Widget element)
 		{
-			// widget.UserId
 			_context.Widgets.Add(element);
 			await _context.SaveChangesAsync();
 			return element;
