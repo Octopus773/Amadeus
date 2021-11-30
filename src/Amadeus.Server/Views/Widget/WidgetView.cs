@@ -3,6 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Amadeus.Server.Controllers;
+using Amadeus.Server.Exceptions;
 using Amadeus.Server.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -45,6 +46,42 @@ namespace Amadeus.Server.Views.Widget
 			widget.Type = widgetCreationDto.Type;
 			widget.UserId = userId;
 			return await _widgetRepository.Create(widget);
+		}
+
+		[HttpDelete("{uid:int}")]
+		public async Task<ActionResult<Models.Widget>> DeleteWidget(int uid)
+		{
+			if (!int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out int userId))
+			{
+				return BadRequest("Invalid user credential");
+			}
+
+			try
+			{
+				return await _widgetRepository.Delete(uid);
+			}
+			catch (ElementNotFound e)
+			{
+				return NotFound(e.Message);
+			}
+		}
+
+		[HttpPut("{uid:int}")]
+		public async Task<ActionResult<Models.Widget>> ModifyWidget(int uid)
+		{
+			if (!int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out int userId))
+			{
+				return BadRequest("Invalid user credential");
+			}
+
+			try
+			{
+				return await _widgetRepository.Modify(uid);
+			}
+			catch (ElementNotFound e)
+			{
+				return NotFound(e.Message);
+			}
 		}
 	}
 }

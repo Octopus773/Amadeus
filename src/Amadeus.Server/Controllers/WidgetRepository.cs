@@ -44,14 +44,23 @@ namespace Amadeus.Server.Controllers
 			return u;
 		}
 
-		public Task<Widget> Modify(int id, Widget element)
+		public async Task<Widget> Modify(int id, Widget element)
 		{
-			throw new NotImplementedException();
+			Widget w = await GetById(id);
+
+			w = element;
+			_context.Entry(w).State = EntityState.Modified;
+			await _context.SaveChangesAsync();
+			return w;
 		}
 
-		public Task<Widget> Delete(int id)
+		public async Task<Widget> Delete(int id)
 		{
-			throw new NotImplementedException();
+			Widget w = await GetById(id);
+
+			_context.Widgets.Remove(w);
+			await _context.SaveChangesAsync();
+			return w;
 		}
 
 		public async Task<IList<Widget>> GetWhere(Expression<Func<Widget, bool>> pred)
