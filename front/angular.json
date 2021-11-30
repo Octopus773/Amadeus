@@ -80,7 +80,8 @@
 					"configurations": {
 						"production": {
 							"browserTarget": "host:build:production",
-							"extraWebpackConfig": "projects/host/webpack.prod.config.js"
+							"extraWebpackConfig": "projects/host/webpack.prod.config.js",
+							"proxyConfig": "projects/host/src/proxy.conf.json"
 						},
 						"development": {
 							"browserTarget": "host:build:development"

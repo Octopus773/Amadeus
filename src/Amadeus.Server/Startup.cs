@@ -88,6 +88,7 @@ namespace Amadeus.Server
 				app.UseDeveloperExceptionPage();
 			}
 
+			app.UseCors(x => x.AllowAnyOrigin());
 			// app.UseHttpsRedirection();
 			app.UseStaticFiles();
 

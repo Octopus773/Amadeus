@@ -1,4 +1,9 @@
-import { Component, ElementRef, ViewChild } from "@angular/core";
+import { Component } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { environment } from "../../../environments/environment";
+import { Observable } from "rxjs";
+import { AuthService } from "../../services/auth.service";
+import { LoginRequest, RegisterRequest } from "../../models/jwt";
 
 @Component({
 	selector: "host-login",
@@ -7,15 +12,22 @@ import { Component, ElementRef, ViewChild } from "@angular/core";
 })
 export class LoginComponent
 {
-	@ViewChild("container") private _container!: ElementRef<HTMLElement>;
+	public showSignUp = false;
+	public signUpForm: RegisterRequest = new RegisterRequest();
+	public signInForm: LoginRequest = new LoginRequest();
 
-	showSignUp()
+	constructor(
+		private _auth: AuthService
+	)
+	{}
+
+	signUp(): void
 	{
-		this._container.nativeElement.classList.add("right-panel-active");
+		this._auth.register(this.signUpForm);
 	}
 
-	showSignIn()
+	signIn(): void
 	{
-		this._container.nativeElement.classList.remove("right-panel-active");
+		this._auth.login(this.signInForm);
 	}
 }

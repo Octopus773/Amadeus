@@ -12,14 +12,16 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { LoginComponent } from './pages/login/login.component';
+import { LoginComponent } from "./pages/login/login.component";
+import { FormsModule } from "@angular/forms";
+import { HttpClient, HttpClientModule } from "@angular/common/http";
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		NotFoundComponent,
 		DashboardComponent,
-  LoginComponent
+		LoginComponent
 	],
 	imports: [
 		BrowserModule,
@@ -29,10 +31,13 @@ import { LoginComponent } from './pages/login/login.component';
 		MatIconModule,
 		MatButtonModule,
 		MatTooltipModule,
-		MatCardModule
+		MatCardModule,
+		FormsModule,
+		HttpClientModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]
 })
 export class AppModule
-{ }
+{
+}
