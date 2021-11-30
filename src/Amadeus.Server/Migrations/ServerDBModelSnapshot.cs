@@ -29,11 +29,6 @@ namespace Amadeus.Server.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("DisplayName")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("character varying(30)");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("text");
@@ -41,6 +36,9 @@ namespace Amadeus.Server.Migrations
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<string[]>("Permissions")
+                        .HasColumnType("text[]");
 
                     b.Property<string>("Username")
                         .HasMaxLength(20)

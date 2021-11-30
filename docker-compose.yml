@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  webapp:
+    build: front
+    restart: on-failure
+    ports:
+      - "8080:80"
+    depends_on:
+      - amadeus
+  amadeus:
+    build: .
+    restart: on-failure
+    environment:
+      - DATABASE__SERVER=postgres
+      - DATABASE__USER ID=amadeus
+      - DATABASE__PASSWORD=amadeusPassword
+    ports:
+      - "8081:80"
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres
+    restart: on-failure
+    environment:
+      - POSTGRES_USER=amadeus
+      - POSTGRES_PASSWORD=amadeusPassword
+    volumes:
+      - db:/var/lib/postgresql/data
+
+volumes:
+  db:
