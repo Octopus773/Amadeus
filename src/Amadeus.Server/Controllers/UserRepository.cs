@@ -49,7 +49,7 @@ namespace Amadeus.Server.Controllers
 		/// </summary>
 		/// <param name="id">The id of the user to get.</param>
 		/// <returns>The user corresponding at the id.</returns>
-		public async Task<User> GetUserById(int id)
+		public async Task<User> GetById(int id)
 		{
 			User u = await _context.Users.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
 			if (u == null)
@@ -64,10 +64,16 @@ namespace Amadeus.Server.Controllers
 		/// </summary>
 		/// <param name="user">The user to save in the db.</param>
 		/// <returns>The user saved in db.</returns>
-		public async Task<User> Create([NotNull] User user)
+		public async Task<User> Create([NotNull] UserCreationDTO userCreationDto)
 		{
-			Debug.Assert(user != null, nameof(user) + " != null");
+			User user = new();
+			Debug.Assert(userCreationDto != null, nameof(userCreationDto) + " != null");
+
+			user.Email = userCreationDto.Email;
+			user.Password = userCreationDto.Password;
+			user.Username = userCreationDto.Username;
 			user.CreatedAt = DateTime.UtcNow;
+			user.Verified = false;
 			_context.Add(user);
 			try
 			{
@@ -84,7 +90,7 @@ namespace Amadeus.Server.Controllers
 		/// <inheritdoc/>
 		public async Task<User> Modify(int uid, [NotNull] User user)
 		{
-			User u = await GetUserById(uid);
+			User u = await GetById(uid);
 
 			user.Id = uid;
 			_context.Entry(user).State = EntityState.Modified;
@@ -99,7 +105,7 @@ namespace Amadeus.Server.Controllers
 		/// <returns>True if the user was deleted false otherwise</returns>
 		public async Task<User> Delete(int id)
 		{
-			User user = await GetUserById(id);
+			User user = await GetById(id);
 
 			_context.Remove(user);
 			await _context.SaveChangesAsync();

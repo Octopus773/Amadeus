@@ -23,6 +23,6 @@ namespace Amadeus.Server.Data
 		/// </summary>
 		public DbSet<User> Users { get; set; }
 
-		public DbSet<WidgetModel> Widgets { get; set; }
+		public DbSet<Widget> Widgets { get; set; }
 	}
 }

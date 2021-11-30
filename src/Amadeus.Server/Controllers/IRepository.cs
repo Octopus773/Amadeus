@@ -23,7 +23,7 @@ namespace Amadeus.Server.Controllers
 		/// </summary>
 		/// <param name="id">The id of the element to get.</param>
 		/// <returns>The element corresponding at the id.</returns>
-		public Task<T> GetUserById(int id);
+		public Task<T> GetById(int id);
 
 		/// <summary>
 		/// Create saves the user in the db.

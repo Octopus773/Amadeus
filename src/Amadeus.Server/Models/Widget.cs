@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Amadeus.Server.Models
 {
-	public class WidgetModel
+	public class Widget
 	{
 		public int Id { get; set; }
 
