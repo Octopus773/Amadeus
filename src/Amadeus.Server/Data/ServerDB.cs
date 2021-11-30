@@ -1,3 +1,4 @@
+
 using Microsoft.EntityFrameworkCore;
 using Amadeus.Server.Models;
 
@@ -21,5 +22,7 @@ namespace Amadeus.Server.Data
 		/// Users objects.
 		/// </summary>
 		public DbSet<User> Users { get; set; }
+
+		public DbSet<WidgetModel> Widgets { get; set; }
 	}
 }
