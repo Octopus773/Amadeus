@@ -19,7 +19,13 @@ namespace Amadeus.Server.Data
 			DbConnectionStringBuilder builder = new();
 			IConfigurationSection section = config.GetSection("database");
 			foreach (IConfigurationSection child in section.GetChildren())
-				builder[child.Key] = child.Value;
+			{
+				if (child.Key == "USER_ID")
+					builder["USER ID"] = child.Value;
+				else
+					builder[child.Key] = child.Value;
+			}
+
 			return builder.ConnectionString;
 		}
 	}

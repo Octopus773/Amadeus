@@ -3,17 +3,17 @@ version: "3.8"
 services:
   webapp:
     build: front
-    restart: on-failure
+    restart: unless-stopped
     ports:
       - "8080:80"
     depends_on:
       - amadeus
   amadeus:
     build: .
-    restart: on-failure
+    restart: unless-stopped
     environment:
       - DATABASE__SERVER=postgres
-      - DATABASE__USER ID=amadeus
+      - DATABASE__USER_ID=amadeus
       - DATABASE__PASSWORD=amadeusPassword
     ports:
       - "8081:80"
@@ -21,7 +21,7 @@ services:
       - postgres
   postgres:
     image: postgres
-    restart: on-failure
+    restart: unless-stopped
     environment:
       - POSTGRES_USER=amadeus
       - POSTGRES_PASSWORD=amadeusPassword
