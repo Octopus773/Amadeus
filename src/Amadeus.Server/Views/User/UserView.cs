@@ -55,7 +55,7 @@ namespace Amadeus.Server.Views
 		{
 			try
 			{
-				return await _userRepository.GetUserById(uid);
+				return await _userRepository.GetById(uid);
 			}
 			catch (ElementNotFound e)
 			{

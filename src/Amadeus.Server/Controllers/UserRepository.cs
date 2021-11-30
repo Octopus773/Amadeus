@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq.Expressions;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Amadeus.Server.Data;
@@ -64,14 +65,10 @@ namespace Amadeus.Server.Controllers
 		/// </summary>
 		/// <param name="user">The user to save in the db.</param>
 		/// <returns>The user saved in db.</returns>
-		public async Task<User> Create([NotNull] UserCreationDTO userCreationDto)
+		public async Task<User> Create([NotNull] User user)
 		{
-			User user = new();
-			Debug.Assert(userCreationDto != null, nameof(userCreationDto) + " != null");
+			Debug.Assert(user != null, nameof(user) + " != null");
 
-			user.Email = userCreationDto.Email;
-			user.Password = userCreationDto.Password;
-			user.Username = userCreationDto.Username;
 			user.CreatedAt = DateTime.UtcNow;
 			user.Verified = false;
 			_context.Add(user);
@@ -111,6 +108,11 @@ namespace Amadeus.Server.Controllers
 			await _context.SaveChangesAsync();
 
 			return user;
+		}
+
+		public Task<IList<User>> GetWhere(Expression<Func<User, bool>> pred)
+		{
+			throw new NotImplementedException();
 		}
 	}
 }

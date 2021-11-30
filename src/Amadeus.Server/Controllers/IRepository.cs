@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Amadeus.Server.Models;
 
@@ -46,5 +48,12 @@ namespace Amadeus.Server.Controllers
 		/// <param name="id">id of the element to delete.</param>
 		/// <returns>The deleted element.</returns>
 		public Task<T> Delete(int id);
+
+		/// <summary>
+		/// Get elements matching the predicate.
+		/// </summary>
+		/// <param name="pred">The predicate.</param>
+		/// <returns>All the elements matching the predicate.</returns>
+		public Task<IList<T>> GetWhere(Expression<Func<T, bool>> pred);
 	}
 }
