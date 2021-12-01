@@ -1,5 +1,8 @@
+using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using System.Net;
+using System.Net.Sockets;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -37,6 +40,24 @@ namespace Amadeus.Server.Controllers
 			str = str.Trim('-', '_');
 			str = Regex.Replace(str, @"([-_]){2,}", "$1", RegexOptions.Compiled);
 			return str;
+		}
+
+		/// <summary>
+		/// get local ip address.
+		/// </summary>
+		/// <returns>The local ip address.</returns>
+		/// <exception cref="Exception">If.</exception>
+		public static string GetLocalIpAddress()
+		{
+			IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());
+			foreach (IPAddress ip in host.AddressList)
+			{
+				if (ip.AddressFamily == AddressFamily.InterNetwork)
+				{
+					return ip.ToString();
+				}
+			}
+			throw new Exception("No network adapters with an IPv4 address in the system!");
 		}
 	}
 }

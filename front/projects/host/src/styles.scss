@@ -1,0 +1,13 @@
+@import "~@angular/material/theming";
+
+@include mat-core();
+
+$primary: (default: #00C9A7); // #C4FCEF, #4D8076
+$accent: mat-palette((500: #845EC2, contrast: (500: white)));
+$theme: mat-light-theme($primary, $accent);
+@include angular-material-theme($theme);
+
+body
+{
+	margin: 0;
+}

@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Amadeus.Server.Models;
 
@@ -23,13 +25,13 @@ namespace Amadeus.Server.Controllers
 		/// </summary>
 		/// <param name="id">The id of the element to get.</param>
 		/// <returns>The element corresponding at the id.</returns>
-		public Task<T> GetUserById(int id);
+		public Task<T> GetById(int id);
 
 		/// <summary>
 		/// Create saves the user in the db.
 		/// </summary>
 		/// <param name="element">The element to create in the db.</param>
-		/// <returns>The user saved in db.</returns>
+		/// <returns>The element saved in db.</returns>
 		public Task<T> Create([NotNull] T element);
 
 		/// <summary>
@@ -46,5 +48,12 @@ namespace Amadeus.Server.Controllers
 		/// <param name="id">id of the element to delete.</param>
 		/// <returns>The deleted element.</returns>
 		public Task<T> Delete(int id);
+
+		/// <summary>
+		/// Get elements matching the predicate.
+		/// </summary>
+		/// <param name="pred">The predicate.</param>
+		/// <returns>All the elements matching the predicate.</returns>
+		public Task<IList<T>> GetWhere(Expression<Func<T, bool>> pred);
 	}
 }

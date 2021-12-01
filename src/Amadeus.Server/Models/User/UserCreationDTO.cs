@@ -13,7 +13,7 @@ namespace Amadeus.Server.Models
 		[Required]
 		[MaxLength(30)]
 		[MinLength(3)]
-		public string DisplayName { get; set; }
+		public string Username { get; set; }
 
 		/// <summary>
 		/// The user's email.

@@ -55,40 +55,12 @@ namespace Amadeus.Server.Views
 		{
 			try
 			{
-				return await _userRepository.GetUserById(uid);
+				return await _userRepository.GetById(uid);
 			}
 			catch (ElementNotFound e)
 			{
 				return NotFound(e.Message);
 			}
-		}
-
-		/// <summary>
-		/// Create a user.
-		/// </summary>
-		/// <param name="user">The user to create.</param>
-		/// <returns>The infos of the newly created user.</returns>
-		[HttpPost]
-		[ProducesResponseType(StatusCodes.Status200OK)]
-		[ProducesResponseType(StatusCodes.Status400BadRequest)]
-		public async Task<IActionResult> CreateUser([NotNull] UserCreationDTO userDto)
-		{
-			User user = new();
-
-			// will be in a controller.
-			user.Email = userDto.Email;
-			user.Password = userDto.Password;
-			user.DisplayName = userDto.DisplayName.Trim();
-			user.Username = UtilsController.ToSlug(user.DisplayName);
-			try
-			{
-				await _userRepository.Create(user);
-			}
-			catch (DuplicateField exception)
-			{
-				return BadRequest(new { Message = exception.Message });
-			}
-			return Created(nameof(CreateUser), user);
 		}
 
 		/// <summary>
@@ -100,8 +72,26 @@ namespace Amadeus.Server.Views
 		[HttpPut("{uid:int}")]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
-		public async Task<ActionResult<User>> ModifyUser(int uid, User user)
+		public async Task<ActionResult<User>> ModifyUser(int uid, [NotNull] UserModificationDto userDto)
 		{
+			User user;
+			try
+			{
+				user = await _userRepository.GetById(uid);
+			}
+			catch (ElementNotFound e)
+			{
+				return NotFound(e.Message);
+			}
+			if (userDto == null)
+			{
+				return BadRequest("Missing update infos");
+			}
+
+			user.Email = userDto.Email ?? user.Email;
+			user.Username = userDto.Username ?? user.Username;
+			user.Password = userDto.Password ?? user.Password;
+
 			try
 			{
 				return await _userRepository.Modify(uid, user);

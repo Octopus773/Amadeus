@@ -21,5 +21,7 @@ namespace Amadeus.Server.Data
 		/// Users objects.
 		/// </summary>
 		public DbSet<User> Users { get; set; }
+
+		public DbSet<Widget> Widgets { get; set; }
 	}
 }
