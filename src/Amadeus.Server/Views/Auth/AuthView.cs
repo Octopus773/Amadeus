@@ -120,7 +120,7 @@ namespace Amadeus.Server.Views.Auth
 			try
 			{
 				int userId = _token.GetRefreshTokenUser(token);
-				User user = await _users.GetUserById(userId);
+				User user = await _users.GetById(userId);
 				return new JwtResponse
 				{
 					AccessToken = _token.CreateAccessToken(user, out DateTime expireDate),

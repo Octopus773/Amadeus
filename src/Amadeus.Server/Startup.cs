@@ -49,6 +49,7 @@ namespace Amadeus.Server
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddScoped<IRepository<User>, UserRepository>();
+			services.AddScoped<IRepository<Widget>, WidgetRepository>();
 			services.AddTransient<TokenController>();
 
 			services.AddDbContext<ServerDB>(options => options.UseNpgsql(Configuration.GetDatabaseConnection()));
