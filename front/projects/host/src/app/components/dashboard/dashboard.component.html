@@ -1,3 +1,10 @@
-<mat-card *ngFor="let widget of widgets.widgets">
+<mat-card *ngFor="let widget of widgets.widgets" class="widget">
 	<mat-card-title>TOTO</mat-card-title>
+	<mat-card-actions>
+		<button mat-icon-button color="warn"
+		        matTooltipPosition="below" matTooltip="Delete widget"
+				(click)="widgets.delete(widget)">
+			<mat-icon>delete</mat-icon>
+		</button>
+	</mat-card-actions>
 </mat-card>

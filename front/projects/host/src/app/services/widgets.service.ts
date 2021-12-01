@@ -54,7 +54,7 @@ export class WidgetsService
 
 	async delete(widget: Widget): Promise<void>
 	{
-		await this._http.delete(`${environment.apiUrl}/widget`, widget)
+		await this._http.delete(`${environment.apiUrl}/widget/${widget.id}`)
 			.subscribe(() => this._widgets = this._widgets.filter(x => x != widget));
 	}
 

@@ -17,13 +17,15 @@ import { FormsModule } from "@angular/forms";
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { MatMenuModule } from "@angular/material/menu";
 import { AuthorizerInterceptor } from "./misc/authorization-interceptor.service";
+import { WeatherComponent } from './components/weather/weather.component';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		NotFoundComponent,
 		DashboardComponent,
-		LoginComponent
+		LoginComponent,
+  WeatherComponent
 	],
 	imports: [
 		BrowserModule,
