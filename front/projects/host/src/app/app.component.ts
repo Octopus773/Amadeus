@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { Router } from "@angular/router";
+import { WidgetsService } from "./services/widgets.service";
 
 @Component({
 	selector: "host-root",
@@ -9,6 +9,7 @@ import { Router } from "@angular/router";
 export class AppComponent
 {
 	constructor(
+		private _widgets: WidgetsService
 		// private _lookup: LookupService,
 		// private  _router: Router
 	)
@@ -22,5 +23,10 @@ export class AppComponent
 		// 	console.log(this._router.config);
 		// 	console.log(modules);
 		// });
+	}
+
+	addWidget(type: string): void
+	{
+		this._widgets.createWidget(type);
 	}
 }

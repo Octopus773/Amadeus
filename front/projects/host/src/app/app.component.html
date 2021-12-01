@@ -3,7 +3,8 @@
 		<span>Amadeus</span>
 		<span class="spacer"></span>
 		<button mat-icon-button class="example-icon" aria-label="Add widget"
-		        matTooltipPosition="below" matTooltip="Add widget">
+		        matTooltipPosition="below" matTooltip="Add widget"
+		        [matMenuTriggerFor]="addMenu">
 			<mat-icon>add</mat-icon>
 		</button>
 		<button mat-icon-button class="example-icon" aria-label="Login"
@@ -16,3 +17,18 @@
 <main>
 	<router-outlet></router-outlet>
 </main>
+
+<mat-menu #addMenu>
+	<button mat-menu-item (click)="addWidget('weather')">
+		<mat-icon>thermostat</mat-icon>
+		<span>Weather</span>
+	</button>
+	<button mat-menu-item disabled>
+		<mat-icon>voicemail</mat-icon>
+		<span>Soon</span>
+	</button>
+	<button mat-menu-item>
+		<mat-icon>notifications_off</mat-icon>
+		<span>Soon</span>
+	</button>
+</mat-menu>

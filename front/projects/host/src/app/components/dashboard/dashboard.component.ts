@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { Widget } from "../../models/widget";
+import { WidgetsService } from "../../services/widgets.service";
 
 @Component({
 	selector: "host-dashboard",
@@ -8,5 +8,8 @@ import { Widget } from "../../models/widget";
 })
 export class DashboardComponent
 {
-	public widgets: Widget[] = [{}];
+	constructor(
+		public widgets: WidgetsService
+	)
+	{}
 }

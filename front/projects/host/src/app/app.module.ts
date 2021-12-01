@@ -14,7 +14,8 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { LoginComponent } from "./pages/login/login.component";
 import { FormsModule } from "@angular/forms";
-import { HttpClient, HttpClientModule } from "@angular/common/http";
+import { HttpClientModule } from "@angular/common/http";
+import { MatMenuModule } from "@angular/material/menu";
 
 @NgModule({
 	declarations: [
@@ -25,7 +26,6 @@ import { HttpClient, HttpClientModule } from "@angular/common/http";
 	],
 	imports: [
 		BrowserModule,
-		BrowserAnimationsModule,
 		AppRoutingModule,
 		MatToolbarModule,
 		MatIconModule,
@@ -33,7 +33,9 @@ import { HttpClient, HttpClientModule } from "@angular/common/http";
 		MatTooltipModule,
 		MatCardModule,
 		FormsModule,
-		HttpClientModule
+		HttpClientModule,
+		MatMenuModule,
+		BrowserAnimationsModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]

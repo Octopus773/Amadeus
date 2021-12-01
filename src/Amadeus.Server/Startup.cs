@@ -17,6 +17,8 @@
 // along with Kyoo. If not, see <https://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 using Amadeus.Server.Controllers;
 using Amadeus.Server.Data;
@@ -30,6 +32,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Npgsql;
+using NSwag;
 
 namespace Amadeus.Server
 {
@@ -72,6 +75,30 @@ namespace Amadeus.Server
 						IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwt.Secret))
 					};
 				});
+
+			services.AddOpenApiDocument(document =>
+			{
+				document.Title = "Amadeus API";
+				// TODO use a real multi-line description in markdown.
+				document.Description = "The Amadeus's public API";
+				document.Version = Assembly.GetExecutingAssembly().GetName().Version!.ToString(3);
+				document.DocumentName = "v1";
+				document.UseControllerSummaryAsTagDescription = true;
+				document.GenerateExamples = true;
+				document.PostProcess = options =>
+				{
+					options.Info.Contact = new OpenApiContact
+					{
+						Name = "Amadeus's github",
+						Url = "https://github.com/Octopus773/Amadeus"
+					};
+					// options.Servers.Add(new OpenApiServer
+					// {
+					// 	Url = _configuration.GetPublicUrl().ToString(),
+					// 	Description = "The currently running kyoo's instance."
+					// });
+				};
+			});
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -87,6 +114,9 @@ namespace Amadeus.Server
 			{
 				app.UseDeveloperExceptionPage();
 			}
+
+			app.UseOpenApi();
+			app.UseSwaggerUi3();
 
 			app.UseCors(x => x.AllowAnyOrigin());
 			// app.UseHttpsRedirection();
