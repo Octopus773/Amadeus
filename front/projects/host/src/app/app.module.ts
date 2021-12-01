@@ -4,7 +4,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { NotFoundComponent } from "./components/not-found/not-found.component";
-import { DashboardComponent } from "./components/dashboard/dashboard.component";
+import { DashboardComponent } from "./pages/dashboard/dashboard.component";
 
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatIconModule } from "@angular/material/icon";
@@ -17,7 +17,9 @@ import { FormsModule } from "@angular/forms";
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { MatMenuModule } from "@angular/material/menu";
 import { AuthorizerInterceptor } from "./misc/authorization-interceptor.service";
-import { WeatherComponent } from './components/weather/weather.component';
+import { WeatherComponent } from "./components/weather/weather.component";
+import { DashboardWidgetDirective } from "./misc/dashboard-widget.directive";
+import { ForecastComponent } from "./components/forecast/forecast.component";
 
 @NgModule({
 	declarations: [
@@ -25,7 +27,9 @@ import { WeatherComponent } from './components/weather/weather.component';
 		NotFoundComponent,
 		DashboardComponent,
 		LoginComponent,
-  WeatherComponent
+		WeatherComponent,
+		DashboardWidgetDirective,
+		ForecastComponent
 	],
 	imports: [
 		BrowserModule,

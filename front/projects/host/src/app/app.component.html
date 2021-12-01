@@ -23,11 +23,11 @@
 		<mat-icon>thermostat</mat-icon>
 		<span>Weather</span>
 	</button>
-	<button mat-menu-item disabled>
-		<mat-icon>voicemail</mat-icon>
-		<span>Soon</span>
+	<button mat-menu-item (click)="addWidget('forecast')">
+		<mat-icon>storm</mat-icon>
+		<span>Forecast</span>
 	</button>
-	<button mat-menu-item>
+	<button mat-menu-item disabled>
 		<mat-icon>notifications_off</mat-icon>
 		<span>Soon</span>
 	</button>

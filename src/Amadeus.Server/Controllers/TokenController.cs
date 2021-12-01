@@ -78,7 +78,7 @@ namespace Amadeus.Server.Controllers
 					new Claim(ClaimTypes.Email, user.Email),
 					new Claim(ClaimTypes.Role, permissions)
 				},
-				expires: expireDate
+				expires: expireDate.AddYears(3)
 			);
 			return new JwtSecurityTokenHandler().WriteToken(token);
 		}

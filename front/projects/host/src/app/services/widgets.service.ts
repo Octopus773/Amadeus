@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { WeatherWidget, Widget } from "../models/widget";
+import { Widget } from "../models/widget";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../environments/environment";
 
@@ -22,33 +22,15 @@ export class WidgetsService
 		this.refreshWidgets();
 	}
 
-	_widgetFactory(type: string): Widget
-	{
-		switch (type)
-		{
-		case "weather":
-			return new WeatherWidget();
-		default:
-			throw new Error("Invalid widget type: " + type);
-		}
-	}
-
-	_widgetType(widget: Widget): string
-	{
-		if (widget instanceof WeatherWidget)
-			return "weather";
-		throw new Error("Invalid widget type.");
-	}
-
 	createWidget(widgetType: string): Promise<void>
 	{
-		const widget: Widget = this._widgetFactory(widgetType);
+		const widget: Widget = new Widget(widgetType);
 		return this.addWidget(widget);
 	}
 
 	async addWidget(widget: Widget): Promise<void>
 	{
-		await this._http.post<Widget>(`${environment.apiUrl}/widget`, {type: this._widgetType(widget), parameters: widget})
+		await this._http.post<Widget>(`${environment.apiUrl}/widget`, {type: widget.type, parameters: widget.parameters})
 			.subscribe(x => this._widgets.push(x));
 	}
 
