@@ -7,6 +7,7 @@ using Amadeus.Server.Controllers;
 using Amadeus.Server.Exceptions;
 using Amadeus.Server.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Amadeus.Server.Views.Widget
@@ -23,7 +24,16 @@ namespace Amadeus.Server.Views.Widget
 			_widgetRepository = widgetRepository;
 		}
 
+		/// <summary>
+		/// Get user widgets.
+		/// </summary>
+		/// <remarks>
+		/// Get all the users registered widgets with theirs params.
+		/// </remarks>
+		/// <returns>A list of all the widgets.</returns>
 		[HttpGet]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		public async Task<ActionResult<IList<Models.Widget>>> GetWidgets()
 		{
 			if (!int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out int userId))
@@ -31,7 +41,16 @@ namespace Amadeus.Server.Views.Widget
 			return Ok(await _widgetRepository.GetWhere(w => w.UserId == userId));
 		}
 
+		/// <summary>
+		/// Create user widgets.
+		/// </summary>
+		/// <remarks>
+		/// Create a user registered widget with its params.
+		/// </remarks>
+		/// <returns>The created widget.</returns>
 		[HttpPost]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		public async Task<ActionResult<Models.Widget>> CreateWidget([NotNull] WidgetDTO widgetDto)
 		{
 			if (!int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out int userId))
@@ -48,7 +67,17 @@ namespace Amadeus.Server.Views.Widget
 			return await _widgetRepository.Create(widget);
 		}
 
+		/// <summary>
+		/// Delete a user widget.
+		/// </summary>
+		/// <remarks>
+		/// Delete a user registered widget.
+		/// </remarks>
+		/// <returns>The deleted widget.</returns>
 		[HttpDelete("{uid:int}")]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		[ProducesResponseType(StatusCodes.Status404NotFound)]
+		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		public async Task<ActionResult<Models.Widget>> DeleteWidget(int uid)
 		{
 			if (!int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out int userId))
@@ -69,7 +98,17 @@ namespace Amadeus.Server.Views.Widget
 			}
 		}
 
+		/// <summary>
+		/// Delete a user widget.
+		/// </summary>
+		/// <remarks>
+		/// Delete a user registered widget.
+		/// </remarks>
+		/// <returns>The deleted widget.</returns>
 		[HttpPut("{uid:int}")]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		[ProducesResponseType(StatusCodes.Status400BadRequest)]
+		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		public async Task<ActionResult<Models.Widget>> ModifyWidget(int uid, [NotNull] WidgetDTO widgetDto)
 		{
 			if (!int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out int userId))

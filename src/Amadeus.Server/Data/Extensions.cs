@@ -1,3 +1,4 @@
+using System;
 using System.Data.Common;
 using Microsoft.Extensions.Configuration;
 
@@ -20,7 +21,7 @@ namespace Amadeus.Server.Data
 			IConfigurationSection section = config.GetSection("database");
 			foreach (IConfigurationSection child in section.GetChildren())
 			{
-				if (child.Key == "USER_ID")
+				if (string.Equals(child.Key, "USER_ID", StringComparison.OrdinalIgnoreCase))
 					builder["USER ID"] = child.Value;
 				else
 					builder[child.Key] = child.Value;

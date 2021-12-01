@@ -74,7 +74,15 @@ namespace Amadeus.Server.Views
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		public async Task<ActionResult<User>> ModifyUser(int uid, [NotNull] UserModificationDto userDto)
 		{
-			User user = await _userRepository.GetById(uid);
+			User user;
+			try
+			{
+				user = await _userRepository.GetById(uid);
+			}
+			catch (ElementNotFound e)
+			{
+				return NotFound(e.Message);
+			}
 			if (userDto == null)
 			{
 				return BadRequest("Missing update infos");

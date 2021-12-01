@@ -31,7 +31,7 @@ namespace Amadeus.Server.Controllers
 		/// Create saves the user in the db.
 		/// </summary>
 		/// <param name="element">The element to create in the db.</param>
-		/// <returns>The user saved in db.</returns>
+		/// <returns>The element saved in db.</returns>
 		public Task<T> Create([NotNull] T element);
 
 		/// <summary>
