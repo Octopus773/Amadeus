@@ -5,7 +5,7 @@ namespace Amadeus.Server.Models.Weather
 		/// <summary>
 		/// The temperature in Celsius.
 		/// </summary>
-		public int Celsius { get; set; }
+		public double Celsius { get; set; }
 
 		/// <summary>
 		/// The actual weather label.

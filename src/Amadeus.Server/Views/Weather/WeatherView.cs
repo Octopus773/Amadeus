@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -28,9 +29,18 @@ namespace Amadeus.Server.Views.Weather
 		/// <param name="city">The city to get the weather.</param>
 		/// <returns>All the weather infos.</returns>
 		[HttpGet]
-		public async Task<WeatherData> GetCityWeather([NotNull] string city)
+		public async Task<ActionResult<WeatherData>> GetCityWeather([NotNull] string city)
 		{
-			return await _weatherController.GetWeather(city);
+			try
+			{
+				return await _weatherController.GetWeather(city);
+			}
+#pragma warning disable CA1031
+			catch (Exception e)
+#pragma warning restore CA1031
+			{
+				return BadRequest(e.Message);
+			}
 		}
 	}
 }
