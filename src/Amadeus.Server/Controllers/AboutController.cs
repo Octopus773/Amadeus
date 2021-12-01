@@ -1,5 +1,4 @@
 using System;
-using Amadeus.Server.Controllers;
 
 namespace Amadeus.Server.Controllers
 {
@@ -22,7 +21,7 @@ namespace Amadeus.Server.Controllers
 				},
 				server = new
 				{
-					current_time = (uint)DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds,
+					current_time = (uint) DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1)).TotalSeconds,
 					services = new[]
 					{
 						new
@@ -34,8 +33,7 @@ namespace Amadeus.Server.Controllers
 								{
 									name = "city_weather",
 									description = "Display temperature & weather for a city",
-									// TODO replace paramsij by params
-									paramsij = new[]
+									@params = new[]
 									{
 										new
 										{
@@ -55,8 +53,7 @@ namespace Amadeus.Server.Controllers
 								{
 									name = "city_forecast",
 									description = "Displaying the list of the next n days of weather for a city",
-									// TODO replace paramsij by params
-									paramsij = new[]
+									@params = new[]
 									{
 										new
 										{
