@@ -29,9 +29,9 @@ namespace Amadeus.Server.Controllers.Weather
 			dynamic data = await response.Content.ReadAsAsync<ExpandoObject>();
 			return new WeatherData
 			{
-				Degree = data.current.temp_c,
-				//Weather = Models.Weather.Weather.Sunny
-				Weather = data.current.condition.text // Text vs enum. Maybe keep it as a text.
+				Celsius = data.current.temp_c,
+				Weather = data.current.condition.text,
+				Icon = data.current.condition.icon
 			};
 		}
 	}

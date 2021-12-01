@@ -1,9 +1,20 @@
 namespace Amadeus.Server.Models.Weather
 {
-
 	public class WeatherData
 	{
-		public int Degree { get; set; }
+		/// <summary>
+		/// The temperature in Celsius.
+		/// </summary>
+		public int Celsius { get; set; }
+
+		/// <summary>
+		/// The actual weather label.
+		/// </summary>
 		public string Weather { get; set; }
+
+		/// <summary>
+		/// The icon for the Weather Label.
+		/// </summary>
+		public string Icon { get; set; }
 	}
 }
