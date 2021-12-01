@@ -1,14 +1,15 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using Amadeus.Server.Controllers.Weather;
 using Amadeus.Server.Models.Weather;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Amadeus.Server.Views.Weather
 {
 	[ApiController]
-	[Route("/weather/{city}")]
+	[Route("/weather")]
 	public class WeatherView : ControllerBase
 	{
 
@@ -28,12 +29,33 @@ namespace Amadeus.Server.Views.Weather
 		/// </summary>
 		/// <param name="city">The city to get the weather.</param>
 		/// <returns>All the weather infos.</returns>
-		[HttpGet]
+		[HttpGet("{city}")]
 		public async Task<ActionResult<WeatherData>> GetCityWeather([NotNull] string city)
 		{
 			try
 			{
 				return await _weatherController.GetWeather(city);
+			}
+#pragma warning disable CA1031
+			catch (Exception e)
+#pragma warning restore CA1031
+			{
+				return BadRequest(e.Message);
+			}
+		}
+
+		/// <summary>
+		/// Get the forecast for a given city.
+		/// </summary>
+		/// <param name="city">The city to get the weather.</param>
+		/// <param name="days">The number of days to get the forecast.</param>
+		/// <returns>All the weather infos.</returns>
+		[HttpGet("{city}/{days:int}")]
+		public async Task<ActionResult<IList<WeatherData>>> GetCityForecast([NotNull] string city, int days)
+		{
+			try
+			{
+				return Ok(await _weatherController.GetForeCast(city, days));
 			}
 #pragma warning disable CA1031
 			catch (Exception e)
