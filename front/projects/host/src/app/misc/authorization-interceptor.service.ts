@@ -16,8 +16,6 @@ export class AuthorizerInterceptor implements HttpInterceptor
 
 	intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>>
 	{
-		if (request.url.startsWith("http"))
-			return next.handle(request);
 		const token: string | null = this.auth.accessToken;
 		if (token)
 			request = request.clone({setHeaders: {Authorization: "Bearer " + token}});
