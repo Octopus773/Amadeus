@@ -51,17 +51,17 @@ namespace Amadeus.Server.Views.Widget
 		[HttpPost]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
-		public async Task<ActionResult<Models.Widget>> CreateWidget([NotNull] WidgetDTO widgetDto)
+		public async Task<ActionResult<Models.Widget>> CreateWidget([NotNull] WidgetCreationDTO widgetCreationDto)
 		{
 			if (!int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out int userId))
 				return BadRequest("Invalid user credential");
-			if (widgetDto == null)
+			if (widgetCreationDto == null)
 				return BadRequest("Widget information wasn't provided");
 
 			Models.Widget widget = new()
 			{
-				Parameters = widgetDto.Parameters,
-				Type = widgetDto.Type,
+				Parameters = widgetCreationDto.Parameters,
+				Type = widgetCreationDto.Type,
 				UserId = userId
 			};
 			return await _widgetRepository.Create(widget);
@@ -109,12 +109,12 @@ namespace Amadeus.Server.Views.Widget
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(StatusCodes.Status404NotFound)]
-		public async Task<ActionResult<Models.Widget>> ModifyWidget(int uid, [NotNull] WidgetDTO widgetDto)
+		public async Task<ActionResult<Models.Widget>> ModifyWidget(int uid, [NotNull] WidgetModificationDTO widgetModificationDto)
 		{
 			if (!int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out int userId))
 				return BadRequest("Invalid user credential");
 
-			if (widgetDto == null)
+			if (widgetModificationDto == null)
 				return BadRequest("Widget information wasn't provided");
 
 			IList<Models.Widget> wList = await _widgetRepository.GetWhere(x => x.Id == uid && x.UserId == userId);
@@ -123,8 +123,8 @@ namespace Amadeus.Server.Views.Widget
 				return NotFound("The widget don't exist or you don't have access to it");
 			}
 
-			wList[0].Parameters = widgetDto.Parameters;
-			wList[0].Type = widgetDto.Type;
+			wList[0].Parameters = widgetModificationDto.Parameters ?? wList[0].Parameters;
+			wList[0].Type = widgetModificationDto.Type ?? wList[0].Type;
 
 			try
 			{
