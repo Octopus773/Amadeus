@@ -86,7 +86,7 @@ namespace Amadeus.Server.Views.Widget
 			IList<Models.Widget> wList = await _widgetRepository.GetWhere(x => x.Id == uid && x.UserId == userId);
 			if (!wList.Any())
 			{
-				return BadRequest("The widget don't exist or you don't have access to it");
+				return NotFound("The widget don't exist or you don't have access to it");
 			}
 			try
 			{
@@ -120,7 +120,7 @@ namespace Amadeus.Server.Views.Widget
 			IList<Models.Widget> wList = await _widgetRepository.GetWhere(x => x.Id == uid && x.UserId == userId);
 			if (!wList.Any())
 			{
-				return BadRequest("The widget don't exist or you don't have access to it");
+				return NotFound("The widget don't exist or you don't have access to it");
 			}
 
 			wList[0].Parameters = widgetDto.Parameters;

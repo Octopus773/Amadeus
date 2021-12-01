@@ -31,11 +31,6 @@ namespace Amadeus.Server.Controllers
 				.ToListAsync();
 		}
 
-		public async Task<IList<Widget>> GetByUser(User user)
-		{
-			return await _context.Widgets.AsNoTracking().Where(x => x.UserId == user.Id).ToListAsync();
-		}
-
 		public async Task<Widget> GetById(int id)
 		{
 			Widget u = await _context.Widgets.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
