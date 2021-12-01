@@ -1,0 +1,499 @@
+{
+	"info": {
+		"_postman_id": "75807d23-222b-42a3-9205-faf28794b5ce",
+		"name": "Amadeus (Func Tests)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "100 Auth",
+			"item": [
+				{
+					"name": "Register success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test & setting collection variable\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    ",
+									"    var jsonData = pm.response.json();",
+									"    pm.collectionVariables.set(\"bearer_token\", jsonData.accessToken);",
+									"    pm.collectionVariables.set(\"refresh_token\", jsonData.refreshToken);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"{{USER_MAIL}}\",\n    \"username\": \"{{USER_USERNAME}}\",\n    \"password\": \"{{USER_PASSWORD}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register no mail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test & setting collection variable\", function () {",
+									"    pm.response.to.have.status(400);",
+									"",
+									"    pm.response.to.have.jsonBody(\"errors\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"emagil\": \"{{USER_MAIL}}\",\n    \"username\": \"{{USER_USERBAME}}\",\n    \"password\": \"{{USER_PASSORD}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login success",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test & setting collection variable\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    ",
+									"    var jsonData = pm.response.json();",
+									"    pm.collectionVariables.set(\"bearer_token\", jsonData.accessToken);",
+									"    pm.collectionVariables.set(\"refresh_token\", jsonData.refreshToken);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"{{USER_USERNAME}}\",\n    \"password\": \"{{USER_PASSWORD}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login invalid password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status test & setting collection variable\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"{{USER_USERNAME}}\",\n    \"password\": \"{{USER_PASSWORD}}2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Widgets",
+			"item": [
+				{
+					"name": "get all user widgets",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/widget",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"widget"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add user widget",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"manger\",\n    \"parameters\": {\n        \"city\": \"Nantes\",\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/widget",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"widget"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete widget",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/widget/3",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"widget",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "modify widget",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"cinema\",\n    \"parameters\": {\n        \"xmas_status\": \"incoming\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/widget/4",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"widget",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "getUsers check if present",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Checking that user created is in list [SETS the USER_ID]\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    ",
+									"    var jsonData = pm.response.json();",
+									"    const username = pm.collectionVariables.get(\"USER_USERNAME\");",
+									"    const myuser = jsonData.find(el => el.username === username);",
+									"",
+									"    pm.collectionVariables.set(\"USER_ID\", myuser.id);",
+									"    pm.expect(myuser.email ===  pm.collectionVariables.get(\"USER_MAIL\")).eql(true);",
+									"    pm.expect(myuser.password !=  pm.collectionVariables.get(\"USER_PASSWORD\")).eql(true);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/user",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get one user check if correct",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Getting user via getById\", function () {",
+									"    pm.response.to.have.status(200);",
+									"    ",
+									"    var jsonData = pm.response.json();",
+									"",
+									"    pm.expect(jsonData.id).eql(pm.collectionVariables.get(\"USER_ID\"));",
+									"    pm.expect(jsonData.username).eql(pm.collectionVariables.get(\"USER_USERNAME\"));",
+									"    pm.expect(jsonData.email).eql(pm.collectionVariables.get(\"USER_MAIL\"));",
+									"    pm.expect(jsonData.password != pm.collectionVariables.get(\"USER_PASSWORD\")).eql(true);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/user/{{USER_ID}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"{{USER_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update a user",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"displayName\": \"test\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/34",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"34"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete a user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Delete the user check info & cleanup\", function () {",
+									"        pm.response.to.have.status(200);",
+									"    ",
+									"    var jsonData = pm.response.json();",
+									"",
+									"    pm.expect(jsonData.id).eql(pm.collectionVariables.get(\"USER_ID\"));",
+									"    pm.expect(jsonData.username).eql(pm.collectionVariables.get(\"USER_USERNAME\"));",
+									"    pm.expect(jsonData.email).eql(pm.collectionVariables.get(\"USER_MAIL\"));",
+									"    pm.expect(jsonData.password != pm.collectionVariables.get(\"USER_PASSWORD\")).eql(true);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/user/{{USER_ID}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"{{USER_ID}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{bearer_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "{{protocal}}{{host}}"
+		},
+		{
+			"key": "protocal",
+			"value": "http://"
+		},
+		{
+			"key": "port",
+			"value": "5000"
+		},
+		{
+			"key": "host",
+			"value": "{{address}}:{{port}}"
+		},
+		{
+			"key": "address",
+			"value": "localhost"
+		},
+		{
+			"key": "bearer_token",
+			"value": "none"
+		},
+		{
+			"key": "refresh_token",
+			"value": ""
+		},
+		{
+			"key": "USER_ID",
+			"value": ""
+		},
+		{
+			"key": "USER_MAIL",
+			"value": "efzfzefefzf.efuihe@efzef.com"
+		},
+		{
+			"key": "USER_PASSWORD",
+			"value": "zfzei576be@"
+		},
+		{
+			"key": "USER_USERNAME",
+			"value": "beatrix_test"
+		}
+	]
+}
