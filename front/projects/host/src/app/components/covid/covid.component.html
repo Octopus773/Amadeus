@@ -1,0 +1,16 @@
+<mat-card-title>Covid</mat-card-title>
+<mat-card-content>
+	<mat-form-field appearance="fill">
+		<mat-label>Country Code</mat-label>
+		<input matInput placeholder="Country" [(ngModel)]="widget.parameters['country']" (change)="updateWidget()">
+	</mat-form-field>
+
+	<ng-container *ngIf="info != null">
+		<ul>
+			<li>Confirmed: {{info.confirmed}}</li>
+			<li>Critical: {{info.critical}}</li>
+			<li>Deaths: {{info.deaths}}</li>
+			<li>Recovered: {{info.recovered}}</li>
+		</ul>
+	</ng-container>
+</mat-card-content>

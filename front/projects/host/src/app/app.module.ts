@@ -24,6 +24,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatSelectModule } from "@angular/material/select";
 import { MatExpansionModule } from "@angular/material/expansion";
+import { CovidComponent } from './components/covid/covid.component';
 
 @NgModule({
 	declarations: [
@@ -33,7 +34,8 @@ import { MatExpansionModule } from "@angular/material/expansion";
 		LoginComponent,
 		WeatherComponent,
 		DashboardWidgetDirective,
-		ForecastComponent
+		ForecastComponent,
+  CovidComponent
 	],
 	imports: [
 		BrowserModule,
