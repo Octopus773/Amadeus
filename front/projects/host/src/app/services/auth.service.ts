@@ -1,9 +1,11 @@
-import { Injectable } from "@angular/core";
+import { Injectable, Injector } from "@angular/core";
 import { environment } from "../../environments/environment";
 import { HttpClient } from "@angular/common/http";
 import { Jwt, LoginRequest, RegisterRequest } from "../models/jwt";
 import { map, Observable } from "rxjs";
 import { CookieService } from "ngx-cookie-service";
+import { WidgetsService } from "./widgets.service";
+import { Widget } from "../models/widget";
 
 @Injectable({
 	providedIn: "root"
@@ -19,7 +21,8 @@ export class AuthService
 
 	constructor(
 		private _http: HttpClient,
-		private _cookies: CookieService
+		private _cookies: CookieService,
+		private _injector: Injector
 	)
 	{
 		if (this._cookies.check("jwt"))
@@ -33,6 +36,8 @@ export class AuthService
 			{
 				this._jwt = x;
 				this._cookies.set("jwt", JSON.stringify(this._jwt));
+				// noinspection JSIgnoredPromiseFromCall
+				this._injector.get(WidgetsService).refreshWidgets();
 			}));
 	}
 

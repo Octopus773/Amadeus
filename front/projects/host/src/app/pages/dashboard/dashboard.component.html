@@ -1,10 +1,18 @@
-<mat-card *ngFor="let widget of widgets.widgets" class="widget">
-	<ng-template #body [hostWidgetType]="widget"></ng-template>
-	<mat-card-actions>
-		<button mat-icon-button color="warn"
-		        matTooltipPosition="below" matTooltip="Delete widget"
-				(click)="widgets.delete(widget)">
-			<mat-icon>delete</mat-icon>
-		</button>
-	</mat-card-actions>
-</mat-card>
+<ng-container *ngIf="auth.accessToken !== null; else notAuth">
+	<mat-card *ngFor="let widget of widgets.widgets" class="widget">
+		<ng-template [hostWidgetType]="widget"></ng-template>
+		<mat-card-actions>
+			<button mat-icon-button color="warn"
+			        matTooltipPosition="below" matTooltip="Delete widget"
+					(click)="widgets.delete(widget)">
+				<mat-icon>delete</mat-icon>
+			</button>
+		</mat-card-actions>
+	</mat-card>
+</ng-container>
+<ng-template #notAuth>
+	<div style="justify-content: center; text-align: center; display: flex; flex-direction: column">
+		<h2>Welcome to your dashboard</h2>
+		<h3>Please log in to start.</h3>
+	</div>
+</ng-template>

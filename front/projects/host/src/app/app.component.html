@@ -2,16 +2,24 @@
 	<mat-toolbar color="accent" class="dark">
 		<span>Amadeus</span>
 		<span class="spacer"></span>
-		<button mat-icon-button class="example-icon" aria-label="Add widget"
+		<button mat-icon-button aria-label="Add widget"
 		        matTooltipPosition="below" matTooltip="Add widget"
 		        [matMenuTriggerFor]="addMenu">
 			<mat-icon>add</mat-icon>
 		</button>
-		<button mat-icon-button class="example-icon" aria-label="Login"
+		<button *ngIf="auth.accessToken === null; else logout"
+		        mat-icon-button aria-label="Login"
 		        matTooltipPosition="below" matTooltip="Login"
-				routerLink="/login" href="/login">
+		        routerLink="/login" href="/login">
 			<mat-icon>account_circle</mat-icon>
 		</button>
+		<ng-template #logout>
+			<button mat-icon-button aria-label="Account"
+			        matTooltipPosition="below" matTooltip="Account"
+			        [matMenuTriggerFor]="accountMenu">
+				<mat-icon>account_circle</mat-icon>
+			</button>
+		</ng-template>
 	</mat-toolbar>
 </header>
 <main>
@@ -30,5 +38,11 @@
 	<button mat-menu-item (click)="addWidget('covid')">
 		<mat-icon>coronavirus</mat-icon>
 		<span>Covid</span>
+	</button>
+</mat-menu>
+
+<mat-menu #accountMenu>
+	<button mat-menu-item (click)="auth.logout()">
+		<span>Logout</span>
 	</button>
 </mat-menu>
