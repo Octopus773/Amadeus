@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from "@angular/core";
+import { WidgetComponent } from "../../misc/widget.component";
 
 @Component({
-  selector: 'app-forecast',
-  templateUrl: './forecast.component.html',
-  styleUrls: ['./forecast.component.scss']
+	selector: "host-forecast",
+	templateUrl: "./forecast.component.html",
+	styleUrls: ["./forecast.component.scss"]
 })
-export class ForecastComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+export class ForecastComponent extends WidgetComponent
+{
+	refresh(): Promise<void>
+	{
+		return Promise.resolve(undefined);
+	}
 }

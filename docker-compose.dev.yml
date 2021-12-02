@@ -19,6 +19,7 @@ services:
       - DATABASE__SERVER=postgres
       - DATABASE__USER ID=amadeus
       - DATABASE__PASSWORD=amadeusPassword
+      - WEATHERCONFIGURATION__APIKEY=${WEATHER_API_KEY}
     ports:
       - "8081:80"
     depends_on:

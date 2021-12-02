@@ -34,6 +34,11 @@ export class WidgetsService
 			.subscribe(x => this._widgets.push(x));
 	}
 
+	async update(widget: Widget): Promise<void>
+	{
+		await this._http.put(`${environment.apiUrl}/widget/${widget.id}`, widget).subscribe();
+	}
+
 	async delete(widget: Widget): Promise<void>
 	{
 		await this._http.delete(`${environment.apiUrl}/widget/${widget.id}`)

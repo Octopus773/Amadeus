@@ -1,8 +1,8 @@
-import { Directive, Input, Type, ViewContainerRef } from "@angular/core";
+import { ComponentRef, Directive, Input, Type, ViewContainerRef } from "@angular/core";
 import { WeatherComponent } from "../components/weather/weather.component";
 import { Widget } from "../models/widget";
 import { ForecastComponent } from "../components/forecast/forecast.component";
-import { NotFoundComponent } from "../components/not-found/not-found.component";
+import { WidgetComponent } from "./widget.component";
 
 @Directive({
 	selector: "[hostWidgetType]"
@@ -12,13 +12,19 @@ export class DashboardWidgetDirective
 	@Input() set hostWidgetType(widget: Widget)
 	{
 		this.viewContainerRef.clear();
-		this.viewContainerRef.createComponent(this._widgetFactory(widget.type));
+		const ref: ComponentRef<WidgetComponent> = this.viewContainerRef.createComponent<WidgetComponent>(
+			DashboardWidgetDirective._widgetFactory(widget.type)
+		);
+		widget.parameters ??= {};
+		console.log(widget);
+		ref.instance.widget = widget;
+		ref.instance._setupRefresh();
 	}
 
 	constructor(private viewContainerRef: ViewContainerRef)
 	{}
 
-	private _widgetFactory(type: string): Type<unknown>
+	private static _widgetFactory(type: string): Type<WidgetComponent>
 	{
 		switch (type)
 		{
@@ -27,7 +33,7 @@ export class DashboardWidgetDirective
 		case "forecast":
 			return ForecastComponent;
 		default:
-			return NotFoundComponent;
+			throw new Error("Invalid component");
 		}
 	}
 }

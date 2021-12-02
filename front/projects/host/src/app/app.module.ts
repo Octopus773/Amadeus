@@ -20,6 +20,8 @@ import { AuthorizerInterceptor } from "./misc/authorization-interceptor.service"
 import { WeatherComponent } from "./components/weather/weather.component";
 import { DashboardWidgetDirective } from "./misc/dashboard-widget.directive";
 import { ForecastComponent } from "./components/forecast/forecast.component";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
 
 @NgModule({
 	declarations: [
@@ -42,7 +44,9 @@ import { ForecastComponent } from "./components/forecast/forecast.component";
 		FormsModule,
 		HttpClientModule,
 		MatMenuModule,
-		BrowserAnimationsModule
+		BrowserAnimationsModule,
+		MatFormFieldModule,
+		MatInputModule
 	],
 	providers: [
 		{

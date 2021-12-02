@@ -1,8 +1,5 @@
 <mat-card *ngFor="let widget of widgets.widgets" class="widget">
-	<mat-card-title>TOTO</mat-card-title>
-	<mat-card-content>
-	<ng-template [hostWidgetType]="widget"></ng-template>
-	</mat-card-content>
+	<ng-template #body [hostWidgetType]="widget"></ng-template>
 	<mat-card-actions>
 		<button mat-icon-button color="warn"
 		        matTooltipPosition="below" matTooltip="Delete widget"
