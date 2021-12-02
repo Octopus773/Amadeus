@@ -3,11 +3,13 @@
 		<span>Amadeus</span>
 		<span class="spacer"></span>
 		<button mat-icon-button class="example-icon" aria-label="Add widget"
-		        matTooltipPosition="below" matTooltip="Add widget">
+		        matTooltipPosition="below" matTooltip="Add widget"
+		        [matMenuTriggerFor]="addMenu">
 			<mat-icon>add</mat-icon>
 		</button>
 		<button mat-icon-button class="example-icon" aria-label="Login"
-		        matTooltipPosition="below" matTooltip="Login">
+		        matTooltipPosition="below" matTooltip="Login"
+				routerLink="/login" href="/login">
 			<mat-icon>account_circle</mat-icon>
 		</button>
 	</mat-toolbar>
@@ -15,3 +17,18 @@
 <main>
 	<router-outlet></router-outlet>
 </main>
+
+<mat-menu #addMenu>
+	<button mat-menu-item (click)="addWidget('weather')">
+		<mat-icon>thermostat</mat-icon>
+		<span>Weather</span>
+	</button>
+	<button mat-menu-item (click)="addWidget('forecast')">
+		<mat-icon>storm</mat-icon>
+		<span>Forecast</span>
+	</button>
+	<button mat-menu-item disabled>
+		<mat-icon>notifications_off</mat-icon>
+		<span>Soon</span>
+	</button>
+</mat-menu>

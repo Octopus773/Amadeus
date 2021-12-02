@@ -1,0 +1,37 @@
+version: "3.8"
+
+services:
+  webapp:
+    build:
+      context: front
+      dockerfile: Dockerfile-dev
+    restart: unless-stopped
+    ports:
+      - "8080:4200"
+    volumes:
+      - ./front:/webapp
+    depends_on:
+      - amadeus
+  amadeus:
+    build: .
+    restart: unless-stopped
+    environment:
+      - DATABASE__SERVER=postgres
+      - DATABASE__USER ID=amadeus
+      - DATABASE__PASSWORD=amadeusPassword
+      - WEATHERCONFIGURATION__APIKEY=${WEATHER_API_KEY}
+    ports:
+      - "8081:80"
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=amadeus
+      - POSTGRES_PASSWORD=amadeusPassword
+    volumes:
+      - db:/var/lib/postgresql/data
+
+volumes:
+  db:

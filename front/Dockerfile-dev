@@ -1,0 +1,8 @@
+FROM node:14-alpine
+WORKDIR /webapp
+RUN npm install -g @angular/cli
+COPY package.json .
+COPY yarn.lock .
+RUN yarn install --frozen-lockfile
+EXPOSE 4200
+CMD ["ng", "serve", "--host", "0.0.0.0", "--disable-host-check", "--proxy-config", "projects/host/src/proxy.conf.json"]

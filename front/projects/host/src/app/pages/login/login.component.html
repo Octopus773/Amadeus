@@ -1,0 +1,53 @@
+<div id="login" class="modal fade" role="dialog">
+	<div class="container" [class.right-panel-active]="showSignUp">
+		<div class="form-container sign-up-container">
+			<form #signUpF="ngForm">
+				<h1>Create Account</h1>
+				<div class="social">
+					<a href="#"><i class="fab fa-google"></i></a>
+					<a href="#"><i class="fab fa-twitter"></i></a>
+					<a href="#"><i class="fab fa-facebook-f"></i></a>
+				</div>
+				<span>or use your email for registration</span>
+				<input required type="text" placeholder="Username" name="username" autocomplete="username"
+				       [(ngModel)]="signUpForm.username"/>
+				<input required type="email" placeholder="Email" name="email" autocomplete="email"
+				       [(ngModel)]="signUpForm.email"/>
+				<input required type="password" placeholder="Password" name="password" autocomplete="new-password"
+				       [(ngModel)]="signUpForm.password"/>
+				<button (click)="signUp()">Sign Up</button>
+			</form>
+		</div>
+		<div class="form-container sign-in-container">
+			<form #signInF="ngForm">
+				<h1>Sign in</h1>
+				<div class="social">
+					<a href="#"><i class="fab fa-google"></i></a>
+					<a href="#"><i class="fab fa-twitter"></i></a>
+					<a href="#"><i class="fab fa-facebook-f"></i></a>
+				</div>
+				<span>or use your account</span>
+				<input required type="text" placeholder="Username" name="username" autocomplete="username"
+				       [(ngModel)]="signInForm.username"/>
+				<input required type="password" placeholder="Password" name="password" autocomplete="current-password"
+				       [(ngModel)]="signInForm.password"/>
+				<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Forgot your password?</a>
+				<button (click)="signIn()">Sign In</button>
+			</form>
+		</div>
+		<div class="overlay-container">
+			<div class="overlay">
+				<div class="overlay-panel overlay-left">
+					<h1>Welcome Back!</h1>
+					<p>To keep connected with us please login with your personal info</p>
+					<button class="ghost" (click)="showSignUp = false;">Sign In</button>
+				</div>
+				<div class="overlay-panel overlay-right">
+					<h1>Welcome!</h1>
+					<p>Enter your personal details and start journey with us</p>
+					<button class="ghost" (click)="showSignUp = true;">Sign Up</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

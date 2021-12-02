@@ -4,7 +4,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { NotFoundComponent } from "./components/not-found/not-found.component";
-import { DashboardComponent } from "./components/dashboard/dashboard.component";
+import { DashboardComponent } from "./pages/dashboard/dashboard.component";
 
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatIconModule } from "@angular/material/icon";
@@ -12,25 +12,51 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { LoginComponent } from "./pages/login/login.component";
+import { FormsModule } from "@angular/forms";
+import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
+import { MatMenuModule } from "@angular/material/menu";
+import { AuthorizerInterceptor } from "./misc/authorization-interceptor.service";
+import { WeatherComponent } from "./components/weather/weather.component";
+import { DashboardWidgetDirective } from "./misc/dashboard-widget.directive";
+import { ForecastComponent } from "./components/forecast/forecast.component";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		NotFoundComponent,
-		DashboardComponent
+		DashboardComponent,
+		LoginComponent,
+		WeatherComponent,
+		DashboardWidgetDirective,
+		ForecastComponent
 	],
 	imports: [
 		BrowserModule,
-		BrowserAnimationsModule,
 		AppRoutingModule,
 		MatToolbarModule,
 		MatIconModule,
 		MatButtonModule,
 		MatTooltipModule,
-		MatCardModule
+		MatCardModule,
+		FormsModule,
+		HttpClientModule,
+		MatMenuModule,
+		BrowserAnimationsModule,
+		MatFormFieldModule,
+		MatInputModule
 	],
-	providers: [],
+	providers: [
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: AuthorizerInterceptor,
+			multi: true
+		}
+	],
 	bootstrap: [AppComponent]
 })
 export class AppModule
-{ }
+{
+}

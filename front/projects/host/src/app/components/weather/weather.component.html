@@ -1,0 +1,13 @@
+<mat-card-title>Weather</mat-card-title>
+<mat-card-content>
+	<mat-form-field appearance="fill">
+		<mat-label>City</mat-label>
+		<input matInput placeholder="Nantes" [(ngModel)]="widget.parameters['city']" (change)="updateWidget()">
+	</mat-form-field>
+
+	<ng-container *ngIf="info != null">
+		<h2>{{info.weather}}</h2>
+		<img [src]="'https://' + info.icon.slice(2)" />
+		<h3>{{info.celsius}}° celsius</h3>
+	</ng-container>
+</mat-card-content>

@@ -1,8 +1,5 @@
 import { Component } from "@angular/core";
-import { Router } from "@angular/router";
-import { routes } from "./app-routing.module";
-import { toRoute } from "./models/module";
-import { LookupService } from "./services/lookup.service";
+import { WidgetsService } from "./services/widgets.service";
 
 @Component({
 	selector: "host-root",
@@ -12,18 +9,24 @@ import { LookupService } from "./services/lookup.service";
 export class AppComponent
 {
 	constructor(
-		private _lookup: LookupService,
-		private  _router: Router
+		private _widgets: WidgetsService
+		// private _lookup: LookupService,
+		// private  _router: Router
 	)
 	{
-		this._lookup.loadModules().subscribe(modules =>
-		{
-			this._router.resetConfig([
-				...modules.map(x => toRoute(x)),
-				...routes
-			]);
-			console.log(this._router.config);
-			console.log(modules);
-		});
+		// this._lookup.loadModules().subscribe(modules =>
+		// {
+		// 	this._router.resetConfig([
+		// 		...modules.map(x => toRoute(x)),
+		// 		...routes
+		// 	]);
+		// 	console.log(this._router.config);
+		// 	console.log(modules);
+		// });
+	}
+
+	addWidget(type: string): void
+	{
+		this._widgets.createWidget(type);
 	}
 }
