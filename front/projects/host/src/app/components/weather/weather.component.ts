@@ -32,7 +32,6 @@ export class WeatherComponent extends WidgetComponent
 
 	async updateWidget(): Promise<void>
 	{
-		console.log("toto")
 		await this._widgets.update(this.widget);
 		await this.refresh();
 	}

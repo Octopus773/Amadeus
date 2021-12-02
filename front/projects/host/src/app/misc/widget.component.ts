@@ -5,7 +5,6 @@ export abstract class WidgetComponent
 	protected _refresher: number;
 	widget: Widget;
 
-
 	abstract refresh(): Promise<void>;
 
 	_setupRefresh(): void
