@@ -36,5 +36,20 @@ namespace Amadeus.Server.Views.Covid
 				return BadRequest(e.Message);
 			}
 		}
+
+		[HttpGet]
+		public async Task<ActionResult<CovidTotal>> GetCovidInfoTotal()
+		{
+			try
+			{
+				return await _covidController.GetCovidInfoLatestTotal();
+			}
+#pragma warning disable CA1031
+			catch (Exception e)
+#pragma warning restore CA1031
+			{
+				return BadRequest(e.Message);
+			}
+		}
 	}
 }

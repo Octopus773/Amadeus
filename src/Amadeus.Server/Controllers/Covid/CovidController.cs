@@ -41,5 +41,25 @@ namespace Amadeus.Server.Controllers.Covid
 				Deaths = data.deaths
 			};
 		}
+
+		public async Task<CovidTotal> GetCovidInfoLatestTotal()
+		{
+			using HttpClient client = new();
+
+			Uri uri = new($"https://covid-19-data.p.rapidapi.com/totals");
+			client.DefaultRequestHeaders.Add("x-rapidapi-key", _config.Value.ApiKey);
+			HttpResponseMessage response = await client.GetAsync(uri);
+
+			response.EnsureSuccessStatusCode();
+			ExpandoObject[] dataList = await response.Content.ReadAsAsync<ExpandoObject[]>();
+			dynamic data = dataList[0];
+			return new CovidTotal
+			{
+				Confirmed = data.confirmed,
+				Recovered = data.recovered,
+				Critical = data.critical,
+				Deaths = data.deaths
+			};
+		}
 	}
 }
