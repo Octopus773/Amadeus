@@ -6,12 +6,12 @@ namespace Amadeus.Server.Models.Convid
 
 		public string Code { get; set; }
 
-		public int Confirmed { get; set; }
+		public long Confirmed { get; set; }
 
-		public int Recovered { get; set; }
+		public long Recovered { get; set; }
 
-		public int Critical { get; set; }
+		public long Critical { get; set; }
 
-		public int Deaths { get; set; }
+		public long Deaths { get; set; }
 	}
 }

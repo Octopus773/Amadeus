@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Net.Http;
@@ -18,34 +19,26 @@ namespace Amadeus.Server.Controllers.Covid
 			_config = config;
 		}
 
-		public async Task<CovidData> GetWeather(string countryCode)
+		public async Task<CovidData> GetCovidInfo(string countryCode)
 		{
 			using HttpClient client = new();
 			countryCode = HttpUtility.UrlEncode(countryCode);
 
-			HttpResponseMessage response;
-			using (HttpRequestMessage requestMessage =
-				new HttpRequestMessage(HttpMethod.Get, "https://covid-19-data.p.rapidapi.com/country/code"))
-			{
-				requestMessage.Headers.Add("x-rapidapi-host", _config.Value.ApiHost);
-				requestMessage.Headers.Add("x-rapidapi-key", _config.Value.ApiKey);
-				requestMessage.Content = new FormUrlEncodedContent(new Dictionary<string, string> {
-						{"code", countryCode}
-					});
-
-				response = await client.SendAsync(requestMessage);
-			}
+			Uri uri = new($"https://covid-19-data.p.rapidapi.com/country/code?code={countryCode}");
+			client.DefaultRequestHeaders.Add("x-rapidapi-key", _config.Value.ApiKey);
+			HttpResponseMessage response = await client.GetAsync(uri);
 
 			response.EnsureSuccessStatusCode();
-			dynamic data = await response.Content.ReadAsAsync<ExpandoObject>();
+			ExpandoObject[] dataList = await response.Content.ReadAsAsync<ExpandoObject[]>();
+			dynamic data = dataList[0];
 			return new CovidData
 			{
-				Country = data[0].country,
-				Code = data[0].code,
-				Confirmed = data[0].confirmed,
-				Recovered = data[0].recovered,
-				Critical = data[0].critical,
-				Deaths = data[0].deaths
+				Country = data.country,
+				Code = data.code,
+				Confirmed = data.confirmed,
+				Recovered = data.recovered,
+				Critical = data.critical,
+				Deaths = data.deaths
 			};
 		}
 	}

@@ -19,6 +19,7 @@
 using System;
 using System.Text;
 using Amadeus.Server.Controllers;
+using Amadeus.Server.Controllers.Covid;
 using Amadeus.Server.Controllers.Weather;
 using Amadeus.Server.Data;
 using Amadeus.Server.Models;
@@ -52,8 +53,10 @@ namespace Amadeus.Server
 			services.AddScoped<IRepository<Widget>, WidgetRepository>();
 			services.AddTransient<TokenController>();
 			services.AddScoped<AboutController>();
+			services.AddScoped<CovidController>();
 
 			services.Configure<WeatherConfiguration>(Configuration.GetSection(nameof(WeatherConfiguration)));
+			services.Configure<CovidConfiguration>(Configuration.GetSection(nameof(CovidConfiguration)));
 			services.AddScoped<WeatherController>();
 
 			services.AddDbContext<ServerDB>(options => options.UseNpgsql(Configuration.GetDatabaseConnection()));
