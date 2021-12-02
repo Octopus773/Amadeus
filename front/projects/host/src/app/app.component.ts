@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { WidgetsService } from "./services/widgets.service";
+import { AuthService } from "./services/auth.service";
 
 @Component({
 	selector: "host-root",
@@ -9,7 +10,8 @@ import { WidgetsService } from "./services/widgets.service";
 export class AppComponent
 {
 	constructor(
-		private _widgets: WidgetsService
+		private _widgets: WidgetsService,
+		public auth: AuthService
 		// private _lookup: LookupService,
 		// private  _router: Router
 	)
