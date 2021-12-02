@@ -1,1 +1,32 @@
-<p>forecast works!</p>
+<mat-card-title>Forecast</mat-card-title>
+<mat-card-content>
+	<mat-form-field appearance="fill">
+		<mat-label>City</mat-label>
+		<input matInput placeholder="Nantes" [(ngModel)]="widget.parameters['city']" (change)="updateWidget()">
+	</mat-form-field>
+	<mat-form-field appearance="fill">
+		<mat-label>Days</mat-label>
+		<mat-select [(ngModel)]="widget.parameters['days']" (valueChange)="updateWidget()">
+			<mat-option value="1">1</mat-option>
+			<mat-option value="2">2</mat-option>
+			<mat-option value="3">3</mat-option>
+		</mat-select>
+	</mat-form-field>
+
+
+	<mat-accordion>
+		<mat-expansion-panel *ngFor="let day of info; let i = index">
+			<mat-expansion-panel-header>
+				<mat-panel-title>
+					In {{i + 1}} days:
+				</mat-panel-title>
+				<mat-panel-description>
+					{{day.weather}} - {{day.celsius}}°
+				</mat-panel-description>
+			</mat-expansion-panel-header>
+			<h2>{{day.weather}}</h2>
+			<img [src]="'https://' + day.icon.slice(2)"/>
+			<h3>{{day.celsius}}° celsius</h3>
+		</mat-expansion-panel>
+	</mat-accordion>
+</mat-card-content>
