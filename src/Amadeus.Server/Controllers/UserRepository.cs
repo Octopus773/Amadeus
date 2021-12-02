@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
@@ -110,9 +111,10 @@ namespace Amadeus.Server.Controllers
 			return user;
 		}
 
-		public Task<IList<User>> GetWhere(Expression<Func<User, bool>> pred)
+		/// <inheritdoc cref="IRepository{T}"/>
+		public async Task<IList<User>> GetWhere(Expression<Func<User, bool>> pred)
 		{
-			throw new NotImplementedException();
+			return await _context.Users.Where(pred).ToListAsync();
 		}
 	}
 }

@@ -21,15 +21,18 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 using Amadeus.Server.Controllers;
+using Amadeus.Server.Controllers.Weather;
 using Amadeus.Server.Data;
 using Amadeus.Server.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Amadeus.Server.Models.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Npgsql;
 using NSwag;
@@ -51,6 +54,10 @@ namespace Amadeus.Server
 			services.AddScoped<IRepository<User>, UserRepository>();
 			services.AddScoped<IRepository<Widget>, WidgetRepository>();
 			services.AddTransient<TokenController>();
+			services.AddScoped<AboutController>();
+
+			services.Configure<WeatherConfiguration>(Configuration.GetSection(nameof(WeatherConfiguration)));
+			services.AddScoped<WeatherController>();
 
 			services.AddDbContext<ServerDB>(options => options.UseNpgsql(Configuration.GetDatabaseConnection()));
 
