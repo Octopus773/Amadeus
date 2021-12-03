@@ -20,6 +20,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Content Include="..\..\docker-compose.back.yml">
+	    <Link>Amadeus\docker-compose.back.yml</Link>
+	  </Content>
 	  <Content Include="..\..\docker-compose.yml">
 	    <Link>Amadeus\docker-compose.yml</Link>
 	  </Content>

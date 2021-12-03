@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile-dev
     restart: unless-stopped
     ports:
-      - "8080:4200"
+      - "8081:4200"
     volumes:
       - ./front:/webapp
     depends_on:
@@ -22,7 +22,7 @@ services:
       - WEATHERCONFIGURATION__APIKEY=${WEATHER_API_KEY}
       - COVIDCONFIGURATION__APIKEY=${COVID_API_KEY}
     ports:
-      - "8081:80"
+      - "8080:8080"
     depends_on:
       - postgres
   postgres:

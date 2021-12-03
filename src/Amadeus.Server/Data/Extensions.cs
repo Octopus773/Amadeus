@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Data.Common;
+using System.Linq;
 using Microsoft.Extensions.Configuration;
 
 namespace Amadeus.Server.Data
@@ -28,6 +30,18 @@ namespace Amadeus.Server.Data
 			}
 
 			return builder.ConnectionString;
+		}
+
+		/// <summary>
+		/// Convert a dictionary to a query string.
+		/// </summary>
+		/// <param name="query">The list of query parameters.</param>
+		/// <returns>A valid query string with all items in the dictionary.</returns>
+		public static string ToQueryString(this Dictionary<string, string> query)
+		{
+			if (!query.Any())
+				return string.Empty;
+			return "?" + string.Join('&', query.Select(x => $"{x.Key}={x.Value}"));
 		}
 	}
 }

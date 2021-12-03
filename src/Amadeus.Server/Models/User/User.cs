@@ -19,6 +19,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
 namespace Amadeus.Server.Models
@@ -82,5 +83,11 @@ namespace Amadeus.Server.Models
 		/// or <see cref="Amadeus.Server.Models.Permissions.Admin"/>.
 		/// </summary>
 		public string[] Permissions { get; set; }
+
+		/// <summary>
+		/// The external tokens on other services.
+		/// </summary>
+		[Column(TypeName = "jsonb")]
+		public Dictionary<string, JwtToken> ExternalTokens { get; set; }
 	}
 }

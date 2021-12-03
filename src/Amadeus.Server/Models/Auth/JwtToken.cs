@@ -5,7 +5,7 @@ namespace Amadeus.Server.Models
 	/// <summary>
 	/// A container representing the response of a login or token refresh.
 	/// </summary>
-	public class JwtResponse
+	public class JwtToken
 	{
 		/// <summary>
 		/// The access token used to authorize requests.

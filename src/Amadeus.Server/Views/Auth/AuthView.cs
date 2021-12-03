@@ -1,11 +1,17 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Amadeus.AniList.Models;
 using Amadeus.Server.Controllers;
+using Amadeus.Server.Controllers.AniList;
+using Amadeus.Server.Data;
 using Amadeus.Server.Exceptions;
 using Amadeus.Server.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using BCryptNet = BCrypt.Net.BCrypt;
 
@@ -51,12 +57,12 @@ namespace Amadeus.Server.Views.Auth
 		[HttpPost("login")]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
-		public async Task<ActionResult<JwtResponse>> Login([FromBody] LoginRequest request)
+		public async Task<ActionResult<JwtToken>> Login([FromBody] LoginRequest request)
 		{
 			User user = (await _users.GetAll()).FirstOrDefault(x => x.Username == request.Username);
 			if (user != null && BCryptNet.Verify(request.Password, user.Password))
 			{
-				return new JwtResponse
+				return new JwtToken
 				{
 					AccessToken = _token.CreateAccessToken(user, out DateTime expireDate),
 					RefreshToken = await _token.CreateRefreshToken(user),
@@ -80,7 +86,7 @@ namespace Amadeus.Server.Views.Auth
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(StatusCodes.Status409Conflict)]
-		public async Task<ActionResult<JwtResponse>> Register([FromBody] RegisterRequest request)
+		public async Task<ActionResult<JwtToken>> Register([FromBody] RegisterRequest request)
 		{
 			User user = request.ToUser();
 			user.Password = BCryptNet.HashPassword(request.Password);
@@ -94,7 +100,7 @@ namespace Amadeus.Server.Views.Auth
 			}
 
 
-			return new JwtResponse
+			return new JwtToken
 			{
 				AccessToken = _token.CreateAccessToken(user, out DateTime expireDate),
 				RefreshToken = await _token.CreateRefreshToken(user),
@@ -115,13 +121,13 @@ namespace Amadeus.Server.Views.Auth
 		[HttpGet("refresh")]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
-		public async Task<ActionResult<JwtResponse>> Refresh([FromQuery] string token)
+		public async Task<ActionResult<JwtToken>> Refresh([FromQuery] string token)
 		{
 			try
 			{
 				int userId = _token.GetRefreshTokenUser(token);
 				User user = await _users.GetById(userId);
-				return new JwtResponse
+				return new JwtToken
 				{
 					AccessToken = _token.CreateAccessToken(user, out DateTime expireDate),
 					RefreshToken = await _token.CreateRefreshToken(user),
@@ -136,6 +142,28 @@ namespace Amadeus.Server.Views.Auth
 			{
 				return BadRequest(new { ex.Message });
 			}
+		}
+
+		[HttpGet("anilist")]
+		[ProducesResponseType(StatusCodes.Status302Found)]
+		public IActionResult AniListLogin([FromQuery] Uri redirectUrl, [FromServices] IOptions<AniListOptions> anilist)
+		{
+			Dictionary<string, string> query = new()
+			{
+				["client_id"] = anilist.Value.ClientID,
+				["redirect_uri"] = redirectUrl.ToString(),
+				["response_type"] = "code"
+			};
+			return Redirect($"https://anilist.co/api/v2/oauth/authorize{query.ToQueryString()}");
+		}
+
+		[HttpGet("link/anilist")]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		public async Task<IActionResult> AniListLink([FromQuery] string code, [FromServices] AniListService anilist)
+		{
+			int? userID = int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out int id) ? id : null;
+			await anilist.LinkAccount(userID, code);
+			return Ok();
 		}
 	}
 }
