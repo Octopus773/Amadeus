@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Amadeus.AniList.Models;
@@ -10,20 +11,20 @@ namespace Amadeus.Server.Controllers.AniList
 {
 	public class AniListService
 	{
-		private readonly IRepository<User> _user;
+		private readonly IRepository<User> _users;
 		private readonly IHttpClientFactory _factory;
 		private readonly IOptions<AniListOptions> _options;
 
-		public AniListService(IRepository<User> user,
+		public AniListService(IRepository<User> users,
 			IHttpClientFactory factory,
 			IOptions<AniListOptions> options)
 		{
-			_user = user;
+			_users = users;
 			_factory = factory;
 			_options = options;
 		}
 
-		public async Task LinkAccount(int? userID, string code)
+		public async Task<User> LinkAccount(int? userID, string code)
 		{
 			using HttpClient client = _factory.CreateClient();
 			HttpResponseMessage response = await client.PostAsJsonAsync($"https://anilist.co/api/v2/oauth/token", new
@@ -35,13 +36,45 @@ namespace Amadeus.Server.Controllers.AniList
 				code
 			});
 			response.EnsureSuccessStatusCode();
+			JwtToken token = await response.Content.ReadAsAsync<JwtToken>();
 
-			if (userID == null)
-				return;
+			if (userID != null)
+			{
+				User user = await _users.GetById(userID.Value);
+				user.ExternalTokens["anilist"] = token;
+				await _users.Modify(user.Id, user);
+				return user;
+			}
 			else
 			{
-
+				User user = await _GetUser(token);
+				await _users.Create(user);
+				return user;
 			}
+		}
+
+		private async Task<User> _GetUser(JwtToken token)
+		{
+			using HttpClient client = _factory.CreateClient();
+			client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token.AccessToken}");
+			HttpResponseMessage response = await client.PostAsJsonAsync($"https://graphql.anilist.co/", new
+			{
+				query = @"
+					Viewer
+					{
+						name
+					}"
+			});
+			response.EnsureSuccessStatusCode();
+			dynamic rep = await response.Content.ReadAsAsync<ExpandoObject>();
+			return new User
+			{
+				Username = rep.data.viewer.name,
+				ExternalTokens = new Dictionary<string, JwtToken>
+				{
+					["anilist"] = token
+				}
+			};
 		}
 	}
 }

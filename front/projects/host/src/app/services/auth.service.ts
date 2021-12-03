@@ -16,7 +16,7 @@ export class AuthService
 
 	public get accessToken(): string | null
 	{
-		return this._jwt?.accessToken || null;
+		return this._jwt?.access_token || null;
 	}
 
 	constructor(

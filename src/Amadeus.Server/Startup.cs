@@ -23,6 +23,7 @@ using System.Text;
 using Amadeus.AniList;
 using Amadeus.AniList.Models;
 using Amadeus.Server.Controllers;
+using Amadeus.Server.Controllers.AniList;
 using Amadeus.Server.Controllers.Covid;
 using Amadeus.Server.Controllers.Weather;
 using Amadeus.Server.Data;
@@ -59,6 +60,8 @@ namespace Amadeus.Server
 			services.AddTransient<TokenController>();
 			services.AddScoped<AboutController>();
 			services.AddScoped<CovidController>();
+			services.AddScoped<AniListService>();
+			services.AddHttpClient();
 
 			services.Configure<WeatherConfiguration>(Configuration.GetSection(nameof(WeatherConfiguration)));
 			services.Configure<CovidConfiguration>(Configuration.GetSection(nameof(CovidConfiguration)));

@@ -53,14 +53,14 @@ namespace Amadeus.Server.Controllers
 		/// Create a new access token for the given user.
 		/// </summary>
 		/// <param name="user">The user to create a token for.</param>
-		/// <param name="expireDate">When this token will expire.</param>
+		/// <param name="expireIn">When this token will expire.</param>
 		/// <returns>A new, valid access token.</returns>
-		public string CreateAccessToken([NotNull] User user, out DateTime expireDate)
+		public string CreateAccessToken([NotNull] User user, out TimeSpan expireIn)
 		{
 			if (user == null)
 				throw new ArgumentNullException(nameof(user));
 
-			expireDate = DateTime.UtcNow.AddHours(1);
+			expireIn = new TimeSpan(1, 0, 0);
 
 			SymmetricSecurityKey key = new(Encoding.UTF8.GetBytes(_options.Value.Secret));
 			SigningCredentials credential = new(key, SecurityAlgorithms.HmacSha256Signature);
@@ -78,7 +78,8 @@ namespace Amadeus.Server.Controllers
 					new Claim(ClaimTypes.Email, user.Email),
 					new Claim(ClaimTypes.Role, permissions)
 				},
-				expires: expireDate.AddYears(3)
+				// TODO replace this expire date.
+				expires: DateTime.UtcNow.AddYears(5)
 			);
 			return new JwtSecurityTokenHandler().WriteToken(token);
 		}

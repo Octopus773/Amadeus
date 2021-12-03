@@ -21,6 +21,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace Amadeus.Server.Models
 {
@@ -88,6 +89,9 @@ namespace Amadeus.Server.Models
 		/// The external tokens on other services.
 		/// </summary>
 		[Column(TypeName = "jsonb")]
+		[JsonIgnore]
 		public Dictionary<string, JwtToken> ExternalTokens { get; set; }
+
+		public bool AniListLinked => ExternalTokens?["anilist"].RefreshToken != null;
 	}
 }

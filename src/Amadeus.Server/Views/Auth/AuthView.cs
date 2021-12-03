@@ -64,9 +64,9 @@ namespace Amadeus.Server.Views.Auth
 			{
 				return new JwtToken
 				{
-					AccessToken = _token.CreateAccessToken(user, out DateTime expireDate),
+					AccessToken = _token.CreateAccessToken(user, out TimeSpan expireDate),
 					RefreshToken = await _token.CreateRefreshToken(user),
-					ExpireTime = expireDate
+					ExpireIn = expireDate
 				};
 			}
 			return BadRequest(new { Message = "The user and password does not match." });
@@ -102,9 +102,9 @@ namespace Amadeus.Server.Views.Auth
 
 			return new JwtToken
 			{
-				AccessToken = _token.CreateAccessToken(user, out DateTime expireDate),
+				AccessToken = _token.CreateAccessToken(user, out TimeSpan expireDate),
 				RefreshToken = await _token.CreateRefreshToken(user),
-				ExpireTime = expireDate
+				ExpireIn = expireDate
 			};
 		}
 
@@ -129,9 +129,9 @@ namespace Amadeus.Server.Views.Auth
 				User user = await _users.GetById(userId);
 				return new JwtToken
 				{
-					AccessToken = _token.CreateAccessToken(user, out DateTime expireDate),
+					AccessToken = _token.CreateAccessToken(user, out TimeSpan expireDate),
 					RefreshToken = await _token.CreateRefreshToken(user),
-					ExpireTime = expireDate
+					ExpireIn = expireDate
 				};
 			}
 			catch (ElementNotFound)
@@ -157,13 +157,14 @@ namespace Amadeus.Server.Views.Auth
 			return Redirect($"https://anilist.co/api/v2/oauth/authorize{query.ToQueryString()}");
 		}
 
-		[HttpGet("link/anilist")]
+		[HttpPost("link/anilist")]
 		[ProducesResponseType(StatusCodes.Status200OK)]
-		public async Task<IActionResult> AniListLink([FromQuery] string code, [FromServices] AniListService anilist)
+		public async Task<ActionResult<User>> AniListLink([FromQuery] string code, [FromServices] AniListService anilist)
 		{
 			int? userID = int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out int id) ? id : null;
-			await anilist.LinkAccount(userID, code);
-			return Ok();
+			return await anilist.LinkAccount(userID, code);
+			// TODO send a JWT if the user is newly created.
+			// TODO handle sign in with anilist.
 		}
 	}
 }
