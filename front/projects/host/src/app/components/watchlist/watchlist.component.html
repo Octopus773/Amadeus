@@ -5,8 +5,8 @@
 		<input matInput placeholder="Nantes" [(ngModel)]="widget.parameters['user']" (change)="updateWidget()">
 	</mat-form-field>
 	<mat-form-field appearance="fill">
-		<mat-label>Days</mat-label>
-		<mat-select [(ngModel)]="widget.parameters['title']" (valueChange)="updateWidget()">
+		<mat-label>Title Display</mat-label>
+		<mat-select [(value)]="widget.parameters['title']" (valueChange)="updateWidget()">
 			<mat-option value="english">English</mat-option>
 			<mat-option value="native">Native</mat-option>
 			<mat-option value="romaji">Romaji</mat-option>

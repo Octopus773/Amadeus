@@ -194,7 +194,7 @@ namespace Amadeus.Server.Controllers.AniList
 					    }
 					    description
 					    coverImage {
-					      medium
+					      extraLarge
 					    }
 					  }
 					}",
@@ -214,8 +214,8 @@ namespace Amadeus.Server.Controllers.AniList
 					Romaji = x.title.romaji,
 					Native = x.title.native,
 				},
-				Descrition = x.description,
-				Image = x.coverImage.medium
+				Description = x.description,
+				Image = x.coverImage.extraLarge
 			};
 		}
 	}
