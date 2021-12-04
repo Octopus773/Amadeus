@@ -60,7 +60,7 @@ namespace Amadeus.Server.Controllers
 
 		public async Task<IList<Widget>> GetWhere(Expression<Func<Widget, bool>> pred)
 		{
-			return await _context.Widgets.AsNoTracking().Where(pred).ToListAsync();
+			return await _context.Widgets.AsNoTracking().Where(pred).OrderBy(x => x.Order).ToListAsync();
 		}
 
 		public async Task<Widget> Create(Widget element)

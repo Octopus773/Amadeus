@@ -55,5 +55,6 @@ export class WidgetsService
 	async reorder(from: number, to: number): Promise<void>
 	{
 		moveItemInArray(this._widgets, from, to);
+		await this._http.post(`${environment.apiUrl}/widget/reorder?from=${from + 1}&to=${to + 1}`, {}).subscribe();
 	}
 }

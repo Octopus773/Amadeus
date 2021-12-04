@@ -15,5 +15,7 @@ namespace Amadeus.Server.Models
 
 		[Required]
 		public int UserId { get; set; }
+
+		public int Order { get; set; }
 	}
 }
