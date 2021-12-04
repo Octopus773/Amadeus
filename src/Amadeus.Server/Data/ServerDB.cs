@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Amadeus.Server.Models;
+using Namotion.Reflection;
+using NJsonSchema.Annotations;
 
 namespace Amadeus.Server.Data
 {
@@ -23,5 +25,13 @@ namespace Amadeus.Server.Data
 		public DbSet<User> Users { get; set; }
 
 		public DbSet<Widget> Widgets { get; set; }
+
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
+		{
+			base.OnModelCreating(modelBuilder);
+			modelBuilder.Entity<Widget>()
+				.Property(x => x.Parameters)
+				.HasColumnType("jsonb");
+		}
 	}
 }

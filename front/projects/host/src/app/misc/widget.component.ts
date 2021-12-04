@@ -1,6 +1,8 @@
 import { Widget } from "../models/widget";
+import { Component, OnDestroy } from "@angular/core";
 
-export abstract class WidgetComponent
+@Component({template: ""})
+export abstract class WidgetComponent implements OnDestroy
 {
 	protected _refresher: number;
 	widget: Widget;
@@ -14,5 +16,10 @@ export abstract class WidgetComponent
 		this._refresher = setInterval(async () => {
 			await this.refresh();
 		}, 5000);
+	}
+
+	ngOnDestroy(): void
+	{
+		clearInterval(this._refresher);
 	}
 }

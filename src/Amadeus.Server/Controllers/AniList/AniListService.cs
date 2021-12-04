@@ -107,7 +107,7 @@ namespace Amadeus.Server.Controllers.AniList
 					            native
 					          }
 					          coverImage {
-					             large
+					             medium
 					          }
 					        }
 					      }
@@ -130,7 +130,7 @@ namespace Amadeus.Server.Controllers.AniList
 					Romaji = x.media.title.romaji,
 					Native = x.media.title.native,
 				},
-				Image = x.media.coverImage.large
+				Image = x.media.coverImage.medium
 			}).ToArray();
 		}
 
@@ -152,7 +152,7 @@ namespace Amadeus.Server.Controllers.AniList
 					            native
 					          }
 					          coverImage {
-					             large
+					             medium
 					          }
 					        }
 					      }
@@ -175,8 +175,48 @@ namespace Amadeus.Server.Controllers.AniList
 					Romaji = x.media.title.romaji,
 					Native = x.media.title.native,
 				},
-				Image = x.media.coverImage.large
+				Image = x.media.coverImage.medium
 			}).ToArray();
+		}
+
+		public async Task<Anime> GetAnime(string name)
+		{
+			using HttpClient client = _factory.CreateClient();
+			HttpResponseMessage response = await client.PostAsJsonAsync($"https://graphql.anilist.co/", new
+			{
+				query = @"
+					query($name: String) {
+					  Media(search: $name) {
+					    title {
+					      romaji
+					      english
+					      native
+					    }
+					    description
+					    coverImage {
+					      medium
+					    }
+					  }
+					}",
+				variables = new
+				{
+					name
+				}
+			});
+			response.EnsureSuccessStatusCode();
+			dynamic rep = await response.Content.ReadAsAsync<ExpandoObject>();
+			dynamic x = rep.data.Media;
+			return new Anime
+			{
+				Title = new Title
+				{
+					English = x.title.english,
+					Romaji = x.title.romaji,
+					Native = x.title.native,
+				},
+				Descrition = x.description,
+				Image = x.coverImage.medium
+			};
 		}
 	}
 }

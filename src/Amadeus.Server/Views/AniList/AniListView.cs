@@ -26,19 +26,44 @@ namespace Amadeus.Server.Views.AniList
 
 		[HttpGet("watchlist/{user?}")]
 		[ProducesResponseType(StatusCodes.Status200OK)]
+		[ProducesResponseType(StatusCodes.Status404NotFound)]
 		public async Task<ActionResult<Anime[]>> GetWatchList(string user = null)
 		{
-			if (user == null)
+			try
 			{
-				if (!int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out int uid))
-					return BadRequest(new {error = "User required if you are not logged in to anilist."});
-				User authenticated = await _users.GetById(uid);
-				return await _aniList.GetWatchList(authenticated.AnilistID);
-			}
+				if (user == null)
+				{
+					if (!int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out int uid))
+						return BadRequest(new { error = "User required if you are not logged in to anilist." });
+					User authenticated = await _users.GetById(uid);
+					return await _aniList.GetWatchList(authenticated.AnilistID);
+				}
 
-			if (int.TryParse(user, out int id))
-				return await _aniList.GetWatchList(id);
-			return await _aniList.GetWatchList(user);
+				if (int.TryParse(user, out int id))
+					return await _aniList.GetWatchList(id);
+				return await _aniList.GetWatchList(user);
+			}
+			catch
+			{
+				// Probably because the user does not exists.
+				return NotFound();
+			}
+		}
+
+		[HttpGet("anime/{name}")]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		[ProducesResponseType(StatusCodes.Status404NotFound)]
+		public async Task<ActionResult<Anime>> GetAnime(string name)
+		{
+			try
+			{
+				return await _aniList.GetAnime(name);
+			}
+			catch
+			{
+				// Probably because the user does not exists.
+				return NotFound();
+			}
 		}
 	}
 }

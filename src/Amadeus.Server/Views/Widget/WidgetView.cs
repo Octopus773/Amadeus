@@ -38,7 +38,8 @@ namespace Amadeus.Server.Views.Widget
 		{
 			if (!int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out int userId))
 				return BadRequest("Invalid user credential");
-			return Ok(await _widgetRepository.GetWhere(w => w.UserId == userId));
+			IList<Models.Widget> ret = await _widgetRepository.GetWhere(w => w.UserId == userId);
+			return Ok(ret);
 		}
 
 		/// <summary>

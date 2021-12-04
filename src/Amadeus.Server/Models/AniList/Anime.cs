@@ -5,6 +5,8 @@ namespace Amadeus.AniList.Models
 		public Title Title { get; set; }
 
 		public string Image { get; set; }
+
+		public string Descrition { get; set; }
 	}
 
 	public class Title
