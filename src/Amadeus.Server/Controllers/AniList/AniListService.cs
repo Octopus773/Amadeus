@@ -88,5 +88,95 @@ namespace Amadeus.Server.Controllers.AniList
 			await _users.Modify(user.Id, user);
 			return user;
 		}
+
+		public async Task<Anime[]> GetWatchList(int user)
+		{
+			using HttpClient client = _factory.CreateClient();
+			HttpResponseMessage response = await client.PostAsJsonAsync($"https://graphql.anilist.co/", new
+			{
+				query = @"
+					query ($userID: Int) {
+					  MediaListCollection(userId: $userID, status:CURRENT, type: ANIME) {
+					    lists {
+					      name
+					      entries {
+					        media {
+					          title {
+					            romaji
+					            english
+					            native
+					          }
+					          coverImage {
+					             large
+					          }
+					        }
+					      }
+					    }
+					  }
+					}",
+				variables = new
+				{
+					userID = user
+				}
+			});
+			response.EnsureSuccessStatusCode();
+			dynamic rep = await response.Content.ReadAsAsync<ExpandoObject>();
+			IEnumerable<dynamic> animes = rep.data.MediaListCollection.lists[0].entries;
+			return animes.Select(x => new Anime
+			{
+				Title = new Title
+				{
+					English = x.media.title.english,
+					Romaji = x.media.title.romaji,
+					Native = x.media.title.native,
+				},
+				Image = x.media.coverImage.large
+			}).ToArray();
+		}
+
+		public async Task<Anime[]> GetWatchList(string user)
+		{
+			using HttpClient client = _factory.CreateClient();
+			HttpResponseMessage response = await client.PostAsJsonAsync($"https://graphql.anilist.co/", new
+			{
+				query = @"
+					query ($user: String) {
+					  MediaListCollection(userName: $user, status:CURRENT, type: ANIME) {
+					    lists {
+					      name
+					      entries {
+					        media {
+					          title {
+					            romaji
+					            english
+					            native
+					          }
+					          coverImage {
+					             large
+					          }
+					        }
+					      }
+					    }
+					  }
+					}",
+				variables = new
+				{
+					user
+				}
+			});
+			response.EnsureSuccessStatusCode();
+			dynamic rep = await response.Content.ReadAsAsync<ExpandoObject>();
+			IEnumerable<dynamic> animes = rep.data.MediaListCollection.lists[0].entries;
+			return animes.Select(x => new Anime
+			{
+				Title = new Title
+				{
+					English = x.media.title.english,
+					Romaji = x.media.title.romaji,
+					Native = x.media.title.native,
+				},
+				Image = x.media.coverImage.large
+			}).ToArray();
+		}
 	}
 }
