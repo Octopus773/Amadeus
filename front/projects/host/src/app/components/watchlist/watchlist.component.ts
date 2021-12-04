@@ -29,7 +29,13 @@ export class WatchlistComponent extends WidgetComponent
 			url += `/${this.widget.parameters["user"]}`;
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		await this._http.get<Anime[]>(url)
-			.subscribe(x => this.info = x);
+			.subscribe(x =>
+			{
+				if (x.length !== this.info.length)
+					this.info = x;
+				else
+					this.info.map((_, i) => x[i]);
+			});
 	}
 
 	async updateWidget(): Promise<void>

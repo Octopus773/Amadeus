@@ -15,7 +15,7 @@ export abstract class WidgetComponent implements OnDestroy
 		this.refresh();
 		this._refresher = setInterval(async () => {
 			await this.refresh();
-		}, 5000);
+		}, 30_000);
 	}
 
 	ngOnDestroy(): void
