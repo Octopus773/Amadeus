@@ -89,7 +89,7 @@ namespace Amadeus.Server.Controllers.AniList
 			return user;
 		}
 
-		public async Task<Anime[]> GetWatchList(int user)
+		public async Task<Anime[]> GetWatchList(long user)
 		{
 			using HttpClient client = _factory.CreateClient();
 			HttpResponseMessage response = await client.PostAsJsonAsync($"https://graphql.anilist.co/", new

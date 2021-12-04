@@ -27,6 +27,8 @@ import { MatExpansionModule } from "@angular/material/expansion";
 import { CovidComponent } from "./components/covid/covid.component";
 import { OauthCodeComponent } from "./pages/oauth-code/oauth-code.component";
 import { CookieService } from "ngx-cookie-service";
+import { WatchlistComponent } from './components/watchlist/watchlist.component';
+import { MatListModule } from "@angular/material/list";
 
 @NgModule({
 	declarations: [
@@ -38,7 +40,8 @@ import { CookieService } from "ngx-cookie-service";
 		DashboardWidgetDirective,
 		ForecastComponent,
 		CovidComponent,
-		OauthCodeComponent
+		OauthCodeComponent,
+  WatchlistComponent
 	],
 	imports: [
 		BrowserModule,
@@ -55,7 +58,8 @@ import { CookieService } from "ngx-cookie-service";
 		MatFormFieldModule,
 		MatInputModule,
 		MatSelectModule,
-		MatExpansionModule
+		MatExpansionModule,
+		MatListModule
 	],
 	providers: [
 		CookieService,

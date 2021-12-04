@@ -2,7 +2,9 @@ using System.Diagnostics.CodeAnalysis;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Amadeus.AniList.Models;
+using Amadeus.Server.Controllers;
 using Amadeus.Server.Controllers.AniList;
+using Amadeus.Server.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,21 +16,29 @@ namespace Amadeus.Server.Views.AniList
 	public class AniListView : ControllerBase
 	{
 		private readonly AniListService _aniList;
+		private readonly IRepository<User> _users;
 
-		public AniListView(AniListService aniList)
+		public AniListView(AniListService aniList, IRepository<User> users)
 		{
 			_aniList = aniList;
+			_users = users;
 		}
 
 		[HttpGet("watchlist/{user?}")]
 		[ProducesResponseType(StatusCodes.Status200OK)]
-		public Task<Anime[]> GetWatchList(string user = null)
+		public async Task<ActionResult<Anime[]>> GetWatchList(string user = null)
 		{
 			if (user == null)
-				return _aniList.GetWatchList(int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)));
+			{
+				if (!int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out int uid))
+					return BadRequest(new {error = "User required if you are not logged in to anilist."});
+				User authenticated = await _users.GetById(uid);
+				return await _aniList.GetWatchList(authenticated.AnilistID);
+			}
+
 			if (int.TryParse(user, out int id))
-				return _aniList.GetWatchList(id);
-			return _aniList.GetWatchList(user);
+				return await _aniList.GetWatchList(id);
+			return await _aniList.GetWatchList(user);
 		}
 	}
 }
