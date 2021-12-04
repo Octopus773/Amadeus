@@ -17,6 +17,7 @@
 // along with Kyoo. If not, see <https://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
@@ -67,17 +68,19 @@ namespace Amadeus.Server.Controllers
 			string permissions = user.Permissions != null
 				? string.Join(',', user.Permissions)
 				: string.Empty;
+			List<Claim> claims = new()
+			{
+				new Claim(ClaimTypes.NameIdentifier, user.Id.ToString(CultureInfo.InvariantCulture)),
+				new Claim(ClaimTypes.Name, user.Username),
+				new Claim(ClaimTypes.Role, permissions)
+			};
+			if (user.Email != null)
+				claims.Add(new Claim(ClaimTypes.Email, user.Email));
 			JwtSecurityToken token = new(
 				signingCredentials: credential,
 				issuer: _options.Value.Issuer.ToString(),
 				audience: _options.Value.Issuer.ToString(),
-				claims: new[]
-				{
-					new Claim(ClaimTypes.NameIdentifier, user.Id.ToString(CultureInfo.InvariantCulture)),
-					new Claim(ClaimTypes.Name, user.Username),
-					new Claim(ClaimTypes.Email, user.Email),
-					new Claim(ClaimTypes.Role, permissions)
-				},
+				claims: claims,
 				// TODO replace this expire date.
 				expires: DateTime.UtcNow.AddYears(5)
 			);

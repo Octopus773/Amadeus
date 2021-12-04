@@ -72,7 +72,8 @@ namespace Amadeus.Server
 
 			services.AddMvcCore()
 				.AddAuthorization();
-			services.AddControllers();
+			services.AddControllers()
+				.AddNewtonsoftJson();
 
 			JwtOption jwt = new();
 			Configuration.GetSection(JwtOption.Path).Bind(jwt);

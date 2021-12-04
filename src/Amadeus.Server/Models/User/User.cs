@@ -36,6 +36,7 @@ namespace Amadeus.Server.Models
 	/// </summary>
 	[Index(nameof(Username), IsUnique = true)]
 	[Index(nameof(Email), IsUnique = true)]
+	[Index(nameof(AnilistID), IsUnique = true)]
 	public class User
 	{
 		/// <summary>
@@ -53,7 +54,6 @@ namespace Amadeus.Server.Models
 		/// <summary>
 		/// The user's email.
 		/// </summary>
-		[Required]
 		[EmailAddress]
 		public string Email { get; set; }
 
@@ -63,7 +63,6 @@ namespace Amadeus.Server.Models
 		/// <note type="caution">
 		/// It should be encoded.
 		/// </note>
-		[Required]
 		public string Password { get; set; }
 
 		/// <summary>
@@ -92,6 +91,6 @@ namespace Amadeus.Server.Models
 		[JsonIgnore]
 		public Dictionary<string, JwtToken> ExternalTokens { get; set; }
 
-		public bool AniListLinked => ExternalTokens?["anilist"].RefreshToken != null;
+		public long AnilistID { get; set; }
 	}
 }

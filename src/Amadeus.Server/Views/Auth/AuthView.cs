@@ -9,6 +9,7 @@ using Amadeus.Server.Controllers.AniList;
 using Amadeus.Server.Data;
 using Amadeus.Server.Exceptions;
 using Amadeus.Server.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -159,12 +160,37 @@ namespace Amadeus.Server.Views.Auth
 
 		[HttpPost("link/anilist")]
 		[ProducesResponseType(StatusCodes.Status200OK)]
+		[Authorize]
 		public async Task<ActionResult<User>> AniListLink([FromQuery] string code, [FromServices] AniListService anilist)
 		{
-			int? userID = int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out int id) ? id : null;
+			// TODO prevent link if someone has already linked this account.
+			// TODO allow unlink.
+			if (!int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out int userID))
+				return BadRequest("Invalid access token");
 			return await anilist.LinkAccount(userID, code);
-			// TODO send a JWT if the user is newly created.
-			// TODO handle sign in with anilist.
+		}
+
+		[HttpPost("login/anilist")]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		public async Task<ActionResult<JwtToken>> AniListLogin([FromQuery] string code, [FromServices] AniListService anilist)
+		{
+			User user = await anilist.Login(code);
+			return new JwtToken
+			{
+				AccessToken = _token.CreateAccessToken(user, out TimeSpan expireIn),
+				RefreshToken = await _token.CreateRefreshToken(user),
+				ExpireIn = expireIn
+			};
+		}
+
+		[HttpGet("me")]
+		[Authorize]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		public async Task<ActionResult<User>> GetMe()
+		{
+			if (!int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out int userID))
+				return BadRequest("Invalid access token");
+			return await _users.GetById(userID);
 		}
 	}
 }

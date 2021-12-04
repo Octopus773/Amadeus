@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Dynamic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Amadeus.AniList.Models;
@@ -24,7 +25,7 @@ namespace Amadeus.Server.Controllers.AniList
 			_options = options;
 		}
 
-		public async Task<User> LinkAccount(int? userID, string code)
+		private async Task<JwtToken> _GetToken(string code)
 		{
 			using HttpClient client = _factory.CreateClient();
 			HttpResponseMessage response = await client.PostAsJsonAsync($"https://anilist.co/api/v2/oauth/token", new
@@ -36,21 +37,7 @@ namespace Amadeus.Server.Controllers.AniList
 				code
 			});
 			response.EnsureSuccessStatusCode();
-			JwtToken token = await response.Content.ReadAsAsync<JwtToken>();
-
-			if (userID != null)
-			{
-				User user = await _users.GetById(userID.Value);
-				user.ExternalTokens["anilist"] = token;
-				await _users.Modify(user.Id, user);
-				return user;
-			}
-			else
-			{
-				User user = await _GetUser(token);
-				await _users.Create(user);
-				return user;
-			}
+			return await response.Content.ReadAsAsync<JwtToken>();
 		}
 
 		private async Task<User> _GetUser(JwtToken token)
@@ -59,22 +46,47 @@ namespace Amadeus.Server.Controllers.AniList
 			client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token.AccessToken}");
 			HttpResponseMessage response = await client.PostAsJsonAsync($"https://graphql.anilist.co/", new
 			{
-				query = @"
+				query = @"{
 					Viewer
 					{
+						id
 						name
-					}"
+					}
+				}"
 			});
 			response.EnsureSuccessStatusCode();
 			dynamic rep = await response.Content.ReadAsAsync<ExpandoObject>();
 			return new User
 			{
-				Username = rep.data.viewer.name,
+				AnilistID = rep.data.Viewer.id,
+				Username = rep.data.Viewer.name,
 				ExternalTokens = new Dictionary<string, JwtToken>
 				{
 					["anilist"] = token
 				}
 			};
+		}
+
+		public async Task<User> Login(string code)
+		{
+			JwtToken token = await _GetToken(code);
+			User aniListUser = await _GetUser(token);
+			User existing = (await _users.GetWhere(x => x.AnilistID == aniListUser.AnilistID)).FirstOrDefault();
+			if (existing != null)
+				return existing;
+			await _users.Create(aniListUser);
+			return aniListUser;
+		}
+
+		public async Task<User> LinkAccount(int userID, string code)
+		{
+			JwtToken token = await _GetToken(code);
+			User user = await _users.GetById(userID);
+			User aniList = await _GetUser(token);
+			user.AnilistID = aniList.AnilistID;
+			user.ExternalTokens["anilist"] = token;
+			await _users.Modify(user.Id, user);
+			return user;
 		}
 	}
 }

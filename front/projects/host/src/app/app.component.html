@@ -42,6 +42,9 @@
 </mat-menu>
 
 <mat-menu #accountMenu>
+	<button mat-menu-item *ngIf="!auth.user?.anilistID" (click)="auth.anilistRedirect()">
+		<span>Link AniList account</span>
+	</button>
 	<button mat-menu-item (click)="auth.logout()">
 		<span>Logout</span>
 	</button>

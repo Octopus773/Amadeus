@@ -2,7 +2,6 @@ import { Component } from "@angular/core";
 import { AuthService } from "../../services/auth.service";
 import { LoginRequest, RegisterRequest } from "../../models/jwt";
 import { Router } from "@angular/router";
-import { environment } from "../../../environments/environment";
 
 @Component({
 	selector: "host-login",
@@ -11,28 +10,25 @@ import { environment } from "../../../environments/environment";
 })
 export class LoginComponent
 {
-	public apiUrl = environment.apiUrl;
-	public redirectUrl = `${window.location.href}/anilist`;
-
 	public showSignUp = false;
 	public signUpForm: RegisterRequest = new RegisterRequest();
 	public signInForm: LoginRequest = new LoginRequest();
 
 	constructor(
-		private _auth: AuthService,
+		public auth: AuthService,
 		private _router: Router
 	)
 	{}
 
 	signUp(): void
 	{
-		this._auth.register(this.signUpForm)
+		this.auth.register(this.signUpForm)
 			.subscribe(() => this._router.navigateByUrl("/"));
 	}
 
 	signIn(): void
 	{
-		this._auth.login(this.signInForm)
+		this.auth.login(this.signInForm)
 			.subscribe(() => this._router.navigateByUrl("/"));
 	}
 }
