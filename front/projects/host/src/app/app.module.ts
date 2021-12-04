@@ -30,6 +30,7 @@ import { CookieService } from "ngx-cookie-service";
 import { WatchlistComponent } from "./components/watchlist/watchlist.component";
 import { MatListModule } from "@angular/material/list";
 import { AnimeComponent } from "./components/anime/anime.component";
+import { DragDropModule } from "@angular/cdk/drag-drop";
 
 @NgModule({
 	declarations: [
@@ -61,7 +62,8 @@ import { AnimeComponent } from "./components/anime/anime.component";
 		MatInputModule,
 		MatSelectModule,
 		MatExpansionModule,
-		MatListModule
+		MatListModule,
+		DragDropModule
 	],
 	providers: [
 		CookieService,

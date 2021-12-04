@@ -193,9 +193,7 @@ namespace Amadeus.Server.Controllers.AniList
 					      native
 					    }
 					    description
-					    coverImage {
-					      extraLarge
-					    }
+					    bannerImage
 					  }
 					}",
 				variables = new
@@ -215,7 +213,7 @@ namespace Amadeus.Server.Controllers.AniList
 					Native = x.title.native,
 				},
 				Description = x.description,
-				Image = x.coverImage.extraLarge
+				Image = x.bannerImage
 			};
 		}
 	}

@@ -13,16 +13,18 @@
 		</mat-select>
 	</mat-form-field>
 
-	<mat-accordion>
-		<mat-expansion-panel *ngFor="let anime of info">
-			<mat-expansion-panel-header>
-				<mat-panel-title>
-					{{$any(anime.title)[widget.parameters["title"] ?? "english"]}}
-				</mat-panel-title>
-			</mat-expansion-panel-header>
-			<div style="display: flex; width: 100%; justify-content: center;">
-				<img [src]="anime.image" />
-			</div>
-		</mat-expansion-panel>
-	</mat-accordion>
+	<div style="max-height: 250px; overflow-y: scroll;">
+		<mat-accordion>
+			<mat-expansion-panel *ngFor="let anime of info">
+				<mat-expansion-panel-header>
+					<mat-panel-title>
+						{{$any(anime.title)[widget.parameters["title"] ?? "english"]}}
+					</mat-panel-title>
+				</mat-expansion-panel-header>
+				<div style="display: flex; width: 100%; justify-content: center;">
+					<img [src]="anime.image" />
+				</div>
+			</mat-expansion-panel>
+		</mat-accordion>
+	</div>
 </mat-card-content>

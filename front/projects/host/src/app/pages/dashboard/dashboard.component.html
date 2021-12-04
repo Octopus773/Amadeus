@@ -1,15 +1,20 @@
-<ng-container *ngIf="auth.accessToken !== null; else notAuth">
-	<mat-card *ngFor="let widget of widgets.widgets" class="widget">
-		<ng-template [hostWidgetType]="widget"></ng-template>
-		<mat-card-actions>
-			<button mat-icon-button color="warn"
-			        matTooltipPosition="below" matTooltip="Delete widget"
-					(click)="widgets.delete(widget)">
-				<mat-icon>delete</mat-icon>
-			</button>
-		</mat-card-actions>
-	</mat-card>
-</ng-container>
+<div *ngIf="auth.accessToken !== null; else notAuth" class="host" cdkDropListGroup>
+	<div class="widget" *ngFor="let widget of widgets.widgets; let index = index"
+	     cdkDropList cdkDropListOrientation="horizontal"
+	     [cdkDropListData]="index"
+	     (cdkDropListDropped)="reorder($event)">
+		<mat-card cdkDrag>
+			<ng-template [hostWidgetType]="widget"></ng-template>
+			<mat-card-actions>
+				<button mat-icon-button color="warn"
+				        matTooltipPosition="below" matTooltip="Delete widget"
+				        (click)="widgets.delete(widget)">
+					<mat-icon>delete</mat-icon>
+				</button>
+			</mat-card-actions>
+		</mat-card>
+	</div>
+</div>
 <ng-template #notAuth>
 	<div style="justify-content: center; text-align: center; display: flex; flex-direction: column">
 		<h2>Welcome to your dashboard</h2>
