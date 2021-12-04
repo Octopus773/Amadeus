@@ -5,15 +5,17 @@ using Amadeus.Server.Data;
 using Amadeus.Server.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Amadeus.Server.Migrations
 {
     [DbContext(typeof(ServerDB))]
-    partial class ServerDBModelSnapshot : ModelSnapshot
+    [Migration("20211203162628_jwt")]
+    partial class jwt
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,19 +30,18 @@ namespace Amadeus.Server.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<long>("AnilistID")
-                        .HasColumnType("bigint");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<Dictionary<string, JwtToken>>("ExternalTokens")
                         .HasColumnType("jsonb");
 
                     b.Property<string>("Password")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string[]>("Permissions")
@@ -54,9 +55,6 @@ namespace Amadeus.Server.Migrations
                         .HasColumnType("boolean");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AnilistID")
-                        .IsUnique();
 
                     b.HasIndex("Email")
                         .IsUnique();

@@ -1,11 +1,18 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Amadeus.AniList.Models;
 using Amadeus.Server.Controllers;
+using Amadeus.Server.Controllers.AniList;
+using Amadeus.Server.Data;
 using Amadeus.Server.Exceptions;
 using Amadeus.Server.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using BCryptNet = BCrypt.Net.BCrypt;
 
@@ -51,16 +58,16 @@ namespace Amadeus.Server.Views.Auth
 		[HttpPost("login")]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
-		public async Task<ActionResult<JwtResponse>> Login([FromBody] LoginRequest request)
+		public async Task<ActionResult<JwtToken>> Login([FromBody] LoginRequest request)
 		{
 			User user = (await _users.GetAll()).FirstOrDefault(x => x.Username == request.Username);
 			if (user != null && BCryptNet.Verify(request.Password, user.Password))
 			{
-				return new JwtResponse
+				return new JwtToken
 				{
-					AccessToken = _token.CreateAccessToken(user, out DateTime expireDate),
+					AccessToken = _token.CreateAccessToken(user, out TimeSpan expireDate),
 					RefreshToken = await _token.CreateRefreshToken(user),
-					ExpireTime = expireDate
+					ExpireIn = expireDate
 				};
 			}
 			return BadRequest(new { Message = "The user and password does not match." });
@@ -80,7 +87,7 @@ namespace Amadeus.Server.Views.Auth
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(StatusCodes.Status409Conflict)]
-		public async Task<ActionResult<JwtResponse>> Register([FromBody] RegisterRequest request)
+		public async Task<ActionResult<JwtToken>> Register([FromBody] RegisterRequest request)
 		{
 			User user = request.ToUser();
 			user.Password = BCryptNet.HashPassword(request.Password);
@@ -94,11 +101,11 @@ namespace Amadeus.Server.Views.Auth
 			}
 
 
-			return new JwtResponse
+			return new JwtToken
 			{
-				AccessToken = _token.CreateAccessToken(user, out DateTime expireDate),
+				AccessToken = _token.CreateAccessToken(user, out TimeSpan expireDate),
 				RefreshToken = await _token.CreateRefreshToken(user),
-				ExpireTime = expireDate
+				ExpireIn = expireDate
 			};
 		}
 
@@ -115,17 +122,17 @@ namespace Amadeus.Server.Views.Auth
 		[HttpGet("refresh")]
 		[ProducesResponseType(StatusCodes.Status200OK)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
-		public async Task<ActionResult<JwtResponse>> Refresh([FromQuery] string token)
+		public async Task<ActionResult<JwtToken>> Refresh([FromQuery] string token)
 		{
 			try
 			{
 				int userId = _token.GetRefreshTokenUser(token);
 				User user = await _users.GetById(userId);
-				return new JwtResponse
+				return new JwtToken
 				{
-					AccessToken = _token.CreateAccessToken(user, out DateTime expireDate),
+					AccessToken = _token.CreateAccessToken(user, out TimeSpan expireDate),
 					RefreshToken = await _token.CreateRefreshToken(user),
-					ExpireTime = expireDate
+					ExpireIn = expireDate
 				};
 			}
 			catch (ElementNotFound)
@@ -136,6 +143,54 @@ namespace Amadeus.Server.Views.Auth
 			{
 				return BadRequest(new { ex.Message });
 			}
+		}
+
+		[HttpGet("anilist")]
+		[ProducesResponseType(StatusCodes.Status302Found)]
+		public IActionResult AniListLogin([FromQuery] Uri redirectUrl, [FromServices] IOptions<AniListOptions> anilist)
+		{
+			Dictionary<string, string> query = new()
+			{
+				["client_id"] = anilist.Value.ClientID,
+				["redirect_uri"] = redirectUrl.ToString(),
+				["response_type"] = "code"
+			};
+			return Redirect($"https://anilist.co/api/v2/oauth/authorize{query.ToQueryString()}");
+		}
+
+		[HttpPost("link/anilist")]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		[Authorize]
+		public async Task<ActionResult<User>> AniListLink([FromQuery] string code, [FromServices] AniListService anilist)
+		{
+			// TODO prevent link if someone has already linked this account.
+			// TODO allow unlink.
+			if (!int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out int userID))
+				return BadRequest("Invalid access token");
+			return await anilist.LinkAccount(userID, code);
+		}
+
+		[HttpPost("login/anilist")]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		public async Task<ActionResult<JwtToken>> AniListLogin([FromQuery] string code, [FromServices] AniListService anilist)
+		{
+			User user = await anilist.Login(code);
+			return new JwtToken
+			{
+				AccessToken = _token.CreateAccessToken(user, out TimeSpan expireIn),
+				RefreshToken = await _token.CreateRefreshToken(user),
+				ExpireIn = expireIn
+			};
+		}
+
+		[HttpGet("me")]
+		[Authorize]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		public async Task<ActionResult<User>> GetMe()
+		{
+			if (!int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out int userID))
+				return BadRequest("Invalid access token");
+			return await _users.GetById(userID);
 		}
 	}
 }

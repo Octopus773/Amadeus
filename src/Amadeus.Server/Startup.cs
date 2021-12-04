@@ -20,7 +20,10 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
+using Amadeus.AniList;
+using Amadeus.AniList.Models;
 using Amadeus.Server.Controllers;
+using Amadeus.Server.Controllers.AniList;
 using Amadeus.Server.Controllers.Covid;
 using Amadeus.Server.Controllers.Weather;
 using Amadeus.Server.Data;
@@ -57,16 +60,20 @@ namespace Amadeus.Server
 			services.AddTransient<TokenController>();
 			services.AddScoped<AboutController>();
 			services.AddScoped<CovidController>();
+			services.AddScoped<AniListService>();
+			services.AddHttpClient();
 
 			services.Configure<WeatherConfiguration>(Configuration.GetSection(nameof(WeatherConfiguration)));
 			services.Configure<CovidConfiguration>(Configuration.GetSection(nameof(CovidConfiguration)));
+			services.Configure<AniListOptions>(Configuration.GetSection(nameof(AniListOptions)));
 			services.AddScoped<WeatherController>();
 
 			services.AddDbContext<ServerDB>(options => options.UseNpgsql(Configuration.GetDatabaseConnection()));
 
 			services.AddMvcCore()
 				.AddAuthorization();
-			services.AddControllers();
+			services.AddControllers()
+				.AddNewtonsoftJson();
 
 			JwtOption jwt = new();
 			Configuration.GetSection(JwtOption.Path).Bind(jwt);

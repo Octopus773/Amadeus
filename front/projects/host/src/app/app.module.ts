@@ -24,7 +24,9 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatSelectModule } from "@angular/material/select";
 import { MatExpansionModule } from "@angular/material/expansion";
-import { CovidComponent } from './components/covid/covid.component';
+import { CovidComponent } from "./components/covid/covid.component";
+import { OauthCodeComponent } from "./pages/oauth-code/oauth-code.component";
+import { CookieService } from "ngx-cookie-service";
 
 @NgModule({
 	declarations: [
@@ -35,7 +37,8 @@ import { CovidComponent } from './components/covid/covid.component';
 		WeatherComponent,
 		DashboardWidgetDirective,
 		ForecastComponent,
-  CovidComponent
+		CovidComponent,
+		OauthCodeComponent
 	],
 	imports: [
 		BrowserModule,
@@ -55,6 +58,7 @@ import { CovidComponent } from './components/covid/covid.component';
 		MatExpansionModule
 	],
 	providers: [
+		CookieService,
 		{
 			provide: HTTP_INTERCEPTORS,
 			useClass: AuthorizerInterceptor,

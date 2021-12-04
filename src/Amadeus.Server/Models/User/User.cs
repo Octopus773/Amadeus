@@ -19,7 +19,9 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 
 namespace Amadeus.Server.Models
 {
@@ -34,6 +36,7 @@ namespace Amadeus.Server.Models
 	/// </summary>
 	[Index(nameof(Username), IsUnique = true)]
 	[Index(nameof(Email), IsUnique = true)]
+	[Index(nameof(AnilistID), IsUnique = true)]
 	public class User
 	{
 		/// <summary>
@@ -51,7 +54,6 @@ namespace Amadeus.Server.Models
 		/// <summary>
 		/// The user's email.
 		/// </summary>
-		[Required]
 		[EmailAddress]
 		public string Email { get; set; }
 
@@ -61,7 +63,6 @@ namespace Amadeus.Server.Models
 		/// <note type="caution">
 		/// It should be encoded.
 		/// </note>
-		[Required]
 		public string Password { get; set; }
 
 		/// <summary>
@@ -82,5 +83,14 @@ namespace Amadeus.Server.Models
 		/// or <see cref="Amadeus.Server.Models.Permissions.Admin"/>.
 		/// </summary>
 		public string[] Permissions { get; set; }
+
+		/// <summary>
+		/// The external tokens on other services.
+		/// </summary>
+		[Column(TypeName = "jsonb")]
+		[JsonIgnore]
+		public Dictionary<string, JwtToken> ExternalTokens { get; set; }
+
+		public long AnilistID { get; set; }
 	}
 }

@@ -2,30 +2,29 @@ version: "3.8"
 
 services:
   webapp:
-    build: front
+    build:
+      context: front
+      dockerfile: Dockerfile-dev
     restart: unless-stopped
+    network_mode: "host"
     ports:
-      - "8081:80"
+      - "8081:8081"
+    volumes:
+      - ./front:/webapp
     depends_on:
       - amadeus
-  amadeus:
-    build: .
-    restart: unless-stopped
-    environment:
-      - DATABASE__SERVER=postgres
-      - DATABASE__USER_ID=amadeus
-      - DATABASE__PASSWORD=amadeusPassword
-    ports:
-      - "8080:8080"
-    depends_on:
-      - postgres
   postgres:
     image: postgres
     restart: unless-stopped
+    network_mode: "host"
     environment:
       - POSTGRES_USER=amadeus
       - POSTGRES_PASSWORD=amadeusPassword
+    ports:
+      - "5432:5432"
     volumes:
       - db:/var/lib/postgresql/data
 volumes:
   db:
+
+# host network means that the proxy in front/src/projects/host/proxy.conf.json should be set to 127.0.0.1

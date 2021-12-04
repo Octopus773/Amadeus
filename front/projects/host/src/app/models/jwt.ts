@@ -1,8 +1,8 @@
 export class Jwt
 {
-	accessToken: string;
-	refreshToken: string;
-	expireTime: Date;
+	access_token: string;
+	refresh_token: string;
+	expire_in: Date;
 }
 
 export class LoginRequest

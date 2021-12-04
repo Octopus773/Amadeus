@@ -22,9 +22,11 @@
 			<form #signInF="ngForm">
 				<h1>Sign in</h1>
 				<div class="social">
-					<a href="#"><i class="fab fa-google"></i></a>
-					<a href="#"><i class="fab fa-twitter"></i></a>
-					<a href="#"><i class="fab fa-facebook-f"></i></a>
+					<a (click)="auth.anilistRedirect()">
+						<img src="/assets/anilist.png" height="14px" />
+					</a>
+					<a style="color: #757575; cursor: default;"><i class="fab fa-twitter"></i></a>
+					<a style="color: #757575; cursor: default;"><i class="fab fa-facebook-f"></i></a>
 				</div>
 				<span>or use your account</span>
 				<input required type="text" placeholder="Username" name="username" autocomplete="username"

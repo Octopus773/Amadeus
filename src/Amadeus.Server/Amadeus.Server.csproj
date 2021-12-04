@@ -6,6 +6,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.8" />
 		<PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.12" />
 		<PackageReference Include="BCrypt.Net-Next" Version="4.0.2" />
@@ -15,11 +17,13 @@
 		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.10" />
-		<PackageReference Include="NSwag.AspNetCore" Version="13.14.8" />
-		<PackageReference Include="NSwag.Core" Version="13.14.8" />
+		<PackageReference Include="NSwag.AspNetCore" Version="13.13.2" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Content Include="..\..\docker-compose.back.yml">
+	    <Link>Amadeus\docker-compose.back.yml</Link>
+	  </Content>
 	  <Content Include="..\..\docker-compose.yml">
 	    <Link>Amadeus\docker-compose.yml</Link>
 	  </Content>

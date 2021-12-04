@@ -15,20 +15,20 @@ export class LoginComponent
 	public signInForm: LoginRequest = new LoginRequest();
 
 	constructor(
-		private _auth: AuthService,
+		public auth: AuthService,
 		private _router: Router
 	)
 	{}
 
 	signUp(): void
 	{
-		this._auth.register(this.signUpForm)
+		this.auth.register(this.signUpForm)
 			.subscribe(() => this._router.navigateByUrl("/"));
 	}
 
 	signIn(): void
 	{
-		this._auth.login(this.signInForm)
+		this.auth.login(this.signInForm)
 			.subscribe(() => this._router.navigateByUrl("/"));
 	}
 }
