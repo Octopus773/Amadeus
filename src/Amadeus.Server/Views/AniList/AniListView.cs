@@ -65,5 +65,21 @@ namespace Amadeus.Server.Views.AniList
 				return NotFound();
 			}
 		}
+
+		[HttpGet("list/{type}")]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		[ProducesResponseType(StatusCodes.Status404NotFound)]
+		public async Task<ActionResult<Anime[]>> GetList(string type)
+		{
+			try
+			{
+				return await _aniList.GetList(type);
+			}
+			catch
+			{
+				// Probably because the user does not exists.
+				return NotFound();
+			}
+		}
 	}
 }

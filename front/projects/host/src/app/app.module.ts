@@ -31,6 +31,7 @@ import { WatchlistComponent } from "./components/watchlist/watchlist.component";
 import { MatListModule } from "@angular/material/list";
 import { AnimeComponent } from "./components/anime/anime.component";
 import { DragDropModule } from "@angular/cdk/drag-drop";
+import { TrendsComponent } from "./components/trends/trends.component";
 
 @NgModule({
 	declarations: [
@@ -44,7 +45,8 @@ import { DragDropModule } from "@angular/cdk/drag-drop";
 		CovidComponent,
 		OauthCodeComponent,
 		WatchlistComponent,
-		AnimeComponent
+		AnimeComponent,
+		TrendsComponent
 	],
 	imports: [
 		BrowserModule,

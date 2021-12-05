@@ -216,5 +216,45 @@ namespace Amadeus.Server.Controllers.AniList
 				Image = x.bannerImage
 			};
 		}
+
+		public async Task<Anime[]> GetList(string type)
+		{
+			using HttpClient client = _factory.CreateClient();
+			HttpResponseMessage response = await client.PostAsJsonAsync($"https://graphql.anilist.co/", new
+			{
+				query = @"
+					query ($type: MediaSort) {
+					  Page(page: 1, perPage: 6) {
+					    media(sort: [$type], type: ANIME) {
+					      title {
+					        romaji
+					        english
+					        native
+					      }
+					      coverImage {
+					        medium
+					      }
+					    }
+					  }
+					}",
+				variables = new
+				{
+					type
+				}
+			});
+			response.EnsureSuccessStatusCode();
+			dynamic rep = await response.Content.ReadAsAsync<ExpandoObject>();
+			IEnumerable<dynamic> animes = rep.data.Page.media;
+			return animes.Select(x => new Anime
+			{
+				Title = new Title
+				{
+					English = x.title.english,
+					Romaji = x.title.romaji,
+					Native = x.title.native,
+				},
+				Image = x.coverImage.medium
+			}).ToArray();
+		}
 	}
 }

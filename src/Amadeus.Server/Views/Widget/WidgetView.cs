@@ -151,6 +151,8 @@ namespace Amadeus.Server.Views.Widget
 		[Authorize]
 		public async Task<IActionResult> Reorder(int from, int to)
 		{
+			if (from == to)
+				return Ok();
 			if (!int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out int userId))
 				return BadRequest("Invalid user credential");
 			IList<Models.Widget> widgets = await _db.Widgets.Where(x => x.UserId == userId).ToListAsync();
