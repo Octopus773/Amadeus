@@ -2,7 +2,7 @@ import { Injectable, Injector } from "@angular/core";
 import { environment } from "../../environments/environment";
 import { HttpClient } from "@angular/common/http";
 import { Jwt, LoginRequest, RegisterRequest } from "../models/jwt";
-import { map, Observable } from "rxjs";
+import { map, Observable, tap } from "rxjs";
 import { CookieService } from "ngx-cookie-service";
 import { WidgetsService } from "./widgets.service";
 import { User } from "../models/user";
@@ -54,6 +54,11 @@ export class AuthService
 				path: "/"
 			}
 		);
+		this._refreshSelf();
+	}
+
+	_refreshSelf(): void
+	{
 		// noinspection JSIgnoredPromiseFromCall
 		this._injector.get(WidgetsService).refreshWidgets();
 		this._http.get<User>(`${environment.apiUrl}/auth/me`).subscribe(x => this._user = x);
@@ -69,6 +74,12 @@ export class AuthService
 	{
 		return this._http.post<Jwt>(`${environment.apiUrl}/auth/login/${api}?code=${code}`, {})
 			.pipe(map(x => this._useToken(x)));
+	}
+
+	link(api: string, code: string): Observable<void>
+	{
+		return this._http.post(`${environment.apiUrl}/auth/link/${api}?code=${code}`, {})
+			.pipe(map(() => this._refreshSelf()));
 	}
 
 	register(request: RegisterRequest): Observable<void>

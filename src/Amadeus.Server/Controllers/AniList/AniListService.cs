@@ -84,6 +84,7 @@ namespace Amadeus.Server.Controllers.AniList
 			User user = await _users.GetById(userID);
 			User aniList = await _GetUser(token);
 			user.AnilistID = aniList.AnilistID;
+			user.ExternalTokens ??= new Dictionary<string, JwtToken>();
 			user.ExternalTokens["anilist"] = token;
 			await _users.Modify(user.Id, user);
 			return user;

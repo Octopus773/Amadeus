@@ -25,7 +25,7 @@ export class OauthCodeComponent
 			const code: string = x["code"];
 			let sub: Observable<unknown>;
 			if (this._auth.accessToken)
-				sub = this._http.post(`${environment.apiUrl}/auth/link/${api}?code=${code}`, {});
+				sub = this._auth.link(api, code);
 			else
 				sub = this._auth.loginVia(api, code);
 			sub.subscribe(() =>
