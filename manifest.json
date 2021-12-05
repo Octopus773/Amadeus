@@ -1,0 +1,1001 @@
+{
+  "homepages": [],
+  "source_base_path": "/github/workspace/docs",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      },
+      "is_incremental": false
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "A0ftEIk9WrIE073R/Q4Crg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.AniList.Models.AniListOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.AniList.Models.AniListOptions.html",
+          "hash": "KQOj/9mObBvsk9ZB+mXLOg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.AniList.Models.Anime.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.AniList.Models.Anime.html",
+          "hash": "t8mq8azY7f7Z0XL5olG8fQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.AniList.Models.Title.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.AniList.Models.Title.html",
+          "hash": "+xrefz+FHGKqY7+spkoFlA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.AniList.Models.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.AniList.Models.html",
+          "hash": "FnTQ01i6bYNXxFD0AcyBRg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Controllers.AboutController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Controllers.AboutController.html",
+          "hash": "SOcAFVxcB4E+K3g8bN2hhw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Controllers.AniList.AniListService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Controllers.AniList.AniListService.html",
+          "hash": "iDs87emOnGHwy8dIv5B0uA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Controllers.AniList.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Controllers.AniList.html",
+          "hash": "NiMmgxxiH7Cv6hRji9sKDQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Controllers.Covid.CovidController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Controllers.Covid.CovidController.html",
+          "hash": "svPqF9poKZ3SajqDoP6MXQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Controllers.Covid.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Controllers.Covid.html",
+          "hash": "c48cOjy7aFbZY3ZovOdpXg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Controllers.IRepository-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Controllers.IRepository-1.html",
+          "hash": "1jsYKMyDrKFsdw5CZ7QcyA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Controllers.TokenController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Controllers.TokenController.html",
+          "hash": "UuBAHESaLRK0I3JiOaHTPA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Controllers.UserRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Controllers.UserRepository.html",
+          "hash": "Rjibo3oIbUoL5OMfCY38GQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Controllers.UtilsController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Controllers.UtilsController.html",
+          "hash": "8T5gQA2h7UQgVmTB6M4Vkw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Controllers.Weather.WeatherController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Controllers.Weather.WeatherController.html",
+          "hash": "ywCN7uftsJEia2enXyuFiQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Controllers.Weather.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Controllers.Weather.html",
+          "hash": "skae5DfmLQr859QBOrslPQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Controllers.WidgetRepository.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Controllers.WidgetRepository.html",
+          "hash": "qbWupie/G+w1BJJHQe04wQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Controllers.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Controllers.html",
+          "hash": "8JkCeOQ9OxhZ0AW4uGVswg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Data.Extensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Data.Extensions.html",
+          "hash": "xoOQlRLi+nKum7ix7qPe3g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Data.ServerDB.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Data.ServerDB.html",
+          "hash": "bgWT5EA/+tSsLrm+aiRgSA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Data.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Data.html",
+          "hash": "t25juAX/esPGUrR+6owJeg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Exceptions.DuplicateField.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Exceptions.DuplicateField.html",
+          "hash": "DNR9vBb3Qf7/qLtxF5Y9GA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Exceptions.ElementNotFound.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Exceptions.ElementNotFound.html",
+          "hash": "GYVkjNDX5H54Jupzx/WVgA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Exceptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Exceptions.html",
+          "hash": "offwGm2ZFEmN0hLD4IJ9PQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Migrations.InitialCreate.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Migrations.InitialCreate.html",
+          "hash": "S68ooz9gv1kW9U+aDmVCng=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Migrations.UserPermissions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Migrations.UserPermissions.html",
+          "hash": "fkgezCmfiy18LodAwUoVPA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Migrations.anilistID.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Migrations.anilistID.html",
+          "hash": "DQVXQrBBAEJ1gX/LSoHBQA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Migrations.jwt.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Migrations.jwt.html",
+          "hash": "ke72hvDFrKhjdJecg3E4bw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Migrations.required.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Migrations.required.html",
+          "hash": "DK0ZCdivEMRY6ul9OiLRrw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Migrations.rmpasswordconstraints.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Migrations.rmpasswordconstraints.html",
+          "hash": "ccLF/ywC92n6Ng/V4eVH2g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Migrations.settingusernamepassordasunqiue.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Migrations.settingusernamepassordasunqiue.html",
+          "hash": "0wYYVBz/fThHv68NG3atiw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Migrations.sortOrder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Migrations.sortOrder.html",
+          "hash": "kTndbs0O0PtGz7Gny5Ge+A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Migrations.updatingallconstraints.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Migrations.updatingallconstraints.html",
+          "hash": "lgVhiznCz6U7gNUq4uIdPw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Migrations.widgetModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Migrations.widgetModel.html",
+          "hash": "3udzL0EyDWjqJpvKf4c7oA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Migrations.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Migrations.html",
+          "hash": "lkr5rm6RjpySWnTY1r0awg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Models.Configuration.CovidConfiguration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Models.Configuration.CovidConfiguration.html",
+          "hash": "8siE6jm8XJBnXsi2u5aRyg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Models.Configuration.WeatherConfiguration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Models.Configuration.WeatherConfiguration.html",
+          "hash": "i6hXdHK6WeQ5m9QZZRErqw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Models.Configuration.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Models.Configuration.html",
+          "hash": "BK89iTj2OG5tewita9ddGg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Models.Convid.CovidData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Models.Convid.CovidData.html",
+          "hash": "MDEi/TOaXL/K0rzKB9n0IQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Models.Convid.CovidTotal.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Models.Convid.CovidTotal.html",
+          "hash": "CKpJ8Gwp34AWO1q1Z3H+yA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Models.Convid.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Models.Convid.html",
+          "hash": "FnRef+BY5na8Q/pYoUFpiA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Models.JwtOption.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Models.JwtOption.html",
+          "hash": "FpAGoxg0Q2lQkLfZq+IKwA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Models.JwtToken.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Models.JwtToken.html",
+          "hash": "qAkp4lS3Tlu0ACGjT+cwDQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Models.LoginRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Models.LoginRequest.html",
+          "hash": "fwV6VdRRzkX+yoQMP/vxQQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Models.Permissions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Models.Permissions.html",
+          "hash": "M81N7WWOwaT2EABIrQp3lg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Models.RegisterRequest.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Models.RegisterRequest.html",
+          "hash": "woGbOTJ6WwXjiax5w9epOg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Models.User.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Models.User.html",
+          "hash": "FkER0PJ9g52yt22YRJce3w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Models.UserCreationDTO.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Models.UserCreationDTO.html",
+          "hash": "iMy1qrRhilrfPCIFSwWGcQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Models.UserModificationDto.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Models.UserModificationDto.html",
+          "hash": "g2FsxMi/MrSirtZjqmA7+w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Models.Weather.WeatherData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Models.Weather.WeatherData.html",
+          "hash": "7rBNv+2+oocPfZinmAqplQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Models.Weather.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Models.Weather.html",
+          "hash": "bpDmbzhZLp9XpWgeHsu/TQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Models.Widget.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Models.Widget.html",
+          "hash": "tVFxGKQpPQGBh4ty1F0SwA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Models.WidgetCreationDTO.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Models.WidgetCreationDTO.html",
+          "hash": "vMlN5JAZKbVy0EgUG4Z1ww=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Models.WidgetModificationDTO.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Models.WidgetModificationDTO.html",
+          "hash": "/qbgK87T1dl7jvqEZcVOZQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Models.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Models.html",
+          "hash": "NkM4JKE5ff06qbNKebU/pA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Program.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Program.html",
+          "hash": "fQPMP3VPkQQgfnGvzpo5XQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Startup.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Startup.html",
+          "hash": "CAtY6aBNKotP3Bv8OfhSBw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Views.AniList.AniListView.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Views.AniList.AniListView.html",
+          "hash": "/HGp7nZtrTHihVlMUO3qCQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Views.AniList.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Views.AniList.html",
+          "hash": "2AvZMGvN/qE+ahV8VWlGzQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Views.Auth.AuthView.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Views.Auth.AuthView.html",
+          "hash": "L4ZP6Ygq3vJnPqneHRBIpA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Views.Auth.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Views.Auth.html",
+          "hash": "MDStevQbhx5mtzMKbWqkrQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Views.Core.CoreView.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Views.Core.CoreView.html",
+          "hash": "u/Odjk5hkpy2vjvM62XwJQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Views.Core.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Views.Core.html",
+          "hash": "XlcoCHVuasmtR/jK+bnk2A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Views.Covid.CovidView.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Views.Covid.CovidView.html",
+          "hash": "fe0krBZbTFvzGd3qK8AAXw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Views.Covid.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Views.Covid.html",
+          "hash": "ZkhjDxmYQkm7eIxtdHEoAA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Views.Secure.SecureView.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Views.Secure.SecureView.html",
+          "hash": "p3EngeZFIuGLwpDLwaV3QQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Views.Secure.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Views.Secure.html",
+          "hash": "rxTnQu8d4wBbEiSqEWahyw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Views.UserView.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Views.UserView.html",
+          "hash": "ESrzUgXBQFjcrf788xtuSQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Views.Weather.WeatherView.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Views.Weather.WeatherView.html",
+          "hash": "MWXe4Vpnr6GckBgkw9voww=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Views.Weather.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Views.Weather.html",
+          "hash": "gWIiWFufsboHpscPNWH7vQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Views.Widget.WidgetView.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Views.Widget.WidgetView.html",
+          "hash": "WkYYcVS3q5QC0pCAdk7u3g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Views.Widget.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Views.Widget.html",
+          "hash": "+bqkdR4a20hhJN66ZlxrMQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.Views.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.Views.html",
+          "hash": "U1gHBZOT2GHLyohvTQ67yg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/Amadeus.Server.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Amadeus.Server.html",
+          "hash": "pNJvJh0apDJVXQnxFNjbTg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "obj/api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "obj/api/toc.html",
+          "hash": "BT3h7cKgqTknFMCjdOe++g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "start/install.md",
+      "output": {
+        ".html": {
+          "relative_path": "start/install.html",
+          "hash": "BQ21HlUNtKyAbdOqZGdkpw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "start/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "start/toc.html",
+          "hash": "Mr2px+G4tWdpYlzyWHZJvA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "SVdOhzyxEqNl3N9OKspwDw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot build incrementally because last build info is missing.",
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0,
+        "full_build_reason_code": "NoAvailableBuildCache"
+      },
+      "processors": {
+        "ConceptualDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 2,
+          "skipped_file_count": 0
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 73,
+          "skipped_file_count": 0
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot support incremental post processing, the reason is: should not trace intermediate info.",
+        "incrementalPhase": "postProcessing",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

@@ -1,0 +1,377 @@
+{
+  "api/Amadeus.AniList.Models.AniListOptions.html": {
+    "href": "api/Amadeus.AniList.Models.AniListOptions.html",
+    "title": "Class AniListOptions | Documentation - Amadeus",
+    "keywords": "Class AniListOptions Inheritance System.Object AniListOptions Namespace : Amadeus.AniList.Models Assembly : Amadeus.Server.dll Syntax public class AniListOptions : object Properties | Improve this Doc View Source ClientID Declaration public string ClientID { get; set; } Property Value Type Description System.String | Improve this Doc View Source ClientSecret Declaration public string ClientSecret { get; set; } Property Value Type Description System.String | Improve this Doc View Source RedirectUri Declaration public Uri RedirectUri { get; set; } Property Value Type Description Uri"
+  },
+  "api/Amadeus.AniList.Models.Anime.html": {
+    "href": "api/Amadeus.AniList.Models.Anime.html",
+    "title": "Class Anime | Documentation - Amadeus",
+    "keywords": "Class Anime Inheritance System.Object Anime Namespace : Amadeus.AniList.Models Assembly : Amadeus.Server.dll Syntax public class Anime : object Properties | Improve this Doc View Source Description Declaration public string Description { get; set; } Property Value Type Description System.String | Improve this Doc View Source Image Declaration public string Image { get; set; } Property Value Type Description System.String | Improve this Doc View Source Title Declaration public Title Title { get; set; } Property Value Type Description Title"
+  },
+  "api/Amadeus.AniList.Models.html": {
+    "href": "api/Amadeus.AniList.Models.html",
+    "title": "Namespace Amadeus.AniList.Models | Documentation - Amadeus",
+    "keywords": "Namespace Amadeus.AniList.Models Classes AniListOptions Anime Title"
+  },
+  "api/Amadeus.AniList.Models.Title.html": {
+    "href": "api/Amadeus.AniList.Models.Title.html",
+    "title": "Class Title | Documentation - Amadeus",
+    "keywords": "Class Title Inheritance System.Object Title Namespace : Amadeus.AniList.Models Assembly : Amadeus.Server.dll Syntax public class Title : object Properties | Improve this Doc View Source English Declaration public string English { get; set; } Property Value Type Description System.String | Improve this Doc View Source Native Declaration public string Native { get; set; } Property Value Type Description System.String | Improve this Doc View Source Romaji Declaration public string Romaji { get; set; } Property Value Type Description System.String"
+  },
+  "api/Amadeus.Server.Controllers.AboutController.html": {
+    "href": "api/Amadeus.Server.Controllers.AboutController.html",
+    "title": "Class AboutController | Documentation - Amadeus",
+    "keywords": "Class AboutController Controller used to serve the about.json. Inheritance System.Object AboutController Namespace : Amadeus.Server.Controllers Assembly : Amadeus.Server.dll Syntax public class AboutController : object Methods | Improve this Doc View Source GetCurrentAboutJson(String) Generate the current about.json. Declaration public object GetCurrentAboutJson(string address) Parameters Type Name Description System.String address Returns Type Description System.Object The C# object that represents the about.json."
+  },
+  "api/Amadeus.Server.Controllers.AniList.AniListService.html": {
+    "href": "api/Amadeus.Server.Controllers.AniList.AniListService.html",
+    "title": "Class AniListService | Documentation - Amadeus",
+    "keywords": "Class AniListService Inheritance System.Object AniListService Namespace : Amadeus.Server.Controllers.AniList Assembly : Amadeus.Server.dll Syntax public class AniListService : object Constructors | Improve this Doc View Source AniListService(IRepository<User>, IHttpClientFactory, IOptions<AniListOptions>) Declaration public AniListService(IRepository<User> users, IHttpClientFactory factory, IOptions<AniListOptions> options) Parameters Type Name Description IRepository < User > users IHttpClientFactory factory IOptions < AniListOptions > options Methods | Improve this Doc View Source GetAnime(String) Declaration public Task<Anime> GetAnime(string name) Parameters Type Name Description System.String name Returns Type Description Task < Anime > | Improve this Doc View Source GetList(String) Declaration public Task<Anime[]> GetList(string type) Parameters Type Name Description System.String type Returns Type Description Task < Anime []> | Improve this Doc View Source GetWatchList(Int64) Declaration public Task<Anime[]> GetWatchList(long user) Parameters Type Name Description System.Int64 user Returns Type Description Task < Anime []> | Improve this Doc View Source GetWatchList(String) Declaration public Task<Anime[]> GetWatchList(string user) Parameters Type Name Description System.String user Returns Type Description Task < Anime []> | Improve this Doc View Source LinkAccount(Int32, String) Declaration public Task<User> LinkAccount(int userID, string code) Parameters Type Name Description System.Int32 userID System.String code Returns Type Description Task < User > | Improve this Doc View Source Login(String) Declaration public Task<User> Login(string code) Parameters Type Name Description System.String code Returns Type Description Task < User >"
+  },
+  "api/Amadeus.Server.Controllers.AniList.html": {
+    "href": "api/Amadeus.Server.Controllers.AniList.html",
+    "title": "Namespace Amadeus.Server.Controllers.AniList | Documentation - Amadeus",
+    "keywords": "Namespace Amadeus.Server.Controllers.AniList Classes AniListService"
+  },
+  "api/Amadeus.Server.Controllers.Covid.CovidController.html": {
+    "href": "api/Amadeus.Server.Controllers.Covid.CovidController.html",
+    "title": "Class CovidController | Documentation - Amadeus",
+    "keywords": "Class CovidController Inheritance System.Object CovidController Namespace : Amadeus.Server.Controllers.Covid Assembly : Amadeus.Server.dll Syntax public class CovidController : object Constructors | Improve this Doc View Source CovidController(IOptions<CovidConfiguration>) Declaration public CovidController(IOptions<CovidConfiguration> config) Parameters Type Name Description IOptions < CovidConfiguration > config Methods | Improve this Doc View Source GetCovidInfo(String) Declaration public Task<CovidData> GetCovidInfo(string countryCode) Parameters Type Name Description System.String countryCode Returns Type Description Task < CovidData > | Improve this Doc View Source GetCovidInfoLatestTotal() Declaration public Task<CovidTotal> GetCovidInfoLatestTotal() Returns Type Description Task < CovidTotal >"
+  },
+  "api/Amadeus.Server.Controllers.Covid.html": {
+    "href": "api/Amadeus.Server.Controllers.Covid.html",
+    "title": "Namespace Amadeus.Server.Controllers.Covid | Documentation - Amadeus",
+    "keywords": "Namespace Amadeus.Server.Controllers.Covid Classes CovidController"
+  },
+  "api/Amadeus.Server.Controllers.html": {
+    "href": "api/Amadeus.Server.Controllers.html",
+    "title": "Namespace Amadeus.Server.Controllers | Documentation - Amadeus",
+    "keywords": "Namespace Amadeus.Server.Controllers Classes AboutController Controller used to serve the about.json. TokenController The service that controls jwt creation and validation. UserRepository The orm class for the user object. UtilsController Controller used to store utils function. WidgetRepository Interfaces IRepository<T> Generic repository interface."
+  },
+  "api/Amadeus.Server.Controllers.IRepository-1.html": {
+    "href": "api/Amadeus.Server.Controllers.IRepository-1.html",
+    "title": "Interface IRepository<T> | Documentation - Amadeus",
+    "keywords": "Interface IRepository<T> Generic repository interface. Namespace : Amadeus.Server.Controllers Assembly : Amadeus.Server.dll Syntax public interface IRepository<T> Type Parameters Name Description T The type of the repository. Methods | Improve this Doc View Source Create(T) Create saves the user in the db. Declaration Task<T> Create(T element) Parameters Type Name Description T element The element to create in the db. Returns Type Description Task <T> The element saved in db. | Improve this Doc View Source Delete(Int32) Delete a element by id. Declaration Task<T> Delete(int id) Parameters Type Name Description System.Int32 id id of the element to delete. Returns Type Description Task <T> The deleted element. | Improve this Doc View Source GetAll() Get all the users in db. Declaration Task<IList<T>> GetAll() Returns Type Description Task < IList <T>> All the users in the db. | Improve this Doc View Source GetById(Int32) Get a user by it's id. Declaration Task<T> GetById(int id) Parameters Type Name Description System.Int32 id The id of the element to get. Returns Type Description Task <T> The element corresponding at the id. | Improve this Doc View Source GetWhere(Expression<Func<T, Boolean>>) Get elements matching the predicate. Declaration Task<IList<T>> GetWhere(Expression<Func<T, bool>> pred) Parameters Type Name Description Expression < Func <T, System.Boolean >> pred The predicate. Returns Type Description Task < IList <T>> All the elements matching the predicate. | Improve this Doc View Source Modify(Int32, T) Modify an element by id. Declaration Task<T> Modify(int id, T element) Parameters Type Name Description System.Int32 id id of the element to delete. T element The element with new values. Returns Type Description Task <T> The deleted element."
+  },
+  "api/Amadeus.Server.Controllers.TokenController.html": {
+    "href": "api/Amadeus.Server.Controllers.TokenController.html",
+    "title": "Class TokenController | Documentation - Amadeus",
+    "keywords": "Class TokenController The service that controls jwt creation and validation. Inheritance System.Object TokenController Namespace : Amadeus.Server.Controllers Assembly : Amadeus.Server.dll Syntax public class TokenController : object Constructors | Improve this Doc View Source TokenController(IOptions<JwtOption>) Create a new TokenController . Declaration public TokenController(IOptions<JwtOption> options) Parameters Type Name Description IOptions < JwtOption > options The options that this controller will use. Methods | Improve this Doc View Source CreateAccessToken(User, out TimeSpan) Create a new access token for the given user. Declaration public string CreateAccessToken(User user, out TimeSpan expireIn) Parameters Type Name Description User user The user to create a token for. TimeSpan expireIn When this token will expire. Returns Type Description System.String A new, valid access token. | Improve this Doc View Source CreateRefreshToken(User) Create a new refresh token for the given user. Declaration public Task<string> CreateRefreshToken(User user) Parameters Type Name Description User user The user to create a token for. Returns Type Description Task < System.String > A new, valid refresh token. | Improve this Doc View Source GetRefreshTokenUser(String) Check if the given refresh token is valid and if it is, retrieve the id of the user this token belongs to. Declaration public int GetRefreshTokenUser(string refreshToken) Parameters Type Name Description System.String refreshToken The refresh token to validate. Returns Type Description System.Int32 The id of the token's user."
+  },
+  "api/Amadeus.Server.Controllers.UserRepository.html": {
+    "href": "api/Amadeus.Server.Controllers.UserRepository.html",
+    "title": "Class UserRepository | Documentation - Amadeus",
+    "keywords": "Class UserRepository The orm class for the user object. Inheritance System.Object UserRepository Implements IRepository < User > Namespace : Amadeus.Server.Controllers Assembly : Amadeus.Server.dll Syntax public class UserRepository : object, IRepository<User> Constructors | Improve this Doc View Source UserRepository(ServerDB) Constructor. Declaration public UserRepository(ServerDB context) Parameters Type Name Description ServerDB context The DB to use when storing and retrieving data. Methods | Improve this Doc View Source Create(User) Create saves the user in the db. Declaration public Task<User> Create(User user) Parameters Type Name Description User user The user to save in the db. Returns Type Description Task < User > The user saved in db. | Improve this Doc View Source Delete(Int32) Delete a user by id. Declaration public Task<User> Delete(int id) Parameters Type Name Description System.Int32 id id of the user to delete. Returns Type Description Task < User > True if the user was deleted false otherwise | Improve this Doc View Source GetAll() Get all the users in db. Declaration public Task<IList<User>> GetAll() Returns Type Description Task < IList < User >> All the users in the db. | Improve this Doc View Source GetById(Int32) Get a user by it's id. Declaration public Task<User> GetById(int id) Parameters Type Name Description System.Int32 id The id of the user to get. Returns Type Description Task < User > The user corresponding at the id. | Improve this Doc View Source GetWhere(Expression<Func<User, Boolean>>) Generic repository interface. Declaration public Task<IList<User>> GetWhere(Expression<Func<User, bool>> pred) Parameters Type Name Description Expression < Func < User , System.Boolean >> pred Returns Type Description Task < IList < User >> All the elements matching the predicate. | Improve this Doc View Source Modify(Int32, User) Modify an element by id. Declaration public Task<User> Modify(int uid, User user) Parameters Type Name Description System.Int32 uid User user Returns Type Description Task < User > The deleted element. Implements IRepository<T>"
+  },
+  "api/Amadeus.Server.Controllers.UtilsController.html": {
+    "href": "api/Amadeus.Server.Controllers.UtilsController.html",
+    "title": "Class UtilsController | Documentation - Amadeus",
+    "keywords": "Class UtilsController Controller used to store utils function. Inheritance System.Object UtilsController Namespace : Amadeus.Server.Controllers Assembly : Amadeus.Server.dll Syntax public static class UtilsController : object Methods | Improve this Doc View Source GetLocalIpAddress() get local ip address. Declaration public static string GetLocalIpAddress() Returns Type Description System.String The local ip address. | Improve this Doc View Source ToSlug(String) Slugify a string (Replace spaces by -, Uniformize accents) Declaration public static string ToSlug(string str) Parameters Type Name Description System.String str The string to slugify Returns Type Description System.String The slug version of the given string"
+  },
+  "api/Amadeus.Server.Controllers.Weather.html": {
+    "href": "api/Amadeus.Server.Controllers.Weather.html",
+    "title": "Namespace Amadeus.Server.Controllers.Weather | Documentation - Amadeus",
+    "keywords": "Namespace Amadeus.Server.Controllers.Weather Classes WeatherController"
+  },
+  "api/Amadeus.Server.Controllers.Weather.WeatherController.html": {
+    "href": "api/Amadeus.Server.Controllers.Weather.WeatherController.html",
+    "title": "Class WeatherController | Documentation - Amadeus",
+    "keywords": "Class WeatherController Inheritance System.Object WeatherController Namespace : Amadeus.Server.Controllers.Weather Assembly : Amadeus.Server.dll Syntax public class WeatherController : object Constructors | Improve this Doc View Source WeatherController(IOptions<WeatherConfiguration>) Declaration public WeatherController(IOptions<WeatherConfiguration> config) Parameters Type Name Description IOptions < WeatherConfiguration > config Methods | Improve this Doc View Source GetForeCast(String, Int32) Declaration public Task<IList<WeatherData>> GetForeCast(string city, int days) Parameters Type Name Description System.String city System.Int32 days Returns Type Description Task < IList < WeatherData >> | Improve this Doc View Source GetWeather(String) Declaration public Task<WeatherData> GetWeather(string city) Parameters Type Name Description System.String city Returns Type Description Task < WeatherData >"
+  },
+  "api/Amadeus.Server.Controllers.WidgetRepository.html": {
+    "href": "api/Amadeus.Server.Controllers.WidgetRepository.html",
+    "title": "Class WidgetRepository | Documentation - Amadeus",
+    "keywords": "Class WidgetRepository Inheritance System.Object WidgetRepository Implements IRepository < Widget > Namespace : Amadeus.Server.Controllers Assembly : Amadeus.Server.dll Syntax public class WidgetRepository : object, IRepository<Widget> Constructors | Improve this Doc View Source WidgetRepository(ServerDB) Declaration public WidgetRepository(ServerDB context) Parameters Type Name Description ServerDB context Methods | Improve this Doc View Source Create(Widget) Declaration public Task<Widget> Create(Widget element) Parameters Type Name Description Widget element Returns Type Description Task < Widget > | Improve this Doc View Source Delete(Int32) Declaration public Task<Widget> Delete(int id) Parameters Type Name Description System.Int32 id Returns Type Description Task < Widget > | Improve this Doc View Source GetAll() Declaration public Task<IList<Widget>> GetAll() Returns Type Description Task < IList < Widget >> | Improve this Doc View Source GetById(Int32) Declaration public Task<Widget> GetById(int id) Parameters Type Name Description System.Int32 id Returns Type Description Task < Widget > | Improve this Doc View Source GetWhere(Expression<Func<Widget, Boolean>>) Declaration public Task<IList<Widget>> GetWhere(Expression<Func<Widget, bool>> pred) Parameters Type Name Description Expression < Func < Widget , System.Boolean >> pred Returns Type Description Task < IList < Widget >> | Improve this Doc View Source Modify(Int32, Widget) Declaration public Task<Widget> Modify(int id, Widget element) Parameters Type Name Description System.Int32 id Widget element Returns Type Description Task < Widget > Implements IRepository<T>"
+  },
+  "api/Amadeus.Server.Data.Extensions.html": {
+    "href": "api/Amadeus.Server.Data.Extensions.html",
+    "title": "Class Extensions | Documentation - Amadeus",
+    "keywords": "Class Extensions A class that regroup extensions used by some asp-net related parts of the app. Inheritance System.Object Extensions Namespace : Amadeus.Server.Data Assembly : Amadeus.Server.dll Syntax public static class Extensions : object Methods | Improve this Doc View Source GetDatabaseConnection(IConfiguration) Get a connection string from the Configuration's section \"Database\". Declaration public static string GetDatabaseConnection(this IConfiguration config) Parameters Type Name Description IConfiguration config The IConfiguration instance to use. Returns Type Description System.String A parsed connection string. | Improve this Doc View Source ToQueryString(Dictionary<String, String>) Convert a dictionary to a query string. Declaration public static string ToQueryString(this Dictionary<string, string> query) Parameters Type Name Description Dictionary < System.String , System.String > query The list of query parameters. Returns Type Description System.String A valid query string with all items in the dictionary."
+  },
+  "api/Amadeus.Server.Data.html": {
+    "href": "api/Amadeus.Server.Data.html",
+    "title": "Namespace Amadeus.Server.Data | Documentation - Amadeus",
+    "keywords": "Namespace Amadeus.Server.Data Classes Extensions A class that regroup extensions used by some asp-net related parts of the app. ServerDB UserDB."
+  },
+  "api/Amadeus.Server.Data.ServerDB.html": {
+    "href": "api/Amadeus.Server.Data.ServerDB.html",
+    "title": "Class ServerDB | Documentation - Amadeus",
+    "keywords": "Class ServerDB UserDB. Inheritance System.Object ServerDB Namespace : Amadeus.Server.Data Assembly : Amadeus.Server.dll Syntax public class ServerDB : DbContext Constructors | Improve this Doc View Source ServerDB(DbContextOptions<ServerDB>) Class containing all models needed for the server. Declaration public ServerDB(DbContextOptions<ServerDB> options) Parameters Type Name Description DbContextOptions < ServerDB > options Db options. Properties | Improve this Doc View Source Users Users objects. Declaration public DbSet<User> Users { get; set; } Property Value Type Description DbSet < User > | Improve this Doc View Source Widgets Declaration public DbSet<Widget> Widgets { get; set; } Property Value Type Description DbSet < Widget > Methods | Improve this Doc View Source OnModelCreating(ModelBuilder) Declaration protected override void OnModelCreating(ModelBuilder modelBuilder) Parameters Type Name Description ModelBuilder modelBuilder"
+  },
+  "api/Amadeus.Server.Exceptions.DuplicateField.html": {
+    "href": "api/Amadeus.Server.Exceptions.DuplicateField.html",
+    "title": "Class DuplicateField | Documentation - Amadeus",
+    "keywords": "Class DuplicateField Exception through when a db fail to create a record due to an unexpected unique field. Inheritance System.Object DuplicateField Namespace : Amadeus.Server.Exceptions Assembly : Amadeus.Server.dll Syntax public class DuplicateField : Exception Constructors | Improve this Doc View Source DuplicateField(String) ctor. Declaration public DuplicateField(string message) Parameters Type Name Description System.String message The message explaining the error."
+  },
+  "api/Amadeus.Server.Exceptions.ElementNotFound.html": {
+    "href": "api/Amadeus.Server.Exceptions.ElementNotFound.html",
+    "title": "Class ElementNotFound | Documentation - Amadeus",
+    "keywords": "Class ElementNotFound Exception through when an element isn't found in a IRepository. Inheritance System.Object ElementNotFound Namespace : Amadeus.Server.Exceptions Assembly : Amadeus.Server.dll Syntax public class ElementNotFound : Exception Constructors | Improve this Doc View Source ElementNotFound(String) ctor. Declaration public ElementNotFound(string message) Parameters Type Name Description System.String message The message explaining the error."
+  },
+  "api/Amadeus.Server.Exceptions.html": {
+    "href": "api/Amadeus.Server.Exceptions.html",
+    "title": "Namespace Amadeus.Server.Exceptions | Documentation - Amadeus",
+    "keywords": "Namespace Amadeus.Server.Exceptions Classes DuplicateField Exception through when a db fail to create a record due to an unexpected unique field. ElementNotFound Exception through when an element isn't found in a IRepository."
+  },
+  "api/Amadeus.Server.html": {
+    "href": "api/Amadeus.Server.html",
+    "title": "Namespace Amadeus.Server | Documentation - Amadeus",
+    "keywords": "Namespace Amadeus.Server Classes Program Startup"
+  },
+  "api/Amadeus.Server.Migrations.anilistID.html": {
+    "href": "api/Amadeus.Server.Migrations.anilistID.html",
+    "title": "Class anilistID | Documentation - Amadeus",
+    "keywords": "Class anilistID Inheritance System.Object anilistID Namespace : Amadeus.Server.Migrations Assembly : Amadeus.Server.dll Syntax public class anilistID : Migration Methods | Improve this Doc View Source BuildTargetModel(ModelBuilder) Declaration protected override void BuildTargetModel(ModelBuilder modelBuilder) Parameters Type Name Description ModelBuilder modelBuilder | Improve this Doc View Source Down(MigrationBuilder) Declaration protected override void Down(MigrationBuilder migrationBuilder) Parameters Type Name Description MigrationBuilder migrationBuilder | Improve this Doc View Source Up(MigrationBuilder) Declaration protected override void Up(MigrationBuilder migrationBuilder) Parameters Type Name Description MigrationBuilder migrationBuilder"
+  },
+  "api/Amadeus.Server.Migrations.html": {
+    "href": "api/Amadeus.Server.Migrations.html",
+    "title": "Namespace Amadeus.Server.Migrations | Documentation - Amadeus",
+    "keywords": "Namespace Amadeus.Server.Migrations Classes anilistID InitialCreate jwt required rmpasswordconstraints settingusernamepassordasunqiue sortOrder updatingallconstraints UserPermissions widgetModel"
+  },
+  "api/Amadeus.Server.Migrations.InitialCreate.html": {
+    "href": "api/Amadeus.Server.Migrations.InitialCreate.html",
+    "title": "Class InitialCreate | Documentation - Amadeus",
+    "keywords": "Class InitialCreate Inheritance System.Object InitialCreate Namespace : Amadeus.Server.Migrations Assembly : Amadeus.Server.dll Syntax public class InitialCreate : Migration Methods | Improve this Doc View Source BuildTargetModel(ModelBuilder) Declaration protected override void BuildTargetModel(ModelBuilder modelBuilder) Parameters Type Name Description ModelBuilder modelBuilder | Improve this Doc View Source Down(MigrationBuilder) Declaration protected override void Down(MigrationBuilder migrationBuilder) Parameters Type Name Description MigrationBuilder migrationBuilder | Improve this Doc View Source Up(MigrationBuilder) Declaration protected override void Up(MigrationBuilder migrationBuilder) Parameters Type Name Description MigrationBuilder migrationBuilder"
+  },
+  "api/Amadeus.Server.Migrations.jwt.html": {
+    "href": "api/Amadeus.Server.Migrations.jwt.html",
+    "title": "Class jwt | Documentation - Amadeus",
+    "keywords": "Class jwt Inheritance System.Object jwt Namespace : Amadeus.Server.Migrations Assembly : Amadeus.Server.dll Syntax public class jwt : Migration Methods | Improve this Doc View Source BuildTargetModel(ModelBuilder) Declaration protected override void BuildTargetModel(ModelBuilder modelBuilder) Parameters Type Name Description ModelBuilder modelBuilder | Improve this Doc View Source Down(MigrationBuilder) Declaration protected override void Down(MigrationBuilder migrationBuilder) Parameters Type Name Description MigrationBuilder migrationBuilder | Improve this Doc View Source Up(MigrationBuilder) Declaration protected override void Up(MigrationBuilder migrationBuilder) Parameters Type Name Description MigrationBuilder migrationBuilder"
+  },
+  "api/Amadeus.Server.Migrations.required.html": {
+    "href": "api/Amadeus.Server.Migrations.required.html",
+    "title": "Class required | Documentation - Amadeus",
+    "keywords": "Class required Inheritance System.Object required Namespace : Amadeus.Server.Migrations Assembly : Amadeus.Server.dll Syntax public class required : Migration Methods | Improve this Doc View Source BuildTargetModel(ModelBuilder) Declaration protected override void BuildTargetModel(ModelBuilder modelBuilder) Parameters Type Name Description ModelBuilder modelBuilder | Improve this Doc View Source Down(MigrationBuilder) Declaration protected override void Down(MigrationBuilder migrationBuilder) Parameters Type Name Description MigrationBuilder migrationBuilder | Improve this Doc View Source Up(MigrationBuilder) Declaration protected override void Up(MigrationBuilder migrationBuilder) Parameters Type Name Description MigrationBuilder migrationBuilder"
+  },
+  "api/Amadeus.Server.Migrations.rmpasswordconstraints.html": {
+    "href": "api/Amadeus.Server.Migrations.rmpasswordconstraints.html",
+    "title": "Class rmpasswordconstraints | Documentation - Amadeus",
+    "keywords": "Class rmpasswordconstraints Inheritance System.Object rmpasswordconstraints Namespace : Amadeus.Server.Migrations Assembly : Amadeus.Server.dll Syntax public class rmpasswordconstraints : Migration Methods | Improve this Doc View Source BuildTargetModel(ModelBuilder) Declaration protected override void BuildTargetModel(ModelBuilder modelBuilder) Parameters Type Name Description ModelBuilder modelBuilder | Improve this Doc View Source Down(MigrationBuilder) Declaration protected override void Down(MigrationBuilder migrationBuilder) Parameters Type Name Description MigrationBuilder migrationBuilder | Improve this Doc View Source Up(MigrationBuilder) Declaration protected override void Up(MigrationBuilder migrationBuilder) Parameters Type Name Description MigrationBuilder migrationBuilder"
+  },
+  "api/Amadeus.Server.Migrations.settingusernamepassordasunqiue.html": {
+    "href": "api/Amadeus.Server.Migrations.settingusernamepassordasunqiue.html",
+    "title": "Class settingusernamepassordasunqiue | Documentation - Amadeus",
+    "keywords": "Class settingusernamepassordasunqiue Inheritance System.Object settingusernamepassordasunqiue Namespace : Amadeus.Server.Migrations Assembly : Amadeus.Server.dll Syntax public class settingusernamepassordasunqiue : Migration Methods | Improve this Doc View Source BuildTargetModel(ModelBuilder) Declaration protected override void BuildTargetModel(ModelBuilder modelBuilder) Parameters Type Name Description ModelBuilder modelBuilder | Improve this Doc View Source Down(MigrationBuilder) Declaration protected override void Down(MigrationBuilder migrationBuilder) Parameters Type Name Description MigrationBuilder migrationBuilder | Improve this Doc View Source Up(MigrationBuilder) Declaration protected override void Up(MigrationBuilder migrationBuilder) Parameters Type Name Description MigrationBuilder migrationBuilder"
+  },
+  "api/Amadeus.Server.Migrations.sortOrder.html": {
+    "href": "api/Amadeus.Server.Migrations.sortOrder.html",
+    "title": "Class sortOrder | Documentation - Amadeus",
+    "keywords": "Class sortOrder Inheritance System.Object sortOrder Namespace : Amadeus.Server.Migrations Assembly : Amadeus.Server.dll Syntax public class sortOrder : Migration Methods | Improve this Doc View Source BuildTargetModel(ModelBuilder) Declaration protected override void BuildTargetModel(ModelBuilder modelBuilder) Parameters Type Name Description ModelBuilder modelBuilder | Improve this Doc View Source Down(MigrationBuilder) Declaration protected override void Down(MigrationBuilder migrationBuilder) Parameters Type Name Description MigrationBuilder migrationBuilder | Improve this Doc View Source Up(MigrationBuilder) Declaration protected override void Up(MigrationBuilder migrationBuilder) Parameters Type Name Description MigrationBuilder migrationBuilder"
+  },
+  "api/Amadeus.Server.Migrations.updatingallconstraints.html": {
+    "href": "api/Amadeus.Server.Migrations.updatingallconstraints.html",
+    "title": "Class updatingallconstraints | Documentation - Amadeus",
+    "keywords": "Class updatingallconstraints Inheritance System.Object updatingallconstraints Namespace : Amadeus.Server.Migrations Assembly : Amadeus.Server.dll Syntax public class updatingallconstraints : Migration Methods | Improve this Doc View Source BuildTargetModel(ModelBuilder) Declaration protected override void BuildTargetModel(ModelBuilder modelBuilder) Parameters Type Name Description ModelBuilder modelBuilder | Improve this Doc View Source Down(MigrationBuilder) Declaration protected override void Down(MigrationBuilder migrationBuilder) Parameters Type Name Description MigrationBuilder migrationBuilder | Improve this Doc View Source Up(MigrationBuilder) Declaration protected override void Up(MigrationBuilder migrationBuilder) Parameters Type Name Description MigrationBuilder migrationBuilder"
+  },
+  "api/Amadeus.Server.Migrations.UserPermissions.html": {
+    "href": "api/Amadeus.Server.Migrations.UserPermissions.html",
+    "title": "Class UserPermissions | Documentation - Amadeus",
+    "keywords": "Class UserPermissions Inheritance System.Object UserPermissions Namespace : Amadeus.Server.Migrations Assembly : Amadeus.Server.dll Syntax public class UserPermissions : Migration Methods | Improve this Doc View Source BuildTargetModel(ModelBuilder) Declaration protected override void BuildTargetModel(ModelBuilder modelBuilder) Parameters Type Name Description ModelBuilder modelBuilder | Improve this Doc View Source Down(MigrationBuilder) Declaration protected override void Down(MigrationBuilder migrationBuilder) Parameters Type Name Description MigrationBuilder migrationBuilder | Improve this Doc View Source Up(MigrationBuilder) Declaration protected override void Up(MigrationBuilder migrationBuilder) Parameters Type Name Description MigrationBuilder migrationBuilder"
+  },
+  "api/Amadeus.Server.Migrations.widgetModel.html": {
+    "href": "api/Amadeus.Server.Migrations.widgetModel.html",
+    "title": "Class widgetModel | Documentation - Amadeus",
+    "keywords": "Class widgetModel Inheritance System.Object widgetModel Namespace : Amadeus.Server.Migrations Assembly : Amadeus.Server.dll Syntax public class widgetModel : Migration Methods | Improve this Doc View Source BuildTargetModel(ModelBuilder) Declaration protected override void BuildTargetModel(ModelBuilder modelBuilder) Parameters Type Name Description ModelBuilder modelBuilder | Improve this Doc View Source Down(MigrationBuilder) Declaration protected override void Down(MigrationBuilder migrationBuilder) Parameters Type Name Description MigrationBuilder migrationBuilder | Improve this Doc View Source Up(MigrationBuilder) Declaration protected override void Up(MigrationBuilder migrationBuilder) Parameters Type Name Description MigrationBuilder migrationBuilder"
+  },
+  "api/Amadeus.Server.Models.Configuration.CovidConfiguration.html": {
+    "href": "api/Amadeus.Server.Models.Configuration.CovidConfiguration.html",
+    "title": "Class CovidConfiguration | Documentation - Amadeus",
+    "keywords": "Class CovidConfiguration Inheritance System.Object CovidConfiguration Namespace : Amadeus.Server.Models.Configuration Assembly : Amadeus.Server.dll Syntax public class CovidConfiguration : object Properties | Improve this Doc View Source ApiKey Declaration public string ApiKey { get; set; } Property Value Type Description System.String"
+  },
+  "api/Amadeus.Server.Models.Configuration.html": {
+    "href": "api/Amadeus.Server.Models.Configuration.html",
+    "title": "Namespace Amadeus.Server.Models.Configuration | Documentation - Amadeus",
+    "keywords": "Namespace Amadeus.Server.Models.Configuration Classes CovidConfiguration WeatherConfiguration"
+  },
+  "api/Amadeus.Server.Models.Configuration.WeatherConfiguration.html": {
+    "href": "api/Amadeus.Server.Models.Configuration.WeatherConfiguration.html",
+    "title": "Class WeatherConfiguration | Documentation - Amadeus",
+    "keywords": "Class WeatherConfiguration Inheritance System.Object WeatherConfiguration Namespace : Amadeus.Server.Models.Configuration Assembly : Amadeus.Server.dll Syntax public class WeatherConfiguration : object Properties | Improve this Doc View Source ApiKey Declaration public string ApiKey { get; set; } Property Value Type Description System.String"
+  },
+  "api/Amadeus.Server.Models.Convid.CovidData.html": {
+    "href": "api/Amadeus.Server.Models.Convid.CovidData.html",
+    "title": "Class CovidData | Documentation - Amadeus",
+    "keywords": "Class CovidData Inheritance System.Object CovidData Namespace : Amadeus.Server.Models.Convid Assembly : Amadeus.Server.dll Syntax public class CovidData : object Properties | Improve this Doc View Source Code Declaration public string Code { get; set; } Property Value Type Description System.String | Improve this Doc View Source Confirmed Declaration public long Confirmed { get; set; } Property Value Type Description System.Int64 | Improve this Doc View Source Country Declaration public string Country { get; set; } Property Value Type Description System.String | Improve this Doc View Source Critical Declaration public long Critical { get; set; } Property Value Type Description System.Int64 | Improve this Doc View Source Deaths Declaration public long Deaths { get; set; } Property Value Type Description System.Int64 | Improve this Doc View Source Recovered Declaration public long Recovered { get; set; } Property Value Type Description System.Int64"
+  },
+  "api/Amadeus.Server.Models.Convid.CovidTotal.html": {
+    "href": "api/Amadeus.Server.Models.Convid.CovidTotal.html",
+    "title": "Class CovidTotal | Documentation - Amadeus",
+    "keywords": "Class CovidTotal Inheritance System.Object CovidTotal Namespace : Amadeus.Server.Models.Convid Assembly : Amadeus.Server.dll Syntax public class CovidTotal : object Properties | Improve this Doc View Source Confirmed Declaration public long Confirmed { get; set; } Property Value Type Description System.Int64 | Improve this Doc View Source Critical Declaration public long Critical { get; set; } Property Value Type Description System.Int64 | Improve this Doc View Source Deaths Declaration public long Deaths { get; set; } Property Value Type Description System.Int64 | Improve this Doc View Source Recovered Declaration public long Recovered { get; set; } Property Value Type Description System.Int64"
+  },
+  "api/Amadeus.Server.Models.Convid.html": {
+    "href": "api/Amadeus.Server.Models.Convid.html",
+    "title": "Namespace Amadeus.Server.Models.Convid | Documentation - Amadeus",
+    "keywords": "Namespace Amadeus.Server.Models.Convid Classes CovidData CovidTotal"
+  },
+  "api/Amadeus.Server.Models.html": {
+    "href": "api/Amadeus.Server.Models.html",
+    "title": "Namespace Amadeus.Server.Models | Documentation - Amadeus",
+    "keywords": "Namespace Amadeus.Server.Models Classes JwtOption A typed option model for the certificate. JwtToken A container representing the response of a login or token refresh. LoginRequest A login request to retrieve an access and a refresh token. Permissions RegisterRequest A model only used on register requests. User The user of all the dashboard. UserCreationDTO Class used to gather data for the creation of a user. UserModificationDto Class used to gather data for the modification of a user. Widget WidgetCreationDTO WidgetModificationDTO"
+  },
+  "api/Amadeus.Server.Models.JwtOption.html": {
+    "href": "api/Amadeus.Server.Models.JwtOption.html",
+    "title": "Class JwtOption | Documentation - Amadeus",
+    "keywords": "Class JwtOption A typed option model for the certificate. Inheritance System.Object JwtOption Namespace : Amadeus.Server.Models Assembly : Amadeus.Server.dll Syntax public class JwtOption : object Fields | Improve this Doc View Source Path The path to get this option from the root configuration. Declaration public const string Path = null Field Value Type Description System.String Properties | Improve this Doc View Source Issuer The public URL of the issuer (this server). Declaration public Uri Issuer { get; set; } Property Value Type Description Uri | Improve this Doc View Source Secret The secret used to encrypt the jwt. Declaration public string Secret { get; set; } Property Value Type Description System.String"
+  },
+  "api/Amadeus.Server.Models.JwtToken.html": {
+    "href": "api/Amadeus.Server.Models.JwtToken.html",
+    "title": "Class JwtToken | Documentation - Amadeus",
+    "keywords": "Class JwtToken A container representing the response of a login or token refresh. Inheritance System.Object JwtToken Namespace : Amadeus.Server.Models Assembly : Amadeus.Server.dll Syntax public class JwtToken : object Properties | Improve this Doc View Source AccessToken The access token used to authorize requests. Declaration public string AccessToken { get; set; } Property Value Type Description System.String | Improve this Doc View Source ExpireIn The date when the access token will expire. After this date, the refresh token should be used to retrieve a new token. Declaration public TimeSpan ExpireIn { get; set; } Property Value Type Description TimeSpan | Improve this Doc View Source RefreshToken The refresh token used to retrieve a new access/refresh token when the access token has expired. Declaration public string RefreshToken { get; set; } Property Value Type Description System.String | Improve this Doc View Source TokenType The type of this token (always a Bearer). Declaration public string TokenType { get; } Property Value Type Description System.String"
+  },
+  "api/Amadeus.Server.Models.LoginRequest.html": {
+    "href": "api/Amadeus.Server.Models.LoginRequest.html",
+    "title": "Class LoginRequest | Documentation - Amadeus",
+    "keywords": "Class LoginRequest A login request to retrieve an access and a refresh token. Inheritance System.Object LoginRequest Namespace : Amadeus.Server.Models Assembly : Amadeus.Server.dll Syntax public class LoginRequest : object Properties | Improve this Doc View Source Password The password of the user. Declaration public string Password { get; set; } Property Value Type Description System.String | Improve this Doc View Source Username The username of the user to log. Declaration public string Username { get; set; } Property Value Type Description System.String"
+  },
+  "api/Amadeus.Server.Models.Permissions.html": {
+    "href": "api/Amadeus.Server.Models.Permissions.html",
+    "title": "Class Permissions | Documentation - Amadeus",
+    "keywords": "Class Permissions Inheritance System.Object Permissions Namespace : Amadeus.Server.Models Assembly : Amadeus.Server.dll Syntax public static class Permissions : object Fields | Improve this Doc View Source Admin Declaration public const string Admin = null Field Value Type Description System.String | Improve this Doc View Source Overall Declaration public const string Overall = null Field Value Type Description System.String"
+  },
+  "api/Amadeus.Server.Models.RegisterRequest.html": {
+    "href": "api/Amadeus.Server.Models.RegisterRequest.html",
+    "title": "Class RegisterRequest | Documentation - Amadeus",
+    "keywords": "Class RegisterRequest A model only used on register requests. Inheritance System.Object RegisterRequest Namespace : Amadeus.Server.Models Assembly : Amadeus.Server.dll Syntax public class RegisterRequest : object Properties | Improve this Doc View Source Email The user email address. Declaration public string Email { get; set; } Property Value Type Description System.String | Improve this Doc View Source Password The user's password. Declaration public string Password { get; set; } Property Value Type Description System.String | Improve this Doc View Source Username The user's username. Declaration public string Username { get; set; } Property Value Type Description System.String Methods | Improve this Doc View Source ToUser() Convert this register request to a new User class. Declaration public User ToUser() Returns Type Description User A user representing this request."
+  },
+  "api/Amadeus.Server.Models.User.html": {
+    "href": "api/Amadeus.Server.Models.User.html",
+    "title": "Class User | Documentation - Amadeus",
+    "keywords": "Class User The user of all the dashboard. Inheritance System.Object User Namespace : Amadeus.Server.Models Assembly : Amadeus.Server.dll Syntax public class User : object Properties | Improve this Doc View Source AnilistID Declaration public long AnilistID { get; set; } Property Value Type Description System.Int64 | Improve this Doc View Source CreatedAt The creation time of the user. Declaration public DateTime CreatedAt { get; set; } Property Value Type Description DateTime | Improve this Doc View Source Email The user's email. Declaration public string Email { get; set; } Property Value Type Description System.String | Improve this Doc View Source ExternalTokens The external tokens on other services. Declaration public Dictionary<string, JwtToken> ExternalTokens { get; set; } Property Value Type Description Dictionary < System.String , JwtToken > | Improve this Doc View Source Id The primary key for the db. Declaration public int Id { get; set; } Property Value Type Description System.Int32 | Improve this Doc View Source Password The user's password. Declaration public string Password { get; set; } Property Value Type Description System.String | Improve this Doc View Source Permissions The list of permissions of the user. This is one of Overall or Admin . Declaration public string[] Permissions { get; set; } Property Value Type Description System.String [] | Improve this Doc View Source Username User's username. Declaration public string Username { get; set; } Property Value Type Description System.String | Improve this Doc View Source Verified True if the user is verified. Declaration public bool Verified { get; set; } Property Value Type Description System.Boolean"
+  },
+  "api/Amadeus.Server.Models.UserCreationDTO.html": {
+    "href": "api/Amadeus.Server.Models.UserCreationDTO.html",
+    "title": "Class UserCreationDTO | Documentation - Amadeus",
+    "keywords": "Class UserCreationDTO Class used to gather data for the creation of a user. Inheritance System.Object UserCreationDTO Namespace : Amadeus.Server.Models Assembly : Amadeus.Server.dll Syntax public class UserCreationDTO : object Properties | Improve this Doc View Source Email The user's email. Declaration public string Email { get; set; } Property Value Type Description System.String | Improve this Doc View Source Password The user's password. Declaration public string Password { get; set; } Property Value Type Description System.String | Improve this Doc View Source Username The name to use as a display. Declaration public string Username { get; set; } Property Value Type Description System.String"
+  },
+  "api/Amadeus.Server.Models.UserModificationDto.html": {
+    "href": "api/Amadeus.Server.Models.UserModificationDto.html",
+    "title": "Class UserModificationDto | Documentation - Amadeus",
+    "keywords": "Class UserModificationDto Class used to gather data for the modification of a user. Inheritance System.Object UserModificationDto Namespace : Amadeus.Server.Models Assembly : Amadeus.Server.dll Syntax public class UserModificationDto : object Properties | Improve this Doc View Source Email The user's email. Declaration public string Email { get; set; } Property Value Type Description System.String | Improve this Doc View Source Password The user's password. Declaration public string Password { get; set; } Property Value Type Description System.String | Improve this Doc View Source Username The name to use as a display. Declaration public string Username { get; set; } Property Value Type Description System.String"
+  },
+  "api/Amadeus.Server.Models.Weather.html": {
+    "href": "api/Amadeus.Server.Models.Weather.html",
+    "title": "Namespace Amadeus.Server.Models.Weather | Documentation - Amadeus",
+    "keywords": "Namespace Amadeus.Server.Models.Weather Classes WeatherData"
+  },
+  "api/Amadeus.Server.Models.Weather.WeatherData.html": {
+    "href": "api/Amadeus.Server.Models.Weather.WeatherData.html",
+    "title": "Class WeatherData | Documentation - Amadeus",
+    "keywords": "Class WeatherData Inheritance System.Object WeatherData Namespace : Amadeus.Server.Models.Weather Assembly : Amadeus.Server.dll Syntax public class WeatherData : object Properties | Improve this Doc View Source Celsius The temperature in Celsius. Declaration public double Celsius { get; set; } Property Value Type Description System.Double | Improve this Doc View Source Icon The icon for the Weather Label. Declaration public string Icon { get; set; } Property Value Type Description System.String | Improve this Doc View Source Weather The actual weather label. Declaration public string Weather { get; set; } Property Value Type Description System.String"
+  },
+  "api/Amadeus.Server.Models.Widget.html": {
+    "href": "api/Amadeus.Server.Models.Widget.html",
+    "title": "Class Widget | Documentation - Amadeus",
+    "keywords": "Class Widget Inheritance System.Object Widget Namespace : Amadeus.Server.Models Assembly : Amadeus.Server.dll Syntax public class Widget : object Properties | Improve this Doc View Source Id Declaration public int Id { get; set; } Property Value Type Description System.Int32 | Improve this Doc View Source Order Declaration public int Order { get; set; } Property Value Type Description System.Int32 | Improve this Doc View Source Parameters Declaration public Dictionary<string, object> Parameters { get; set; } Property Value Type Description Dictionary < System.String , System.Object > | Improve this Doc View Source Type Declaration public string Type { get; set; } Property Value Type Description System.String | Improve this Doc View Source UserId Declaration public int UserId { get; set; } Property Value Type Description System.Int32"
+  },
+  "api/Amadeus.Server.Models.WidgetCreationDTO.html": {
+    "href": "api/Amadeus.Server.Models.WidgetCreationDTO.html",
+    "title": "Class WidgetCreationDTO | Documentation - Amadeus",
+    "keywords": "Class WidgetCreationDTO Inheritance System.Object WidgetCreationDTO Namespace : Amadeus.Server.Models Assembly : Amadeus.Server.dll Syntax public class WidgetCreationDTO : object Properties | Improve this Doc View Source Parameters Declaration public Dictionary<string, object> Parameters { get; set; } Property Value Type Description Dictionary < System.String , System.Object > | Improve this Doc View Source Type Declaration public string Type { get; set; } Property Value Type Description System.String"
+  },
+  "api/Amadeus.Server.Models.WidgetModificationDTO.html": {
+    "href": "api/Amadeus.Server.Models.WidgetModificationDTO.html",
+    "title": "Class WidgetModificationDTO | Documentation - Amadeus",
+    "keywords": "Class WidgetModificationDTO Inheritance System.Object WidgetModificationDTO Namespace : Amadeus.Server.Models Assembly : Amadeus.Server.dll Syntax public class WidgetModificationDTO : object Properties | Improve this Doc View Source Parameters Declaration public Dictionary<string, object> Parameters { get; set; } Property Value Type Description Dictionary < System.String , System.Object > | Improve this Doc View Source Type Declaration public string Type { get; set; } Property Value Type Description System.String"
+  },
+  "api/Amadeus.Server.Program.html": {
+    "href": "api/Amadeus.Server.Program.html",
+    "title": "Class Program | Documentation - Amadeus",
+    "keywords": "Class Program Inheritance System.Object Program Namespace : Amadeus.Server Assembly : Amadeus.Server.dll Syntax public class Program : object Methods | Improve this Doc View Source CreateHostBuilder(String[]) Declaration public static IHostBuilder CreateHostBuilder(string[] args) Parameters Type Name Description System.String [] args Returns Type Description IHostBuilder | Improve this Doc View Source Main(String[]) Declaration public static void Main(string[] args) Parameters Type Name Description System.String [] args"
+  },
+  "api/Amadeus.Server.Startup.html": {
+    "href": "api/Amadeus.Server.Startup.html",
+    "title": "Class Startup | Documentation - Amadeus",
+    "keywords": "Class Startup Inheritance System.Object Startup Namespace : Amadeus.Server Assembly : Amadeus.Server.dll Syntax public class Startup : object Constructors | Improve this Doc View Source Startup(IConfiguration) Declaration public Startup(IConfiguration configuration) Parameters Type Name Description IConfiguration configuration Properties | Improve this Doc View Source Configuration Declaration public IConfiguration Configuration { get; } Property Value Type Description IConfiguration Methods | Improve this Doc View Source Configure(IApplicationBuilder, IWebHostEnvironment, IServiceProvider) Declaration public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider provider) Parameters Type Name Description IApplicationBuilder app IWebHostEnvironment env IServiceProvider provider | Improve this Doc View Source ConfigureServices(IServiceCollection) Declaration public void ConfigureServices(IServiceCollection services) Parameters Type Name Description IServiceCollection services"
+  },
+  "api/Amadeus.Server.Views.AniList.AniListView.html": {
+    "href": "api/Amadeus.Server.Views.AniList.AniListView.html",
+    "title": "Class AniListView | Documentation - Amadeus",
+    "keywords": "Class AniListView Inheritance System.Object AniListView Namespace : Amadeus.Server.Views.AniList Assembly : Amadeus.Server.dll Syntax public class AniListView : ControllerBase Constructors | Improve this Doc View Source AniListView(AniListService, IRepository<User>) Declaration public AniListView(AniListService aniList, IRepository<User> users) Parameters Type Name Description AniListService aniList IRepository < User > users Methods | Improve this Doc View Source GetAnime(String) Declaration public Task<ActionResult<Anime>> GetAnime(string name) Parameters Type Name Description System.String name Returns Type Description Task < ActionResult < Anime >> | Improve this Doc View Source GetList(String) Declaration public Task<ActionResult<Anime[]>> GetList(string type) Parameters Type Name Description System.String type Returns Type Description Task < ActionResult < Anime []>> | Improve this Doc View Source GetWatchList(String) Declaration public Task<ActionResult<Anime[]>> GetWatchList(string user = null) Parameters Type Name Description System.String user Returns Type Description Task < ActionResult < Anime []>>"
+  },
+  "api/Amadeus.Server.Views.AniList.html": {
+    "href": "api/Amadeus.Server.Views.AniList.html",
+    "title": "Namespace Amadeus.Server.Views.AniList | Documentation - Amadeus",
+    "keywords": "Namespace Amadeus.Server.Views.AniList Classes AniListView"
+  },
+  "api/Amadeus.Server.Views.Auth.AuthView.html": {
+    "href": "api/Amadeus.Server.Views.Auth.AuthView.html",
+    "title": "Class AuthView | Documentation - Amadeus",
+    "keywords": "Class AuthView Sign in, Sign up or refresh tokens. Inheritance System.Object AuthView Namespace : Amadeus.Server.Views.Auth Assembly : Amadeus.Server.dll Syntax public class AuthView : ControllerBase Constructors | Improve this Doc View Source AuthView(IRepository<User>, TokenController) Create a new AuthView . Declaration public AuthView(IRepository<User> users, TokenController token) Parameters Type Name Description IRepository < User > users The repository used to check if the user exists. TokenController token The token generator. Methods | Improve this Doc View Source AniListLink(String, AniListService) Declaration public Task<ActionResult<User>> AniListLink(string code, AniListService anilist) Parameters Type Name Description System.String code AniListService anilist Returns Type Description Task < ActionResult < User >> | Improve this Doc View Source AniListLogin(String, AniListService) Declaration public Task<ActionResult<JwtToken>> AniListLogin(string code, AniListService anilist) Parameters Type Name Description System.String code AniListService anilist Returns Type Description Task < ActionResult < JwtToken >> | Improve this Doc View Source AniListLogin(Uri, IOptions<AniListOptions>) Declaration public IActionResult AniListLogin(Uri redirectUrl, IOptions<AniListOptions> anilist) Parameters Type Name Description Uri redirectUrl IOptions < AniListOptions > anilist Returns Type Description IActionResult | Improve this Doc View Source GetMe() Declaration public Task<ActionResult<User>> GetMe() Returns Type Description Task < ActionResult < User >> | Improve this Doc View Source Login(LoginRequest) Login. Declaration public Task<ActionResult<JwtToken>> Login(LoginRequest request) Parameters Type Name Description LoginRequest request The body of the request. Returns Type Description Task < ActionResult < JwtToken >> A new access and a refresh token. Remarks Login as a user and retrieve an access and a refresh token. | Improve this Doc View Source Refresh(String) Refresh a token. Declaration public Task<ActionResult<JwtToken>> Refresh(string token) Parameters Type Name Description System.String token A valid refresh token. Returns Type Description Task < ActionResult < JwtToken >> A new access and refresh token. Remarks Refresh an access token using the given refresh token. A new access and refresh token are generated. The old refresh token should not be used anymore. | Improve this Doc View Source Register(RegisterRequest) Register. Declaration public Task<ActionResult<JwtToken>> Register(RegisterRequest request) Parameters Type Name Description RegisterRequest request The body of the request. Returns Type Description Task < ActionResult < JwtToken >> A new access and a refresh token. Remarks Register a new user and get a new access/refresh token for this new user."
+  },
+  "api/Amadeus.Server.Views.Auth.html": {
+    "href": "api/Amadeus.Server.Views.Auth.html",
+    "title": "Namespace Amadeus.Server.Views.Auth | Documentation - Amadeus",
+    "keywords": "Namespace Amadeus.Server.Views.Auth Classes AuthView Sign in, Sign up or refresh tokens."
+  },
+  "api/Amadeus.Server.Views.Core.CoreView.html": {
+    "href": "api/Amadeus.Server.Views.Core.CoreView.html",
+    "title": "Class CoreView | Documentation - Amadeus",
+    "keywords": "Class CoreView Inheritance System.Object CoreView Namespace : Amadeus.Server.Views.Core Assembly : Amadeus.Server.dll Syntax public class CoreView : ControllerBase Constructors | Improve this Doc View Source CoreView(AboutController) ctor. Declaration public CoreView(AboutController aboutController) Parameters Type Name Description AboutController aboutController The controller that gives the about.json. Methods | Improve this Doc View Source GetAbout() deliver the about.json. Declaration public object GetAbout() Returns Type Description System.Object The json."
+  },
+  "api/Amadeus.Server.Views.Core.html": {
+    "href": "api/Amadeus.Server.Views.Core.html",
+    "title": "Namespace Amadeus.Server.Views.Core | Documentation - Amadeus",
+    "keywords": "Namespace Amadeus.Server.Views.Core Classes CoreView"
+  },
+  "api/Amadeus.Server.Views.Covid.CovidView.html": {
+    "href": "api/Amadeus.Server.Views.Covid.CovidView.html",
+    "title": "Class CovidView | Documentation - Amadeus",
+    "keywords": "Class CovidView Inheritance System.Object CovidView Namespace : Amadeus.Server.Views.Covid Assembly : Amadeus.Server.dll Syntax public class CovidView : ControllerBase Constructors | Improve this Doc View Source CovidView(CovidController) Declaration public CovidView(CovidController covidController) Parameters Type Name Description CovidController covidController Methods | Improve this Doc View Source GetCovidInfoCity(String) Declaration public Task<ActionResult<CovidData>> GetCovidInfoCity(string countryCode) Parameters Type Name Description System.String countryCode Returns Type Description Task < ActionResult < CovidData >> | Improve this Doc View Source GetCovidInfoTotal() Declaration public Task<ActionResult<CovidTotal>> GetCovidInfoTotal() Returns Type Description Task < ActionResult < CovidTotal >>"
+  },
+  "api/Amadeus.Server.Views.Covid.html": {
+    "href": "api/Amadeus.Server.Views.Covid.html",
+    "title": "Namespace Amadeus.Server.Views.Covid | Documentation - Amadeus",
+    "keywords": "Namespace Amadeus.Server.Views.Covid Classes CovidView"
+  },
+  "api/Amadeus.Server.Views.html": {
+    "href": "api/Amadeus.Server.Views.html",
+    "title": "Namespace Amadeus.Server.Views | Documentation - Amadeus",
+    "keywords": "Namespace Amadeus.Server.Views Classes UserView User view that receives http requests."
+  },
+  "api/Amadeus.Server.Views.Secure.html": {
+    "href": "api/Amadeus.Server.Views.Secure.html",
+    "title": "Namespace Amadeus.Server.Views.Secure | Documentation - Amadeus",
+    "keywords": "Namespace Amadeus.Server.Views.Secure Classes SecureView"
+  },
+  "api/Amadeus.Server.Views.Secure.SecureView.html": {
+    "href": "api/Amadeus.Server.Views.Secure.SecureView.html",
+    "title": "Class SecureView | Documentation - Amadeus",
+    "keywords": "Class SecureView Inheritance System.Object SecureView Namespace : Amadeus.Server.Views.Secure Assembly : Amadeus.Server.dll Syntax public class SecureView : ControllerBase Methods | Improve this Doc View Source idk() Declaration public string idk() Returns Type Description System.String"
+  },
+  "api/Amadeus.Server.Views.UserView.html": {
+    "href": "api/Amadeus.Server.Views.UserView.html",
+    "title": "Class UserView | Documentation - Amadeus",
+    "keywords": "Class UserView User view that receives http requests. Inheritance System.Object UserView Namespace : Amadeus.Server.Views Assembly : Amadeus.Server.dll Syntax public class UserView : ControllerBase Constructors | Improve this Doc View Source UserView(IRepository<User>) Create a new UserView . Declaration public UserView(IRepository<User> userRepository) Parameters Type Name Description IRepository < User > userRepository Controller for the business logic. Methods | Improve this Doc View Source DeleteUser(Int32) Delete a specific user. Declaration public Task<ActionResult<User>> DeleteUser(int uid) Parameters Type Name Description System.Int32 uid The id of the specific user. Returns Type Description Task < ActionResult < User >> The infos of the deleted user. | Improve this Doc View Source GetAll() Get all users. Declaration public Task<ActionResult<IList<User>>> GetAll() Returns Type Description Task < ActionResult < IList < User >>> All the users. Remarks It gets all the users. | Improve this Doc View Source GetUser(Int32) Get a specific user. Declaration public Task<ActionResult<User>> GetUser(int uid) Parameters Type Name Description System.Int32 uid Uid of the specific user. Returns Type Description Task < ActionResult < User >> All infos of the specific user. | Improve this Doc View Source ModifyUser(Int32, UserModificationDto) Modify a specific user. Declaration public Task<ActionResult<User>> ModifyUser(int uid, UserModificationDto userDto) Parameters Type Name Description System.Int32 uid The id of the user to modify. UserModificationDto userDto Returns Type Description Task < ActionResult < User >> The specific user with updated infos."
+  },
+  "api/Amadeus.Server.Views.Weather.html": {
+    "href": "api/Amadeus.Server.Views.Weather.html",
+    "title": "Namespace Amadeus.Server.Views.Weather | Documentation - Amadeus",
+    "keywords": "Namespace Amadeus.Server.Views.Weather Classes WeatherView"
+  },
+  "api/Amadeus.Server.Views.Weather.WeatherView.html": {
+    "href": "api/Amadeus.Server.Views.Weather.WeatherView.html",
+    "title": "Class WeatherView | Documentation - Amadeus",
+    "keywords": "Class WeatherView Inheritance System.Object WeatherView Namespace : Amadeus.Server.Views.Weather Assembly : Amadeus.Server.dll Syntax public class WeatherView : ControllerBase Constructors | Improve this Doc View Source WeatherView(WeatherController) ctor. Declaration public WeatherView(WeatherController weatherController) Parameters Type Name Description WeatherController weatherController The weather controller to get the weather. Methods | Improve this Doc View Source GetCityForecast(String, Int32) Get the forecast for a given city. Declaration public Task<ActionResult<IList<WeatherData>>> GetCityForecast(string city, int days) Parameters Type Name Description System.String city The city to get the weather. System.Int32 days The number of days to get the forecast. Returns Type Description Task < ActionResult < IList < WeatherData >>> All the weather infos. | Improve this Doc View Source GetCityWeather(String) Get the weather for a given city. Declaration public Task<ActionResult<WeatherData>> GetCityWeather(string city) Parameters Type Name Description System.String city The city to get the weather. Returns Type Description Task < ActionResult < WeatherData >> All the weather infos."
+  },
+  "api/Amadeus.Server.Views.Widget.html": {
+    "href": "api/Amadeus.Server.Views.Widget.html",
+    "title": "Namespace Amadeus.Server.Views.Widget | Documentation - Amadeus",
+    "keywords": "Namespace Amadeus.Server.Views.Widget Classes WidgetView"
+  },
+  "api/Amadeus.Server.Views.Widget.WidgetView.html": {
+    "href": "api/Amadeus.Server.Views.Widget.WidgetView.html",
+    "title": "Class WidgetView | Documentation - Amadeus",
+    "keywords": "Class WidgetView Inheritance System.Object WidgetView Namespace : Amadeus.Server.Views.Widget Assembly : Amadeus.Server.dll Syntax public class WidgetView : ControllerBase Constructors | Improve this Doc View Source WidgetView(IRepository<Widget>, ServerDB) Declaration public WidgetView(IRepository<Widget> widgetRepository, ServerDB db) Parameters Type Name Description IRepository < Widget > widgetRepository ServerDB db Methods | Improve this Doc View Source CreateWidget(WidgetCreationDTO) Create user widgets. Declaration public Task<ActionResult<Widget>> CreateWidget(WidgetCreationDTO widgetCreationDto) Parameters Type Name Description WidgetCreationDTO widgetCreationDto Returns Type Description Task < ActionResult < Widget >> The created widget. Remarks Create a user registered widget with its params. | Improve this Doc View Source DeleteWidget(Int32) Delete a user widget. Declaration public Task<ActionResult<Widget>> DeleteWidget(int uid) Parameters Type Name Description System.Int32 uid Returns Type Description Task < ActionResult < Widget >> The deleted widget. Remarks Delete a user registered widget. | Improve this Doc View Source GetWidgets() Get user widgets. Declaration public Task<ActionResult<IList<Widget>>> GetWidgets() Returns Type Description Task < ActionResult < IList < Widget >>> A list of all the widgets. Remarks Get all the users registered widgets with theirs params. | Improve this Doc View Source ModifyWidget(Int32, WidgetModificationDTO) Delete a user widget. Declaration public Task<ActionResult<Widget>> ModifyWidget(int uid, WidgetModificationDTO widgetModificationDto) Parameters Type Name Description System.Int32 uid WidgetModificationDTO widgetModificationDto Returns Type Description Task < ActionResult < Widget >> The deleted widget. Remarks Delete a user registered widget. | Improve this Doc View Source Reorder(Int32, Int32) Declaration public Task<IActionResult> Reorder(int from, int to) Parameters Type Name Description System.Int32 from System.Int32 to Returns Type Description Task < IActionResult >"
+  },
+  "index.html": {
+    "href": "index.html",
+    "title": "Welcome to Amadeus | Documentation - Amadeus",
+    "keywords": "Welcome to Amadeus"
+  },
+  "start/install.html": {
+    "href": "start/install.html",
+    "title": "Installation steps will be here | Documentation - Amadeus",
+    "keywords": "Installation steps will be here"
+  }
+}
