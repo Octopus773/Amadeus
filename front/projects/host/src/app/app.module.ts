@@ -27,6 +27,10 @@ import { MatExpansionModule } from "@angular/material/expansion";
 import { CovidComponent } from "./components/covid/covid.component";
 import { OauthCodeComponent } from "./pages/oauth-code/oauth-code.component";
 import { CookieService } from "ngx-cookie-service";
+import { WatchlistComponent } from "./components/watchlist/watchlist.component";
+import { MatListModule } from "@angular/material/list";
+import { AnimeComponent } from "./components/anime/anime.component";
+import { DragDropModule } from "@angular/cdk/drag-drop";
 
 @NgModule({
 	declarations: [
@@ -38,7 +42,9 @@ import { CookieService } from "ngx-cookie-service";
 		DashboardWidgetDirective,
 		ForecastComponent,
 		CovidComponent,
-		OauthCodeComponent
+		OauthCodeComponent,
+		WatchlistComponent,
+		AnimeComponent
 	],
 	imports: [
 		BrowserModule,
@@ -55,7 +61,9 @@ import { CookieService } from "ngx-cookie-service";
 		MatFormFieldModule,
 		MatInputModule,
 		MatSelectModule,
-		MatExpansionModule
+		MatExpansionModule,
+		MatListModule,
+		DragDropModule
 	],
 	providers: [
 		CookieService,

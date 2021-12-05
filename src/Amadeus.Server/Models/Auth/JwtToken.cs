@@ -13,18 +13,21 @@ namespace Amadeus.Server.Models
 		/// The type of this token (always a Bearer).
 		/// </summary>
 		[JsonProperty("token_type")]
+		[JsonPropertyName("token_type")]
 		public string TokenType => "Bearer";
 
 		/// <summary>
 		/// The access token used to authorize requests.
 		/// </summary>
 		[JsonProperty("access_token")]
+		[JsonPropertyName("access_token")]
 		public string AccessToken { get; set; }
 
 		/// <summary>
 		/// The refresh token used to retrieve a new access/refresh token when the access token has expired.
 		/// </summary>
 		[JsonProperty("refresh_token")]
+		[JsonPropertyName("refresh_token")]
 		public string RefreshToken { get; set; }
 
 		/// <summary>
@@ -32,6 +35,7 @@ namespace Amadeus.Server.Models
 		/// a new token.
 		/// </summary>
 		[JsonProperty("expire_in")]
+		[JsonPropertyName("expire_in")]
 		public TimeSpan ExpireIn { get; set; }
 	}
 }

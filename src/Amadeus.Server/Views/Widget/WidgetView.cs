@@ -4,11 +4,13 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Amadeus.Server.Controllers;
+using Amadeus.Server.Data;
 using Amadeus.Server.Exceptions;
 using Amadeus.Server.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Amadeus.Server.Views.Widget
 {
@@ -18,10 +20,12 @@ namespace Amadeus.Server.Views.Widget
 	public class WidgetView : ControllerBase
 	{
 		private readonly IRepository<Models.Widget> _widgetRepository;
+		private readonly ServerDB _db;
 
-		public WidgetView(IRepository<Models.Widget> widgetRepository)
+		public WidgetView(IRepository<Models.Widget> widgetRepository, ServerDB db)
 		{
 			_widgetRepository = widgetRepository;
+			_db = db;
 		}
 
 		/// <summary>
@@ -38,7 +42,8 @@ namespace Amadeus.Server.Views.Widget
 		{
 			if (!int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out int userId))
 				return BadRequest("Invalid user credential");
-			return Ok(await _widgetRepository.GetWhere(w => w.UserId == userId));
+			IList<Models.Widget> ret = await _widgetRepository.GetWhere(w => w.UserId == userId);
+			return Ok(ret);
 		}
 
 		/// <summary>
@@ -62,7 +67,12 @@ namespace Amadeus.Server.Views.Widget
 			{
 				Parameters = widgetCreationDto.Parameters,
 				Type = widgetCreationDto.Type,
-				UserId = userId
+				UserId = userId,
+				Order = _db.Widgets.Where(x => x.UserId == userId)
+					.Select(x => x.Order)
+					.AsEnumerable()
+					.DefaultIfEmpty(0)
+					.Max() + 1
 			};
 			return await _widgetRepository.Create(widget);
 		}
@@ -134,6 +144,28 @@ namespace Amadeus.Server.Views.Widget
 			{
 				return NotFound(e.Message);
 			}
+		}
+
+		[HttpPost("reorder")]
+		[ProducesResponseType(StatusCodes.Status200OK)]
+		[Authorize]
+		public async Task<IActionResult> Reorder(int from, int to)
+		{
+			if (!int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out int userId))
+				return BadRequest("Invalid user credential");
+			IList<Models.Widget> widgets = await _db.Widgets.Where(x => x.UserId == userId).ToListAsync();
+			Models.Widget modified = widgets.First(x => x.Order == from);
+			foreach (Models.Widget widget in widgets)
+			{
+				if ((from < widget.Order && widget.Order < to) || (from < to && to == widget.Order))
+					widget.Order--;
+				if ((to < widget.Order && widget.Order < from) || (from > to && to == widget.Order))
+					widget.Order++;
+			}
+
+			modified.Order = to;
+			await _db.SaveChangesAsync();
+			return Ok();
 		}
 	}
 }

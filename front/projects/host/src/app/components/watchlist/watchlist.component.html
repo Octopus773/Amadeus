@@ -1,0 +1,30 @@
+<mat-card-title>Watchlist</mat-card-title>
+<mat-card-content>
+	<mat-form-field appearance="fill">
+		<mat-label>User</mat-label>
+		<input matInput placeholder="Nantes" [(ngModel)]="widget.parameters['user']" (change)="updateWidget()">
+	</mat-form-field>
+	<mat-form-field appearance="fill">
+		<mat-label>Title Display</mat-label>
+		<mat-select [(value)]="widget.parameters['title']" (valueChange)="updateWidget()">
+			<mat-option value="english">English</mat-option>
+			<mat-option value="native">Native</mat-option>
+			<mat-option value="romaji">Romaji</mat-option>
+		</mat-select>
+	</mat-form-field>
+
+	<div style="max-height: 250px; overflow-y: scroll;">
+		<mat-accordion>
+			<mat-expansion-panel *ngFor="let anime of info">
+				<mat-expansion-panel-header>
+					<mat-panel-title>
+						{{$any(anime.title)[widget.parameters["title"] ?? "english"]}}
+					</mat-panel-title>
+				</mat-expansion-panel-header>
+				<div style="display: flex; width: 100%; justify-content: center;">
+					<img [src]="anime.image" />
+				</div>
+			</mat-expansion-panel>
+		</mat-accordion>
+	</div>
+</mat-card-content>

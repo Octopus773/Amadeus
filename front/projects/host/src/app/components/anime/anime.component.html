@@ -1,0 +1,29 @@
+<mat-card-title>Anime</mat-card-title>
+<mat-card-header>
+	<mat-form-field appearance="fill">
+		<mat-label>Query</mat-label>
+		<input matInput placeholder="One Piece" [(ngModel)]="widget.parameters['query']" (change)="updateWidget()">
+	</mat-form-field>
+	<mat-form-field appearance="fill">
+		<mat-label>Title Display</mat-label>
+		<mat-select [(value)]="widget.parameters['title']" (valueChange)="updateWidget()">
+			<mat-option value="english">English</mat-option>
+			<mat-option value="native">Native</mat-option>
+			<mat-option value="romaji">Romaji</mat-option>
+		</mat-select>
+	</mat-form-field>
+</mat-card-header>
+
+<ng-container *ngIf="info !== null; else noInfo">
+	<mat-card-subtitle>{{$any(info.title)[widget.parameters["title"] ?? "english"]}}</mat-card-subtitle>
+	<img mat-card-image [src]="info.image" />
+	<mat-card-content>
+		{{info.description}}
+	</mat-card-content>
+</ng-container>
+
+<ng-template #noInfo>
+	<mat-card-content>
+		Start searching for an anime...
+	</mat-card-content>
+</ng-template>
