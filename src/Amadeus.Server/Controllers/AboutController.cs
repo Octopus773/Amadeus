@@ -11,13 +11,13 @@ namespace Amadeus.Server.Controllers
 		/// Generate the current about.json.
 		/// </summary>
 		/// <returns>The C# object that represents the about.json.</returns>
-		public object GetCurrentAboutJson()
+		public object GetCurrentAboutJson(string address)
 		{
 			return new
 			{
 				client = new
 				{
-					host = Environment.GetEnvironmentVariable("AMADEUS_HOST") ?? UtilsController.GetLocalIpAddress()
+					host = address
 				},
 				server = new
 				{
@@ -41,18 +41,11 @@ namespace Amadeus.Server.Controllers
 											type = "string"
 										}
 									}
-								}
-							}
-						},
-						new
-						{
-							name = "forecast",
-							widgets = new[]
-							{
+								},
 								new
 								{
-									name = "city_forecast",
-									description = "Displaying the list of the next n days of weather for a city",
+									name = "forecast",
+									description = "Display temperature & weather for the next 1 to 3 days for a city",
 									@params = new[]
 									{
 										new
@@ -62,11 +55,92 @@ namespace Amadeus.Server.Controllers
 										},
 										new
 										{
-											name = "days in the future",
+											name = "days",
 											type = "integer"
 										}
 									}
 								}
+							}
+						},
+						new
+						{
+							name = "covid",
+							widgets = new[]
+							{
+								new
+								{
+									name = "covid_information",
+									description = "Displaying the list number of confirmed, critical, death and recovered cases of covid in one country or globally.",
+									@params = new[]
+									{
+										new
+										{
+											name = "country_code",
+											type = "string"
+										}
+									}
+								}
+							}
+						},
+						new
+						{
+							name = "anilist",
+							widgets = new[]
+							{
+								new
+								{
+									name = "watchlist",
+									description = "Displaying the watchlist of the currently authenticated user or any other user by ID or name.",
+									@params = new[]
+									{
+										new
+										{
+											name = "user",
+											type = "string"
+										},
+										new
+										{
+											name = "title",
+											type = "string"
+										}
+									}
+								},
+								new
+								{
+									name = "anime_description",
+									description = "Search for an anime and display information about this show.",
+									@params = new[]
+									{
+										new
+										{
+											name = "query",
+											type = "string"
+										},
+										new
+										{
+											name = "title",
+											type = "string"
+										}
+									}
+								},
+								new
+								{
+									name = "anime_trends",
+									description = "Display a list of show trending now.",
+									@params = new[]
+									{
+										new
+										{
+											name = "type",
+											type = "string"
+										},
+										new
+										{
+											name = "title",
+											type = "string"
+										}
+									}
+								},
 							}
 						}
 					}

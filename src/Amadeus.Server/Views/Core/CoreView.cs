@@ -26,7 +26,7 @@ namespace Amadeus.Server.Views.Core
 		[HttpGet("about.json")]
 		public object GetAbout()
 		{
-			return _aboutController.GetCurrentAboutJson();
+			return _aboutController.GetCurrentAboutJson(HttpContext.Connection.RemoteIpAddress?.ToString() ?? "???");
 		}
 	}
 }
