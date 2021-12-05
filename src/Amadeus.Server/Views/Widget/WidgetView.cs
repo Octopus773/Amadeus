@@ -154,14 +154,16 @@ namespace Amadeus.Server.Views.Widget
 			if (!int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out int userId))
 				return BadRequest("Invalid user credential");
 			IList<Models.Widget> widgets = await _db.Widgets.Where(x => x.UserId == userId).ToListAsync();
-			widgets.First(x => x.Order == from).Order = to;
+			Models.Widget modified = widgets.First(x => x.Order == from);
 			foreach (Models.Widget widget in widgets)
 			{
-				if (from < widget.Order && widget.Order < to)
+				if ((from < widget.Order && widget.Order < to) || (from < to && to == widget.Order))
 					widget.Order--;
-				if (to < widget.Order && widget.Order < from)
+				if ((to < widget.Order && widget.Order < from) || (from > to && to == widget.Order))
 					widget.Order++;
 			}
+
+			modified.Order = to;
 			await _db.SaveChangesAsync();
 			return Ok();
 		}
