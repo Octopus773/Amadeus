@@ -1,17 +1,18 @@
 import { Component } from "@angular/core";
 import { WidgetComponent } from "../../misc/widget.component";
+import { environment } from "../../../environments/environment";
 import { HttpClient } from "@angular/common/http";
 import { WidgetsService } from "../../services/widgets.service";
-import { environment } from "../../../environments/environment";
+import { Anime } from "../../models/anime";
 
 @Component({
-	selector: "host-forecast",
-	templateUrl: "./forecast.component.html",
-	styleUrls: ["./forecast.component.scss"]
+	selector: "host-trends",
+	templateUrl: "./trends.component.html",
+	styleUrls: ["./trends.component.scss"]
 })
-export class ForecastComponent extends WidgetComponent
+export class TrendsComponent extends WidgetComponent
 {
-	public info: {weather: string, celsius: number, icon: string}[] = [];
+	public info: Anime[] = [];
 
 	constructor(
 		private _http: HttpClient,
@@ -23,10 +24,10 @@ export class ForecastComponent extends WidgetComponent
 
 	async refresh(): Promise<void>
 	{
-		if (!this.widget.parameters["city"] || !this.widget.parameters["days"])
+		if (!this.widget.parameters["type"])
 			return;
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		await this._http.get<any>(`${environment.apiUrl}/weather/${this.widget.parameters["city"]}/${this.widget.parameters["days"]}`)
+		await this._http.get<Anime[]>(`${environment.apiUrl}/anilist/list/${this.widget.parameters["type"]}`)
 			.subscribe(x => this.info = x);
 	}
 

@@ -6,6 +6,7 @@ import { WidgetComponent } from "./widget.component";
 import { CovidComponent } from "../components/covid/covid.component";
 import { WatchlistComponent } from "../components/watchlist/watchlist.component";
 import { AnimeComponent } from "../components/anime/anime.component";
+import { TrendsComponent } from "../components/trends/trends.component";
 
 @Directive({
 	selector: "[hostWidgetType]"
@@ -40,6 +41,8 @@ export class DashboardWidgetDirective
 			return WatchlistComponent;
 		case "anime":
 			return AnimeComponent;
+		case "trends":
+			return TrendsComponent;
 		default:
 			throw new Error("Invalid component");
 		}
